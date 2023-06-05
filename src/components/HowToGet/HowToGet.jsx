@@ -5,11 +5,11 @@ import './HowToGet.css'
 function HowToGet() {
   return (
     <div className='HowToGet'>
+      <HowToGetCardPhone/>
+      <div className="HowToGet__Cards">
       <h3><span>NEW</span></h3>
-      <h1>Super Easy Booking</h1>
-      <div class="HowToGet__Cards">
+      <h1>The best cap app for your mobile app</h1>
         <HowToGetCard/>
-        <HowToGetCardPhone/>
       </div>
     </div>
   );
