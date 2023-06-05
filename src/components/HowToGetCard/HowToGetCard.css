@@ -1,0 +1,50 @@
+.HowToGetCard {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.HowToGetCard__Downloads{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.HowToGetCard__Downloads--Mac-icon{
+  display: flex;
+  align-items: center;
+  font-size: 26px;
+  color:#eab30f;
+  background-color: white;
+  border-radius: 12px;
+  margin: 6px 0 0 0;
+}
+.HowToGetCard__Downloads--Andorid-icon{
+  display: flex;
+  align-items: center;
+  font-size: 26px;
+  color:#eab30f;
+  background-color: white;
+  border-radius: 12px;
+  margin: 6px 0 0 0;
+}
+.HowToGetCard>h3{
+  text-align: center;
+  color:white;
+}
+
+.HowToGetCard>p{
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .HowToGetCard {
+      width: 270px;
+      height: 270px;
+  }
+  .HowToGetCard__Downloads{
+    display: flex;
+    flex-direction: row;
+  }
+}

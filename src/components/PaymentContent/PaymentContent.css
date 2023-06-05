@@ -1,0 +1,32 @@
+.PaymentOptions {
+    padding: 15px;
+}
+
+.PaymentOptions__Column-1__item,
+.PaymentOptions__Column-2__item {
+    margin-bottom: 25px;
+}
+
+@media screen and (min-width: 700px) {
+    .PaymentOptions {
+        width: 100%;
+        padding: 30px;
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        grid-template-rows: 1fr;
+        gap: 25px;
+    }
+
+    .PaymentOptions__Column-1 {
+        width: 100%;
+        grid-area: 1 / 1 / span 1 / span 1;
+    }
+
+    .PaymentOptions__Column-2 {
+        width: 100%;
+        grid-area: 1 / 2 / span 1 / span 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+}
