@@ -52,7 +52,7 @@
     flex-grow: 1;
 }
 
-button {
+/* button {
     background-color: #EAB30F;
     color: white;
     font-weight: bold;
@@ -60,7 +60,7 @@ button {
     padding: 10px;
     width: 200px;
     height: 36px;
-}
+} */
 
 @media screen and (min-width: 700px) {
     .searchForm {
