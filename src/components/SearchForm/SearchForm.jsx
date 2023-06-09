@@ -1,12 +1,22 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { useState } from 'react';
 import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
-import './SearchForm.css';
+import './SearchForm.scss';
 import DatePicker from './DatePicker/DatePicker';
 
 function SearchForm() {
+  const [clickedPickUp, setClickedPickUp] = useState(false);
+  const [pickUpDate, setPickUpDate] = useState('');
+
   function testPickUpLocation() {
-    console.log('Hello world');
+    setClickedPickUp(true);
   }
+
+  // const handleChange = (event) => {
+  //   let { value } = event.target;
+  //   value = pickUpDate;
+  // };
+
   return (
     <>
       <form className="searchForm">
@@ -14,7 +24,7 @@ function SearchForm() {
           <label htmlFor="pickUpLocation" className="searchForm__item">
             Pick Up Location
             <div className="searchForm__input">
-              <input type="text" id="pickUpLocation" placeholder="Pick Up" onClick={testPickUpLocation} />
+              <input type="text" id="pickUpLocation" placeholder="Pick Up" />
               <div className="input-icon">
                 <FaCrosshairs />
               </div>
@@ -34,7 +44,7 @@ function SearchForm() {
           <label htmlFor="pickUpDate" className="searchForm__item">
             Pick Up Date
             <div className="searchForm__input">
-              <input type="text" id="pickUpDate" placeholder="Pick Up" />
+              <input type="text" id="pickUpDate" placeholder="Pick Up" name="pickUpdate" value={pickUpDate} onClick={testPickUpLocation} readOnly />
               <div className="input-icon">
                 <FaRegCalendarAlt />
               </div>
@@ -56,7 +66,11 @@ function SearchForm() {
           </button>
         </div>
       </form>
-      <DatePicker />
+      <DatePicker
+        state={clickedPickUp}
+        setClickedPickUp={setClickedPickUp}
+        setPickUpDate={setPickUpDate}
+      />
     </>
   );
 }

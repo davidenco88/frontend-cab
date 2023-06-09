@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import './DatePicker.scss';
+// import 'react-calendar/dist/Calendar.css';
 
-function DatePicker() {
-  const [value, setValue] = useState(new Date().toJSON());
+function DatePicker({ state, setClickedPickUp, setPickUpDate }) {
+  // const [value, setValue] = useState(new Date().toJSON());
 
-  function onChange(nextValue) {
-    setValue(nextValue);
-    alert(`Value is ${nextValue.toJSON()}`);
+  function onChange(newDate) {
+    const year = newDate.getFullYear();
+    const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = newDate.getDate().toString().padStart(2, '0');
+    const selectedDate = `${day}-${month}-${year}`;
+    // setValue(selectedDate);
+    setClickedPickUp(false);
+    setPickUpDate(selectedDate);
   }
 
   return (
-    <div className="datePicker">
-      <h1>date picker</h1>
+    <div className={state ? 'open-datePicker' : ' datePicker'}>
+      <h2>PICK UP DATE</h2>
       <Calendar
         onChange={onChange}
-        value={value}
+        // value={value}
+        minDate={new Date()}
       />
     </div>
   );
