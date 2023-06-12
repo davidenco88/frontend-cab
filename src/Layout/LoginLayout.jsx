@@ -3,7 +3,7 @@ import HeaderNavBar from "../components/HeaderNavBar/HeaderNavBar";
 import SingleFooter from "../components/SingleFooter/SingleFooter";
 
 
-const LoginLayout = ({children}) => {
+const LoginLayout = () => {
   return (
     <>
     <HeaderNavBar />
