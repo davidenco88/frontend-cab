@@ -8,6 +8,8 @@ import Booking from './pages/Booking';
 import FailedPayment from './pages/FailedPayment';
 import Example from './components/FilteredTable/filter';
 import Payment from './pages/Payment';
+import Login from './pages/Login';
+import SingleFooter from './components/SingleFooter/SingleFooter'
 
 function App() {
   return (
@@ -19,8 +21,10 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/failed" element={<FailedPayment />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
+      <SingleFooter />
     </>
   );
 }
