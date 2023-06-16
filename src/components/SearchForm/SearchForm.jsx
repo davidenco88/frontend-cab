@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
 import "./SearchForm.scss";
 import DatePicker from "./DatePicker/DatePicker";
@@ -8,11 +8,16 @@ import LocationPicker from "./LocationPicker/LocationPicker";
 function SearchForm() {
   const [clickedPickUp, setClickedPickUp] = useState(false);
   const [pickUpDate, setPickUpDate] = useState("");
+  const [openPickUpLocation, setOpenPickUpLocation] = useState(false);
+  const [pickUpLocation, setPickUpLocation] = useState("");
 
   function testPickUpLocation() {
     setClickedPickUp(true);
   }
 
+  useEffect(() => {
+    console.log(openPickUpLocation);
+  }, [openPickUpLocation]);
   // const handleChange = (event) => {
   //   let { value } = event.target;
   //   value = pickUpDate;
@@ -20,13 +25,18 @@ function SearchForm() {
 
   return (
     <>
-      <LocationPicker />
       <form className="searchForm">
         <div className="c-items">
           <label htmlFor="pickUpLocation" className="searchForm__item">
             Pick Up Location
             <div className="searchForm__input">
-              <input type="text" id="pickUpLocation" placeholder="Pick Up" />
+              <input
+                onClick={() => setOpenPickUpLocation(true)}
+                type="text"
+                id="pickUpLocation"
+                placeholder="Pick Up"
+                value={pickUpLocation}
+              />
               <div className="input-icon">
                 <FaCrosshairs />
               </div>
@@ -78,6 +88,11 @@ function SearchForm() {
         state={clickedPickUp}
         setClickedPickUp={setClickedPickUp}
         setPickUpDate={setPickUpDate}
+      />
+      <LocationPicker
+        state={openPickUpLocation}
+        setOpenPickUpLocation={setOpenPickUpLocation}
+        setPickUpLocation={setPickUpLocation}
       />
     </>
   );
