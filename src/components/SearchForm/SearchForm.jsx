@@ -15,14 +15,6 @@ function SearchForm() {
     setClickedPickUp(true);
   }
 
-  useEffect(() => {
-    console.log(openPickUpLocation);
-  }, [openPickUpLocation]);
-  // const handleChange = (event) => {
-  //   let { value } = event.target;
-  //   value = pickUpDate;
-  // };
-
   return (
     <>
       <form className="searchForm">
@@ -36,6 +28,7 @@ function SearchForm() {
                 id="pickUpLocation"
                 placeholder="Pick Up"
                 value={pickUpLocation}
+                readOnly
               />
               <div className="input-icon">
                 <FaCrosshairs />
