@@ -14,8 +14,12 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
     "@splidejs/react-splide": "^0.7.12",
-    "material-react-table": "^1.11.5",
+    "material-react-table": "^1.14.0",
     "react": "^18.2.0",
     "react-calendar": "^4.2.1",
     "react-dom": "^18.2.0",

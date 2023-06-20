@@ -1,5 +1,15 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
+import {fetchUsers}from '../../services/cars';
+import { useState, useEffect } from 'react';
+
+//const [users, setUsers] = useState([]);
+const url = `${import.meta.env.VITE_BASE_URL}/api/vehicles/actives`;
+console.log(url);
+
+const response = await fetch(url);
+const data2 = await response.json();
+console.log(data2);
 
 //nested data is ok, see accessorKeys in ColumnDef below
 const data = [
@@ -55,3 +65,4 @@ const Example = () => {
 };
 
 export default Example;
+
