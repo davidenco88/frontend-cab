@@ -21,8 +21,14 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
     }
 
     try {
-      const response =  await fetch(`https://geocode.maps.co/search?q=${address}`)
+      const response = await fetch(
+        `https://geocode.maps.co/search?q=${address}`
+      );
       const data = await response.json();
+
+      if (data.length === 0) {
+        setPickUpLocation("Try without neighbourhood");
+      }
       setLocation(data);
       setOpenPickUpLocation(false);
       setPickUpLocation(data[0].display_name);
@@ -38,18 +44,26 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
         <>
           <form className="locationForm" onSubmit={handleSubmit}>
             <h2 className="locationForm__title">Fill your data</h2>
-            <input type="text" id="road" name="road" placeholder="Road" />
+            <input
+              type="text"
+              id="road"
+              name="road"
+              placeholder="Road"
+              required
+            />
             <input
               type="text"
               id="houseNumber"
               name="houseNumber"
               placeholder="House number/Alt Address"
+              required
             />
             <input
               type="text"
               id="suburb"
               name="suburb"
               placeholder="Suburb/Zone"
+              required
             />
             <input
               type="text"
@@ -57,7 +71,13 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
               name="neighbourhood"
               placeholder="Neighbourhood"
             />
-            <input type="text" id="city" name="city" placeholder="City" />
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="City"
+              required
+            />
             <button className="locationForm__button" type="submit" id="submit">
               Submit
             </button>
