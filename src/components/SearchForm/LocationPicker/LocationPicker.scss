@@ -1,0 +1,62 @@
+.locationForm {
+  // background-color: rgb(255, 164, 44);
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  gap: 10px;
+  // min-width: 320px;
+  // max-width: 300px;
+  width: fit-content;
+  color: white;
+  padding: 10px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2000px 2000px rgba(155, 155, 155, 0.527);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__title {
+    text-align: center;
+  }
+
+  input {
+    margin: 0px 20px;
+    padding: 8px;
+    background-color: #e7c253;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #ec895a;
+    }
+
+    &:focus {
+      background-color: #c4714a;
+    }
+  }
+
+  input::placeholder {
+    color: white;
+  }
+
+  &__button {
+    margin: 0 20px;
+    padding: 8px;
+    background-color: #eab30f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #eb6020;
+    }
+
+    &:active {
+      background-color: #7c5100;
+    }
+  }
+}
