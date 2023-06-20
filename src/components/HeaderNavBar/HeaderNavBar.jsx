@@ -1,16 +1,11 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import {
-  FaUserAlt,
-  FaWindowClose,
-  FaBars,
-  FaTaxi,
-} from 'react-icons/fa';
+import { FaUserAlt, FaWindowClose, FaBars, FaTaxi } from "react-icons/fa";
 
-import { AiFillSetting } from 'react-icons/ai';
-import { useState } from 'react';
+import { AiFillSetting } from "react-icons/ai";
+import { useState } from "react";
 
-import './HeaderNavBarStyless.css';
+import "./HeaderNavBarStyless.css";
 
 function HeaderNavBar() {
   const [menuHide, setMenuHide] = useState(true);
@@ -27,7 +22,7 @@ function HeaderNavBar() {
         </div>
         <span className="headerNavBar__title">RICA</span>
       </div>
-      <nav className={menuHide ? 'navBarMobile navHide' : 'navBarMobile'}>
+      <nav className={menuHide ? "navBarMobile navHide" : "navBarMobile"}>
         <ul className="navBar">
           <li className="navBar__link">
             <NavLink className="links" to="/">
@@ -39,14 +34,18 @@ function HeaderNavBar() {
               Cab
             </NavLink>
           </li>
-          <li className="navBar__link"><p>Pages</p></li>
+          <li className="navBar__link">
+            <p>Pages</p>
+          </li>
         </ul>
       </nav>
       <nav className="configBar">
         <select
           name="currency"
           id="currency"
-          className={configHide ? 'configNavBar__set navHide' : 'configNavBar__set'}
+          className={
+            configHide ? "configNavBar__set navHide" : "configNavBar__set"
+          }
         >
           <option value="USD">USD</option>
           <option value="COP">COP</option>
@@ -54,26 +53,42 @@ function HeaderNavBar() {
         <select
           name="language"
           id="language"
-          className={configHide ? 'configNavBar__set navHide' : 'configNavBar__set'}
+          className={
+            configHide ? "configNavBar__set navHide" : "configNavBar__set"
+          }
         >
           <option value="ENG">ENG</option>
           <option value="ESP">ESP</option>
         </select>
         <div className="headerNavBar__menu">
-          {configHide
-            ? <div onClick={handleClikConfig}><AiFillSetting /></div>
-            : <div onClick={handleClikConfig}><FaWindowClose /></div>}
+          {configHide ? (
+            <div onClick={handleClikConfig}>
+              <AiFillSetting />
+            </div>
+          ) : (
+            <div onClick={handleClikConfig}>
+              <FaWindowClose />
+            </div>
+          )}
         </div>
         <div>
-          <FaUserAlt />
+          {/* <FaUserAlt /> */}
+          <NavLink className="links" to="/login">
+            <p>Sign in / Sign up</p>
+          </NavLink>
         </div>
         <div className="headerNavBar__menu">
-          {menuHide
-            ? <div onClick={handleClikMenu}><FaBars /></div>
-            : <div onClick={handleClikMenu}><FaWindowClose /></div>}
+          {menuHide ? (
+            <div onClick={handleClikMenu}>
+              <FaBars />
+            </div>
+          ) : (
+            <div onClick={handleClikMenu}>
+              <FaWindowClose />
+            </div>
+          )}
         </div>
       </nav>
-
     </header>
   );
 }
