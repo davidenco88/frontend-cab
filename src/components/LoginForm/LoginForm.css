@@ -3,7 +3,7 @@
 
     margin: 100px auto;
     max-width: 525px;
-    min-height: 500px;
+    min-height: 600px;
     position: relative;
     background-image: url('/login_background.jpg');
     background-size: cover;
@@ -85,9 +85,23 @@
     background: rgba(255, 255, 255, .1);
 }
 
-.login-form .group .label {
+.login-form .group .label,
+.user-rol label {
     color: #aaa;
     font-size: 12px;
+}
+
+.rol-header {
+  text-align: center;
+  color: #fff
+}
+
+.user-rol {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 
 .login-form .group .button {
