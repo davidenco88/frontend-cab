@@ -1,3 +1,4 @@
+import { login } from "../../services/auth";
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -5,10 +6,12 @@ function LoginForm() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const signData = Object.fromEntries(formData);
+    const signInData = Object.fromEntries(formData);
+
+    const loginPayload = await login(signInData);
     console.log(
-      "🚀 ~ file: LoginForm.jsx:10 ~ handleSubmit ~ signData:",
-      signData
+      "🚀 ~ file: LoginForm.jsx:12 ~ handleSubmit ~ loginPayload:",
+      loginPayload
     );
   }
 
@@ -30,7 +33,7 @@ function LoginForm() {
           Sign Up
         </label>
         <div className="login-form">
-          <form className="sign-in-htm">
+          <form className="sign-in-htm" onSubmit={handleSubmit}>
             <div className="group">
               <label htmlFor="email" className="label">
                 Email Address
