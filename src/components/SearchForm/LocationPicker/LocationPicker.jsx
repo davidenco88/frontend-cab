@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./LocationPicker.scss";
 
 function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
   const [location, setLocation] = useState(null);
+  const ref = useRef();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,11 +39,25 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
     }
   }
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenPickUpLocation(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
   return (
     <>
       {state ? (
         <>
-          <form className="locationForm" onSubmit={handleSubmit}>
+          <form ref={ref} className="locationForm" onSubmit={handleSubmit}>
             <h2 className="locationForm__title">Fill your data</h2>
             <input
               type="text"
