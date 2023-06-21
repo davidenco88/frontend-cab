@@ -1,9 +1,8 @@
 .c-loginForm {
     width: 100%;
-
-    margin: 100px auto;
+    margin: 50px auto;
     max-width: 525px;
-    min-height: 600px;
+    min-height: 650px;
     position: relative;
     background-image: url('/login_background.jpg');
     background-size: cover;
