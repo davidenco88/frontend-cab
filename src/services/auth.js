@@ -14,6 +14,10 @@ export async function login(data) {
   if (response.ok) {
     return await response.json();
   } else {
-    return await response.json();
+    const errorData = await response.json();
+    return {
+      status: response.status,
+      message: errorData.message,
+    };
   }
 }

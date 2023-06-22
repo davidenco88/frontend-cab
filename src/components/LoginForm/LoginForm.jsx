@@ -13,6 +13,16 @@ function LoginForm() {
       "🚀 ~ file: LoginForm.jsx:12 ~ handleSubmit ~ loginPayload:",
       loginPayload
     );
+
+    //como la propiedad status solo existe cuando falla entonces solo salta
+    //cuando hay error
+    if (loginPayload.status) {
+      console.log("Algo anda mal");
+      //ACA PODRIA IMPLEMENTARSE UN USESTATE CON UN BOOLEANO
+      //CUANDO SEA TRUE ENTONCES APARECE UN COMPONENTE QUE DICE EL
+      //MENSAJE ENVIADO DESDE EL BACKEND CON EL ERROR
+      //ASI FUNCIONARIA CON DIFERENTES MENSAJES Y VARIAS PAGS
+    }
   }
 
   return (
