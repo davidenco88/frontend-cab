@@ -1,21 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useState } from 'react';
-import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
-import './SearchForm.scss';
-import DatePicker from './DatePicker/DatePicker';
+import { useState, useEffect } from "react";
+import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
+import "./SearchForm.scss";
+import DatePicker from "./DatePicker/DatePicker";
+import LocationPicker from "./LocationPicker/LocationPicker";
 
 function SearchForm() {
   const [clickedPickUp, setClickedPickUp] = useState(false);
-  const [pickUpDate, setPickUpDate] = useState('');
+  const [pickUpDate, setPickUpDate] = useState("");
+  const [openPickUpLocation, setOpenPickUpLocation] = useState(false);
+  const [pickUpLocation, setPickUpLocation] = useState("");
 
   function testPickUpLocation() {
     setClickedPickUp(true);
   }
-
-  // const handleChange = (event) => {
-  //   let { value } = event.target;
-  //   value = pickUpDate;
-  // };
 
   return (
     <>
@@ -24,7 +22,14 @@ function SearchForm() {
           <label htmlFor="pickUpLocation" className="searchForm__item">
             Pick Up Location
             <div className="searchForm__input">
-              <input type="text" id="pickUpLocation" placeholder="Pick Up" />
+              <input
+                onClick={() => setOpenPickUpLocation(true)}
+                type="text"
+                id="pickUpLocation"
+                placeholder="Pick Up"
+                value={pickUpLocation}
+                readOnly
+              />
               <div className="input-icon">
                 <FaCrosshairs />
               </div>
@@ -44,7 +49,15 @@ function SearchForm() {
           <label htmlFor="pickUpDate" className="searchForm__item">
             Pick Up Date
             <div className="searchForm__input">
-              <input type="text" id="pickUpDate" placeholder="Pick Up" name="pickUpdate" value={pickUpDate} onClick={testPickUpLocation} readOnly />
+              <input
+                type="text"
+                id="pickUpDate"
+                placeholder="Pick Up"
+                name="pickUpdate"
+                value={pickUpDate}
+                onClick={testPickUpLocation}
+                readOnly
+              />
               <div className="input-icon">
                 <FaRegCalendarAlt />
               </div>
@@ -61,15 +74,18 @@ function SearchForm() {
           </label>
         </div>
         <div className="c-button">
-          <button type="submit">
-            SEARCH
-          </button>
+          <button type="submit">SEARCH</button>
         </div>
       </form>
       <DatePicker
         state={clickedPickUp}
         setClickedPickUp={setClickedPickUp}
         setPickUpDate={setPickUpDate}
+      />
+      <LocationPicker
+        state={openPickUpLocation}
+        setOpenPickUpLocation={setOpenPickUpLocation}
+        setPickUpLocation={setPickUpLocation}
       />
     </>
   );
