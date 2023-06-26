@@ -1,21 +1,17 @@
-import { login } from "../../services/auth";
+import { login, register } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginForm() {
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  async function handleSubmitSignIn(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const signInData = Object.fromEntries(formData);
 
     const loginPayload = await login(signInData);
-    const savedToken = console.log(
-      "🚀 ~ file: LoginForm.jsx:12 ~ handleSubmit ~ loginPayload:",
-      loginPayload
-    );
 
     //como la propiedad status solo existe cuando falla entonces solo salta
     //cuando hay error
@@ -30,6 +26,28 @@ function LoginForm() {
     localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
 
     navigate("/");
+  }
+
+  async function handleSubmitSignUp(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const signUpData = Object.fromEntries(formData);
+
+    const createUserData = {
+      "name": signUpData.name,
+      "lastname": signUpData.lastname,
+      "email": signUpData.email,
+      "avatar": " ",
+      "password": signUpData.password,
+      "rol_id": [],
+    };
+
+    if (signUpData.userRol === "Client") { createUserData.rol_id.push(2) }
+    if (signUpData.userRol === "Driver") { createUserData.rol_id.push(3) }
+
+    const response = await register(createUserData);
+    console.log(response);
   }
 
   return (
@@ -50,7 +68,7 @@ function LoginForm() {
           Sign Up
         </label>
         <div className="login-form">
-          <form className="sign-in-htm" onSubmit={handleSubmit}>
+          <form className="sign-in-htm" onSubmit={handleSubmitSignIn}>
             <div className="group">
               <label htmlFor="email" className="label">
                 Email Address
@@ -107,24 +125,24 @@ function LoginForm() {
             </div>
           </form>
 
-          <form className="sign-up-htm">
+          <form className="sign-up-htm" onSubmit={handleSubmitSignUp}>
             <div className="group">
               <label htmlFor="first-name" className="label">
                 First Name
               </label>
-              <input id="first-name" type="text" className="input" required />
+              <input id="first-name" type="text" name="name" className="input" required />
             </div>
             <div className="group">
               <label htmlFor="last-name" className="label">
                 Last Name
               </label>
-              <input id="last-name" type="text" className="input" required />
+              <input id="last-name" type="text" name="lastname" className="input" required />
             </div>
             <div className="group">
               <label htmlFor="email-signUp" className="label">
                 Email Address
               </label>
-              <input id="email-signUp" type="text" className="input" required />
+              <input id="email-signUp" type="text" name="email" className="input" required />
             </div>
             <div className="group">
               <label htmlFor="password-signUp" className="label">
@@ -133,6 +151,7 @@ function LoginForm() {
               <input
                 id="password-signUp"
                 type="password"
+                name="password"
                 className="input"
                 data-type="password"
                 required
@@ -145,6 +164,7 @@ function LoginForm() {
               <input
                 id="password-signUp-rep"
                 type="password"
+                name="validationPassword"
                 className="input"
                 data-type="password"
                 required
@@ -157,13 +177,14 @@ function LoginForm() {
                   <input
                     id="check-client"
                     type="radio"
-                    name="user-rol"
+                    name="userRol"
+                    value="Client"
                     defaultChecked
                   />{" "}
                   CLIENT
                 </label>
                 <label htmlFor="check-driver">
-                  <input id="check-driver" type="radio" name="user-rol" />{" "}
+                  <input id="check-driver" type="radio" name="userRol" value="Driver" />{" "}
                   DRIVER
                 </label>
               </div>

@@ -21,3 +21,17 @@ export async function login(data) {
     };
   }
 }
+
+export async function register(data) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(`${BASE_URL}/api/users`, options);
+
+  return response.json();
+}
