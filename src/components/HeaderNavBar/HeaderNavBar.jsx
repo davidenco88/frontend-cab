@@ -86,7 +86,7 @@ function HeaderNavBar() {
         <div>
           {profile ? (
             <>
-              <NavLink className="linksLogin" to="/cab">
+              <NavLink className="linksLogin" to="/profile">
                 <span className="linksLogin">
                   <p className="linkLogin">{profile.fullName}</p>
                   <FaUserAlt />
