@@ -1,7 +1,10 @@
 import { login } from "../../services/auth";
+import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -9,7 +12,7 @@ function LoginForm() {
     const signInData = Object.fromEntries(formData);
 
     const loginPayload = await login(signInData);
-    console.log(
+    const savedToken = console.log(
       "🚀 ~ file: LoginForm.jsx:12 ~ handleSubmit ~ loginPayload:",
       loginPayload
     );
@@ -17,12 +20,16 @@ function LoginForm() {
     //como la propiedad status solo existe cuando falla entonces solo salta
     //cuando hay error
     if (loginPayload.status) {
-      console.log("Algo anda mal");
       //ACA PODRIA IMPLEMENTARSE UN USESTATE CON UN BOOLEANO
       //CUANDO SEA TRUE ENTONCES APARECE UN COMPONENTE QUE DICE EL
       //MENSAJE ENVIADO DESDE EL BACKEND CON EL ERROR
       //ASI FUNCIONARIA CON DIFERENTES MENSAJES Y VARIAS PAGS
+      return alert("Incorrect email or password, try again.");
     }
+    localStorage.setItem("authToken", loginPayload.token);
+    localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
+
+    navigate("/");
   }
 
   return (

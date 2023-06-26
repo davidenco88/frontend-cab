@@ -1,4 +1,4 @@
-.footer__foot {
+.singleFooter {
   justify-content: center;
   background-color: #202020;
   width: 100%;
@@ -6,6 +6,8 @@
   padding: 5px;
   color: #a1a1a1;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 
   &__logo {
     margin: 10px;
