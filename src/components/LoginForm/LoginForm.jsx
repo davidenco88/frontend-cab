@@ -10,16 +10,8 @@ function LoginForm() {
 
     const formData = new FormData(e.target);
     const signInData = Object.fromEntries(formData);
-    console.log(
-      "🚀 ~ file: LoginForm.jsx:13 ~ handleSubmit ~ signInData:",
-      signInData
-    );
 
     const loginPayload = await login(signInData);
-    // const savedToken = console.log(
-    //   "🚀 ~ file: LoginForm.jsx:12 ~ handleSubmit ~ loginPayload:",
-    //   loginPayload
-    // );
 
     //como la propiedad status solo existe cuando falla entonces solo salta
     //cuando hay error
