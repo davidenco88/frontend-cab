@@ -48,6 +48,19 @@
   display: none;
 }
 
+.linksLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f1c40f;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.linksLogin:hover {
+  color: #f1c40fab;
+}
+
 .links {
   color: #f1c40f;
   text-decoration: none;
@@ -55,7 +68,6 @@
 
 .links:hover {
   color: #f1c40fab;
-  /* text-decoration: underline rgb(255, 255, 255); */
 }
 
 @media screen and (max-width: 700px) {

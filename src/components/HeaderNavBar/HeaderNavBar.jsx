@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 import { FaUserAlt, FaWindowClose, FaBars, FaTaxi } from "react-icons/fa";
 
@@ -10,9 +11,20 @@ import "./HeaderNavBarStyless.css";
 function HeaderNavBar() {
   const [menuHide, setMenuHide] = useState(true);
   const [configHide, setConfigHide] = useState(true);
+  const [profile, setProfile] = useState();
 
   const handleClikMenu = () => setMenuHide(!menuHide);
   const handleClikConfig = () => setConfigHide(!configHide);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("authToken");
+    if (!auth) {
+      return undefined;
+    }
+    const profile = JSON.parse(localStorage.getItem("profile"));
+    setProfile(profile);
+    console.log(profile);
+  }, []);
 
   return (
     <header className="headerNavBar">
@@ -72,10 +84,20 @@ function HeaderNavBar() {
           )}
         </div>
         <div>
-          {/* <FaUserAlt /> */}
-          <NavLink className="links" to="/login">
-            <p>Sign in / Sign up</p>
-          </NavLink>
+          {profile ? (
+            <>
+              <NavLink className="linksLogin" to="/profile">
+                <span className="linksLogin">
+                  <p className="linkLogin">{profile.fullName}</p>
+                  <FaUserAlt />
+                </span>
+              </NavLink>
+            </>
+          ) : (
+            <NavLink className="linksLogin" to="/login">
+              <p>Sign in / Sign up</p>
+            </NavLink>
+          )}
         </div>
         <div className="headerNavBar__menu">
           {menuHide ? (
