@@ -1,6 +1,6 @@
-// import { NavLink } from 'react-router-dom';
-// import OrangeButton from '../OrangeButton/OrangeButton';
-import './ContactDetailsForm.css';
+import { NavLink } from "react-router-dom";
+import OrangeButton from "../OrangeButton/OrangeButton";
+import "./ContactDetailsForm.css";
 
 function ContactDetailsForm() {
   return (
@@ -11,13 +11,23 @@ function ContactDetailsForm() {
           <label htmlFor="ContactDetailsForm__firstName">
             First Name
             <div className="c-ContactDetailsForm__input">
-              <input type="text" id="ContactDetailsForm__firstName" required placeholder="First name" />
+              <input
+                type="text"
+                id="ContactDetailsForm__firstName"
+                required
+                placeholder="First name"
+              />
             </div>
           </label>
           <label htmlFor="ContactDetailsForm__lastName">
             Last name
             <div className="c-ContactDetailsForm__input">
-              <input type="text" id="ContactDetailsForm__lastName" required placeholder="Last name" />
+              <input
+                type="text"
+                id="ContactDetailsForm__lastName"
+                required
+                placeholder="Last name"
+              />
             </div>
           </label>
         </div>
@@ -25,7 +35,12 @@ function ContactDetailsForm() {
           <label htmlFor="ContactDetailsForm__email">
             Email Adress
             <div className="c-ContactDetailsForm__input">
-              <input type="email" id="ContactDetailsForm__email" required placeholder="Enter email" />
+              <input
+                type="email"
+                id="ContactDetailsForm__email"
+                required
+                placeholder="Enter email"
+              />
             </div>
             <span>Booking confirmation will be sent to this email ID</span>
           </label>
@@ -34,7 +49,12 @@ function ContactDetailsForm() {
           <label htmlFor="ContactDetailsForm__phoneNumber">
             Phone Number
             <div className="c-ContactDetailsForm__input">
-              <input type="tel" id="ContactDetailsForm__phoneNumber" required placeholder="Phone Number" />
+              <input
+                type="tel"
+                id="ContactDetailsForm__phoneNumber"
+                required
+                placeholder="Phone Number"
+              />
             </div>
           </label>
         </div>
@@ -47,17 +67,25 @@ function ContactDetailsForm() {
           </label>
         </div>
         <div className="ContactDetailsForm__item">
-          <label htmlFor="ContactDetailsForm__promoCode" className="ContactDetailsForm__promoCode">
+          <label
+            htmlFor="ContactDetailsForm__promoCode"
+            className="ContactDetailsForm__promoCode"
+          >
             Have A Coupon Code?
             <div className="c-ContactDetailsForm__promoCode">
-              <input type="text" name="ContactDetailsForm__promoCode" id="ContactDetailsForm__promoCode" placeholder="Promo Code" />
+              <input
+                type="text"
+                name="ContactDetailsForm__promoCode"
+                id="ContactDetailsForm__promoCode"
+                placeholder="Promo Code"
+              />
               <button type="button">Apply</button>
             </div>
           </label>
         </div>
-        {/* <NavLink className="ContactDetailsForm__button" to="/payment">
+        <NavLink className="ContactDetailsForm__button" to="/payment">
           <OrangeButton text="PROCEED TO PAY" />
-        </NavLink> */}
+        </NavLink>
       </form>
     </div>
   );
