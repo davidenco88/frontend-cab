@@ -1,6 +1,9 @@
-import './Failed.scss';
+import { NavLink } from 'react-router-dom';
+import OrangeButton from '../OrangeButton/OrangeButton';
 import TitleAndInfo from '../TitleAndInfo/TitleAndInfo';
 import notFound from '../../assets/Failed/notFound.png';
+import './Failed.scss';
+
 
 const text = {
 
@@ -14,9 +17,9 @@ function Failed() {
     <main className="failed">
       <img className="failed__img" src={notFound} alt="404 not found" />
       <TitleAndInfo text={text} />
-      <button type="button" className="failed__button">
-        Try Again
-      </button>
+      <NavLink to="/">
+        <OrangeButton text="TRY AGAIN" />
+      </NavLink>
     </main>
   );
 }
