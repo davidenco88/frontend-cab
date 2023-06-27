@@ -5,7 +5,15 @@ const AppContext = createContext();
 
 export function ContextProvider({ children }) {
 
-  const initialState = {}
+  const initialState = {
+    searchForm: {
+      dropOffDate: "",
+      dropOffLocation: "",
+      pickUpLocation: "",
+      pickUpdate: "",
+    },
+    anythingElse: true,
+  }
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const store = { state, dispatch }
