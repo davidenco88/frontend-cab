@@ -1,5 +1,6 @@
 import { login, register } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -47,7 +48,22 @@ function LoginForm() {
     if (signUpData.userRol === "Driver") { createUserData.rol_id.push(3) }
 
     const response = await register(createUserData);
-    console.log(response);
+
+    if (response.status === 201) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration successful',
+        text: 'We have sent you an email with a link to verify your account. Please check your inbox.',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration failed',
+        text: 'Something went wrong. Please try again.',
+      });
+    }
+
+    navigate("/");
   }
 
   return (
