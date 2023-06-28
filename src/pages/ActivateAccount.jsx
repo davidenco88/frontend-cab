@@ -1,18 +1,48 @@
 import OrangeButton from "../components/OrangeButton/OrangeButton";
 import { FaTaxi } from "react-icons/fa";
 import SingleFooter from "../components/SingleFooter/SingleFooter";
-import './ActivateAccount.css';
 import { useParams } from 'react-router-dom';
 import { activate } from "../services/auth";
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
+import './ActivateAccount.css';
 
 
 function Login() {
   const { token } = useParams();
+  const navigate = useNavigate();
+
   async function onClickHandler() {
-    const loginPayload = await activate(token);
-    console.log(loginPayload);
+
+    const response = await activate(token);
+
+    if (response.status === 200) {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration successful',
+        text: 'Enjoy all services that we have for you, start now!',
+      });
+
+      const loginPayload = await response.json();
+
+      console.log(loginPayload);
+
+      localStorage.setItem("authToken", loginPayload.token);
+      localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
+
+      navigate("/");
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration failed',
+        text: 'Something went wrong. Please try again.',
+      });
+    }
   };
+
   return (
     <div className="c-activate-account">
       <div className="activate-account">

@@ -46,9 +46,7 @@ export async function activate (token) {
       body: JSON.stringify({token}),
     };
 
-
-
     const response = await fetch(`${BASE_URL}/auth/local/activate`, options);
 
-    return response.json();
+    return response;
 };
