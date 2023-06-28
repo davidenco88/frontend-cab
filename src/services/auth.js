@@ -34,7 +34,7 @@ export async function register(data) {
 
   const response = await fetch(`${BASE_URL}/api/users`, options);
 
-  return response.json();
+  return response;
 }
 
 export async function activate (token) {
