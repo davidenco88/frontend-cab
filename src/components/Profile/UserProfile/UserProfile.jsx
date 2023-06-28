@@ -1,15 +1,21 @@
-import './UserProfile.scss';
+import "./UserProfile.scss";
 
-function UserProfile () {
+function UserProfile() {
   return (
     <div className="userProfile">
-      <div className="userProfile__pic">
-      <img className="userProfile__pic__img" src="https://picsum.photos/200/300" alt="random photo" />
+      {/* <div className="userProfile__pic"> */}
+      <img
+        className="userProfile__img"
+        src="https://picsum.photos/400"
+        alt="random photo"
+      />
+      {/* </div> */}
+      <div className="userProfile__text">
+        <h1 className="userProfile__text__name">Federico Cordoba</h1>
+        <h2 className="userProfile__text__email">email@example.com</h2>
       </div>
-      <h1 className="userProfile__name">Full Name</h1>
-      <h2 className="userProfile__email">email@example.com</h2>
     </div>
-  )
+  );
 }
 
 export default UserProfile;
