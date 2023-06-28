@@ -1,0 +1,30 @@
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  width:max-content;
+  background-color: #1b1b1b;;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  color: white;
+
+  &__pic {
+    border-radius: 50%;
+    object-fit: cover;
+
+    &__img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 5px solid #1b1b1b;;
+      outline: 1px solid#e9af0e8f;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+  }
+
+  &__email {
+    font-weight: 100;
+  }
+}
