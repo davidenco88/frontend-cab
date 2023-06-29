@@ -50,11 +50,15 @@ function LoginForm() {
     const response = await register(createUserData);
 
     if (response.status === 201) {
+
       Swal.fire({
         icon: 'success',
         title: 'Registration successful',
         text: 'We have sent you an email with a link to verify your account. Please check your inbox.',
       });
+
+      navigate("/");
+
     } else {
       Swal.fire({
         icon: 'error',
@@ -62,8 +66,6 @@ function LoginForm() {
         text: 'Something went wrong. Please try again.',
       });
     }
-
-    navigate("/");
   }
 
   return (
