@@ -1,7 +1,7 @@
 import { login, register } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import "./LoginForm.css";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "./LoginForm.scss";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -14,15 +14,12 @@ function LoginForm() {
 
     const loginPayload = await login(signInData);
 
-    //como la propiedad status solo existe cuando falla entonces solo salta
-    //cuando hay error
     if (loginPayload.status === 404) {
       return Swal.fire({
         icon: "error",
         title: "Error",
         text: loginPayload.message,
       });
-      // return alert("Incorrect email or password, try again.");
     }
 
     if (loginPayload.status === 401) {
@@ -31,7 +28,6 @@ function LoginForm() {
         title: "Error",
         text: loginPayload.message,
       });
-      // return alert("Incorrect email or password, try again.");
     }
 
     if (loginPayload.status === 400) {
@@ -40,7 +36,6 @@ function LoginForm() {
         title: "Error",
         text: loginPayload.message,
       });
-      // return alert("Incorrect email or password, try again.");
     }
     localStorage.setItem("authToken", loginPayload.token);
     localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
