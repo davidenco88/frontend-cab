@@ -1,6 +1,6 @@
 import { login, register } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -16,12 +16,31 @@ function LoginForm() {
 
     //como la propiedad status solo existe cuando falla entonces solo salta
     //cuando hay error
-    if (loginPayload.status) {
-      //ACA PODRIA IMPLEMENTARSE UN USESTATE CON UN BOOLEANO
-      //CUANDO SEA TRUE ENTONCES APARECE UN COMPONENTE QUE DICE EL
-      //MENSAJE ENVIADO DESDE EL BACKEND CON EL ERROR
-      //ASI FUNCIONARIA CON DIFERENTES MENSAJES Y VARIAS PAGS
-      return alert("Incorrect email or password, try again.");
+    if (loginPayload.status === 404) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: loginPayload.message,
+      });
+      // return alert("Incorrect email or password, try again.");
+    }
+
+    if (loginPayload.status === 401) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: loginPayload.message,
+      });
+      // return alert("Incorrect email or password, try again.");
+    }
+
+    if (loginPayload.status === 400) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: loginPayload.message,
+      });
+      // return alert("Incorrect email or password, try again.");
     }
     localStorage.setItem("authToken", loginPayload.token);
     localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
@@ -36,34 +55,36 @@ function LoginForm() {
     const signUpData = Object.fromEntries(formData);
 
     const createUserData = {
-      "name": signUpData.name,
-      "lastname": signUpData.lastname,
-      "email": signUpData.email,
-      "avatar": " ",
-      "password": signUpData.password,
-      "rol_id": [],
+      name: signUpData.name,
+      lastname: signUpData.lastname,
+      email: signUpData.email,
+      avatar: " ",
+      password: signUpData.password,
+      rol_id: [],
     };
 
-    if (signUpData.userRol === "Client") { createUserData.rol_id.push(2) }
-    if (signUpData.userRol === "Driver") { createUserData.rol_id.push(3) }
+    if (signUpData.userRol === "Client") {
+      createUserData.rol_id.push(2);
+    }
+    if (signUpData.userRol === "Driver") {
+      createUserData.rol_id.push(3);
+    }
 
     const response = await register(createUserData);
 
     if (response.status === 201) {
-
       Swal.fire({
-        icon: 'success',
-        title: 'Registration successful',
-        text: 'We have sent you an email with a link to verify your account. Please check your inbox.',
+        icon: "success",
+        title: "Registration successful",
+        text: "We have sent you an email with a link to verify your account. Please check your inbox.",
       });
 
       navigate("/");
-
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Registration failed',
-        text: 'Something went wrong. Please try again.',
+        icon: "error",
+        title: "Registration failed",
+        text: "Something went wrong. Please try again.",
       });
     }
   }
@@ -148,19 +169,37 @@ function LoginForm() {
               <label htmlFor="first-name" className="label">
                 First Name
               </label>
-              <input id="first-name" type="text" name="name" className="input" required />
+              <input
+                id="first-name"
+                type="text"
+                name="name"
+                className="input"
+                required
+              />
             </div>
             <div className="group">
               <label htmlFor="last-name" className="label">
                 Last Name
               </label>
-              <input id="last-name" type="text" name="lastname" className="input" required />
+              <input
+                id="last-name"
+                type="text"
+                name="lastname"
+                className="input"
+                required
+              />
             </div>
             <div className="group">
               <label htmlFor="email-signUp" className="label">
                 Email Address
               </label>
-              <input id="email-signUp" type="text" name="email" className="input" required />
+              <input
+                id="email-signUp"
+                type="text"
+                name="email"
+                className="input"
+                required
+              />
             </div>
             <div className="group">
               <label htmlFor="password-signUp" className="label">
@@ -202,7 +241,12 @@ function LoginForm() {
                   CLIENT
                 </label>
                 <label htmlFor="check-driver">
-                  <input id="check-driver" type="radio" name="userRol" value="Driver" />{" "}
+                  <input
+                    id="check-driver"
+                    type="radio"
+                    name="userRol"
+                    value="Driver"
+                  />{" "}
                   DRIVER
                 </label>
               </div>
