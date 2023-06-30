@@ -12,3 +12,11 @@
   max-width: fit-content;
   cursor: pointer;
 }
+
+.orangeButton:hover {
+  background-color: #eb6020;
+}
+
+.orangeButton:active {
+  background-color: #b15805;
+}

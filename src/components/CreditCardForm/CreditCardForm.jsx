@@ -1,4 +1,6 @@
-import './CreditCardForm.css';
+import OrangeButton from "../OrangeButton/OrangeButton";
+import { NavLink } from "react-router-dom";
+import "./CreditCardForm.css";
 
 function CreditCardForm() {
   return (
@@ -42,6 +44,9 @@ function CreditCardForm() {
             <img src="cvv_icon.svg" alt="cvv icon" />
           </div>
         </label>
+        <NavLink className="ContactDetailsForm__button" to="/failed">
+          <OrangeButton text="MAKE PAYMENT" />
+        </NavLink>
       </div>
     </div>
   );

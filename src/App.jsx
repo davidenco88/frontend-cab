@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import DefaultLayout from "./Layout/DefaultLayout";
 import LoginLayout from "./Layout/LoginLayout";
 import Profile from "./pages/Profile";
+import ActivateAccount from "./pages/ActivateAccount";
 
 function App() {
   //Aca podriamos comenzar a implementar el useReducer con la
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<LoginLayout />}>
           <Route path="/login" element={<Login />} />
         </Route>
+        <Route path="/activate-account/:token" element={<ActivateAccount />} />
       </Routes>
     </>
   );
