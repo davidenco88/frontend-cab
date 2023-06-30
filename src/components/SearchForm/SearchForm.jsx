@@ -1,16 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useState, useEffect } from "react";
-import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "../../Context";
+import { SHOW_PICK_UP_DATE } from "../../Context/actionTypes";
+import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
 import DatePicker from "./DatePicker/DatePicker";
 import LocationPicker from "./LocationPicker/LocationPicker";
 import "./SearchForm.scss";
 
 function SearchForm() {
-  const [clickedPickUpDate, setClickedPickUpDate] = useState(false);
-  const [pickUpDate, setPickUpDate] = useState("");
   const [openPickUpLocation, setOpenPickUpLocation] = useState(false);
   const [pickUpLocation, setPickUpLocation] = useState("");
+
+  const dispatch = useDispatch();
+  const { searchForm } = useSelector();
 
   const navigate = useNavigate();
 
@@ -20,6 +23,11 @@ function SearchForm() {
     const scheduledData = Object.fromEntries(formData);
     console.log(scheduledData);
     navigate("/cab");
+  }
+
+  function handleDate() {
+    dispatch({type: SHOW_PICK_UP_DATE, payload: true})
+    console.log(searchForm);
   }
 
   return (
@@ -68,9 +76,9 @@ function SearchForm() {
                 type="text"
                 id="pickUpDate"
                 placeholder="Pick Up"
-                name="pickUpdate"
-                value={pickUpDate}
-                onClick={() => setClickedPickUpDate(true)}
+                name="pickUpDate"
+                value={searchForm.pickUpDate}
+                onClick={() => handleDate()}
                 readOnly
                 required
               />
@@ -99,11 +107,7 @@ function SearchForm() {
           <button type="submit">SEARCH</button>
         </div>
       </form>
-      <DatePicker
-        state={clickedPickUpDate}
-        setClickedPickUp={setClickedPickUpDate}
-        setPickUpDate={setPickUpDate}
-      />
+      <DatePicker/>
       <LocationPicker
         state={openPickUpLocation}
         setOpenPickUpLocation={setOpenPickUpLocation}

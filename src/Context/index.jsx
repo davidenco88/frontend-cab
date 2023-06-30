@@ -7,12 +7,15 @@ export function ContextProvider({ children }) {
 
   const initialState = {
     searchForm: {
-      dropOffDate: "",
-      dropOffLocation: "",
       pickUpLocation: "",
-      pickUpdate: "",
+      pickUpDate: "",
+      pickUpHour: "",
+      dropOffLocation: "",
     },
-    anythingElse: true,
+    showPickUpDate: false,
+    showPickUpHour: false,
+    showPickUpLocation: false,
+    showDropOffLocation: false,
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
