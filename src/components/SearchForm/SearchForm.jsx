@@ -1,16 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "../../Context";
-import { SHOW_PICK_UP_DATE } from "../../Context/actionTypes";
-import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
-import DatePicker from "./DatePicker/DatePicker";
-import LocationPicker from "./LocationPicker/LocationPicker";
-import "./SearchForm.scss";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
+import { useDispatch, useSelector } from '../../Context';
+import { SHOW_COMPONENT } from '../../Context/actionTypes';
+import DatePicker from './DatePicker/DatePicker';
+import LocationPicker from './LocationPicker/LocationPicker';
+import './SearchForm.scss';
 
 function SearchForm() {
   const [openPickUpLocation, setOpenPickUpLocation] = useState(false);
-  const [pickUpLocation, setPickUpLocation] = useState("");
+  const [pickUpLocation, setPickUpLocation] = useState('');
 
   const dispatch = useDispatch();
   const { searchForm } = useSelector();
@@ -22,12 +22,17 @@ function SearchForm() {
     const formData = new FormData(e.target);
     const scheduledData = Object.fromEntries(formData);
     console.log(scheduledData);
-    navigate("/cab");
+    navigate('/cab');
   }
 
   function handleDate() {
-    dispatch({type: SHOW_PICK_UP_DATE, payload: true})
-    console.log(searchForm);
+    dispatch({
+      type: SHOW_COMPONENT,
+      payload: {
+        componentName: 'pickUpDate',
+        showing: true,
+      },
+    });
   }
 
   return (
@@ -107,7 +112,7 @@ function SearchForm() {
           <button type="submit">SEARCH</button>
         </div>
       </form>
-      <DatePicker/>
+      <DatePicker />
       <LocationPicker
         state={openPickUpLocation}
         setOpenPickUpLocation={setOpenPickUpLocation}
