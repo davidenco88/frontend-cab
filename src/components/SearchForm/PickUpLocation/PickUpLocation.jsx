@@ -1,17 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
-import './LocationPicker.scss';
+import { useRef, useEffect } from 'react';
+import Swal from 'sweetalert2/dist/sweetalert2';
+import { useDispatch, useSelector } from '../../../Context';
+import { SET_SEARCH_FORM, SET_TRIP, SHOW_COMPONENT } from '../../../Context/actionTypes';
+import './PickUpLocation.scss';
 
-function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
-  const [location, setLocation] = useState(null);
+function PickUpLocation() {
   const ref = useRef();
+  const dispatch = useDispatch();
+  const { showComponentHandler } = useSelector();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-
     const addressData = Object.fromEntries(formData);
-
     const address = Object.keys(addressData)
       .map((key) => {
         if (addressData[key].includes(' ')) {
@@ -28,21 +30,46 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
       const data = await response.json();
 
       if (data.length === 0) {
-        setPickUpLocation('Try without neighbourhood');
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Oops! Something went wrong, please try without neigbourhood and check for typos',
+        });
       }
-      setLocation(data);
-      setOpenPickUpLocation(false);
-      setPickUpLocation(data[0].display_name);
-      console.log(data);
+      dispatch({
+        type: SET_SEARCH_FORM,
+        payload: {
+          fieldName: 'pickUpLocation',
+          newField: data[0].display_name,
+        },
+      });
+      dispatch({
+        type: SET_TRIP,
+        payload: {
+          pickUpLatitude: data[0].lat,
+          pickUpLongitude: data[0].lon,
+        },
+      });
     } catch (error) {
-      console.log(error);
+      return Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `Oops! Something went wrong, error: ${error.message}`,
+      });
     }
+    return dispatch({
+      type: SHOW_COMPONENT,
+      payload: { componentName: 'pickUpLocation', showing: false },
+    });
   }
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setOpenPickUpLocation(false);
+        dispatch({
+          type: SHOW_COMPONENT,
+          payload: { componentName: 'pickUpLocation', showing: false },
+        });
       }
     }
 
@@ -55,10 +82,12 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
 
   return (
     <div>
-      {state ? (
+      {showComponentHandler.pickUpLocation ? (
         <form ref={ref} className="locationForm" onSubmit={handleSubmit}>
           <h2 className="locationForm__title">Fill your data</h2>
-          <label className="locationForm__input" htmlFor="road"> Road
+          <label className="locationForm__input" htmlFor="road">
+            {' '}
+            Road
             <input
               type="text"
               id="road"
@@ -67,7 +96,9 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
               required
             />
           </label>
-          <label className="locationForm__input" htmlFor="houseNumber"> House number/Alt Address
+          <label className="locationForm__input" htmlFor="houseNumber">
+            {' '}
+            House number/Alt Address
             <input
               type="text"
               id="houseNumber"
@@ -76,7 +107,9 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
               required
             />
           </label>
-          <label className="locationForm__input" htmlFor="suburb"> Suburb/Zone
+          <label className="locationForm__input" htmlFor="suburb">
+            {' '}
+            Suburb/Zone
             <input
               type="text"
               id="suburb"
@@ -85,7 +118,9 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
               required
             />
           </label>
-          <label className="locationForm__input" htmlFor="neighbourhood"> Neighbourhood
+          <label className="locationForm__input" htmlFor="neighbourhood">
+            {' '}
+            Neighbourhood
             <input
               type="text"
               id="neighbourhood"
@@ -93,7 +128,9 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
               placeholder="Neighbourhood"
             />
           </label>
-          <label className="locationForm__input" htmlFor="city"> City
+          <label className="locationForm__input" htmlFor="city">
+            {' '}
+            City
             <input
               type="text"
               id="city"
@@ -111,4 +148,4 @@ function LocationPicker({ state, setOpenPickUpLocation, setPickUpLocation }) {
   );
 }
 
-export default LocationPicker;
+export default PickUpLocation;

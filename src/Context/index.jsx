@@ -17,6 +17,13 @@ export function ContextProvider({ children }) {
       pickUpLocation: false,
       dropOffLocation: false,
     },
+    trip: {
+      pickUpLatitude: '',
+      pickUpLongitude: '',
+      dropOffLatitude: '',
+      dropOffLongitude: '',
+      pickUpDate: '',
+    },
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
