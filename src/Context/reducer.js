@@ -1,4 +1,4 @@
-import { SHOW_COMPONENT, SET_SEARCH_FORM } from './actionTypes';
+import { SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP } from './actionTypes';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -17,6 +17,15 @@ function reducer(state, action) {
         searchForm: {
           ...state.searchForm,
           [action.payload.fieldName]: action.payload.newField,
+        },
+      };
+    }
+    case SET_TRIP: {
+      return {
+        ...state,
+        trip: {
+          ...state.trip,
+          ...action.payload,
         },
       };
     }
