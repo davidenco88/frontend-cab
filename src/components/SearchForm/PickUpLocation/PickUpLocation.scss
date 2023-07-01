@@ -1,11 +1,12 @@
-@import "@sweetalert2/theme-dark/dark.scss";
+// @import '@sweetalert2/theme-dark/dark.scss';
+
 .locationForm {
   // background-color: rgb(255, 164, 44);
   background-color: black;
   display: flex;
   flex-direction: column;
   // align-items: center;
-  gap: 10px;
+  gap: 5px;
   // min-width: 320px;
   // max-width: 300px;
   width: fit-content;
@@ -25,12 +26,12 @@
   &__input {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
   }
 
   label {
     font-size: 15px;
+    font-weight: 600;
   }
 
   input {
@@ -56,6 +57,7 @@
 
   &__button {
     margin: 0 20px;
+    margin-top: 10px;
     padding: 8px;
     background-color: #eab30f;
     color: white;
