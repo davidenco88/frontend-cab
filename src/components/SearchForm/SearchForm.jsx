@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
 import DatePicker from './DatePicker/DatePicker';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
+import DropOffLocation from './DropOffLocation/DropOffLocation';
 import './SearchForm.scss';
 
 function SearchForm() {
@@ -50,10 +51,16 @@ function SearchForm() {
             Drop Off Location
             <div className="searchForm__input">
               <input
+                onClick={() => dispatch({
+                  type: SHOW_COMPONENT,
+                  payload: { componentName: 'dropOffLocation', showing: true },
+                })}
                 type="text"
                 id="dropOffLocation"
                 placeholder="Drop Off"
                 name="dropOffLocation"
+                value={searchForm.dropOffLocation}
+                readOnly
                 required
               />
               <div className="input-icon">
@@ -109,6 +116,7 @@ function SearchForm() {
       </form>
       <DatePicker />
       <PickUpLocation />
+      <DropOffLocation />
     </>
   );
 }

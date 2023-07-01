@@ -2,9 +2,9 @@ import { useRef, useEffect } from 'react';
 import Swal from 'sweetalert2/dist/sweetalert2';
 import { useDispatch, useSelector } from '../../../Context';
 import { SET_SEARCH_FORM, SET_TRIP, SHOW_COMPONENT } from '../../../Context/actionTypes';
-import './PickUpLocation.scss';
+// import './DropOffLocation.scss';
 
-function PickUpLocation() {
+function DropOffLocation() {
   const ref = useRef();
   const dispatch = useDispatch();
   const { showComponentHandler } = useSelector();
@@ -39,15 +39,15 @@ function PickUpLocation() {
       dispatch({
         type: SET_SEARCH_FORM,
         payload: {
-          fieldName: 'pickUpLocation',
+          fieldName: 'dropOffLocation',
           newField: data[0].display_name,
         },
       });
       dispatch({
         type: SET_TRIP,
         payload: {
-          pickUpLatitude: data[0].lat,
-          pickUpLongitude: data[0].lon,
+          dropOffLatitude: data[0].lat,
+          dropOffLongitude: data[0].lon,
         },
       });
     } catch (error) {
@@ -59,7 +59,7 @@ function PickUpLocation() {
     }
     return dispatch({
       type: SHOW_COMPONENT,
-      payload: { componentName: 'pickUpLocation', showing: false },
+      payload: { componentName: 'dropOffLocation', showing: false },
     });
   }
 
@@ -68,7 +68,7 @@ function PickUpLocation() {
       if (ref.current && !ref.current.contains(event.target)) {
         dispatch({
           type: SHOW_COMPONENT,
-          payload: { componentName: 'pickUpLocation', showing: false },
+          payload: { componentName: 'dropOffLocation', showing: false },
         });
       }
     }
@@ -82,9 +82,9 @@ function PickUpLocation() {
 
   return (
     <div>
-      {showComponentHandler.pickUpLocation ? (
+      {showComponentHandler.dropOffLocation ? (
         <form ref={ref} className="locationForm" onSubmit={handleSubmit}>
-          <h3 className="locationForm__title">PICK UP LOCATION</h3>
+          <h3 className="locationForm__title">DROP OFF LOCATION</h3>
           <label className="locationForm__input" htmlFor="road">
             {' '}
             Road
@@ -148,4 +148,4 @@ function PickUpLocation() {
   );
 }
 
-export default PickUpLocation;
+export default DropOffLocation;
