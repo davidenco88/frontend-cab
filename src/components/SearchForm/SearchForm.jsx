@@ -1,14 +1,21 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
-import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaCrosshairs, FaRegCalendarAlt, FaClock } from 'react-icons/fa';
+import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
 import DatePicker from './DatePicker/DatePicker';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
 import DropOffLocation from './DropOffLocation/DropOffLocation';
+import TimePicker from './TimePicker/TimePicker';
+
 import './SearchForm.scss';
 
 function SearchForm() {
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  console.log(showTimePicker);
+
   const dispatch = useDispatch();
   const { searchForm } = useSelector();
 
@@ -94,18 +101,19 @@ function SearchForm() {
               </div>
             </div>
           </label>
-          <label htmlFor="dropOffDate" className="searchForm__item">
-            Drop Off Date
+          <label htmlFor="pickUpTime" className="searchForm__item">
+            Pick Up Time
             <div className="searchForm__input">
               <input
                 type="text"
-                id="dropOffDate"
-                placeholder="Drop Off"
-                name="dropOffDate"
+                id="pickUpTime"
+                placeholder="Pick Up Time"
+                name="pickUpTime"
+                onClick={() => setShowTimePicker(true)}
                 required
               />
               <div className="input-icon">
-                <FaRegCalendarAlt />
+                <FaClock />
               </div>
             </div>
           </label>
@@ -117,6 +125,10 @@ function SearchForm() {
       <DatePicker />
       <PickUpLocation />
       <DropOffLocation />
+      {showTimePicker && createPortal(
+        <TimePicker onAccept={() => setShowTimePicker(false)} />,
+        document.body,
+      )}
     </>
   );
 }
