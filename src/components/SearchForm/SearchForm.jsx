@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaCrosshairs, FaRegCalendarAlt, FaClock } from 'react-icons/fa';
 import { createPortal } from 'react-dom';
+
+import dayjs from 'dayjs';
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
 import DatePicker from './DatePicker/DatePicker';
@@ -13,8 +15,10 @@ import TimePicker from './TimePicker/TimePicker';
 import './SearchForm.scss';
 
 function SearchForm() {
+  const defaultTime = dayjs().set('hour', 0).set('minute', 0);
+
   const [showTimePicker, setShowTimePicker] = useState(false);
-  console.log(showTimePicker);
+  const [pickUpTime, setPickUpTime] = useState(defaultTime);
 
   const dispatch = useDispatch();
   const { searchForm } = useSelector();
@@ -25,7 +29,6 @@ function SearchForm() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const scheduledData = Object.fromEntries(formData);
-    console.log(scheduledData);
     navigate('/cab');
   }
 
@@ -109,7 +112,13 @@ function SearchForm() {
                 id="pickUpTime"
                 placeholder="Pick Up Time"
                 name="pickUpTime"
+                value={
+                  pickUpTime !== defaultTime
+                    ? (pickUpTime.format('hh:mm A'))
+                    : ('')
+                }
                 onClick={() => setShowTimePicker(true)}
+                readOnly
                 required
               />
               <div className="input-icon">
@@ -126,7 +135,10 @@ function SearchForm() {
       <PickUpLocation />
       <DropOffLocation />
       {showTimePicker && createPortal(
-        <TimePicker onAccept={() => setShowTimePicker(false)} />,
+        <TimePicker
+          onAccept={() => setShowTimePicker(false)}
+          onChange={setPickUpTime}
+        />,
         document.body,
       )}
     </>

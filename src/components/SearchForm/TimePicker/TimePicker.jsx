@@ -6,7 +6,7 @@ import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import './TimePicker.css';
 import dayjs from 'dayjs';
 
-function TimePicker({ onAccept }) {
+function TimePicker({ onAccept, onChange }) {
   return (
     <div className="modal-wrap">
       <div className="modal">
@@ -15,10 +15,7 @@ function TimePicker({ onAccept }) {
             defaultValue={dayjs()}
             orientation="portrait"
             onAccept={onAccept}
-          // onChange={(time) => {
-          //   setSelectTime(time);
-          //   onChange(time);
-          // }}
+            onChange={(time) => onChange(dayjs(time))}
           />
         </LocalizationProvider>
       </div>
