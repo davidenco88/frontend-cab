@@ -1,16 +1,27 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { useState, useEffect } from "react";
-import { FaCrosshairs, FaRegCalendarAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "./DatePicker/DatePicker";
-import LocationPicker from "./LocationPicker/LocationPicker";
-import "./SearchForm.scss";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { FaCrosshairs, FaRegCalendarAlt, FaClock } from 'react-icons/fa';
+import { createPortal } from 'react-dom';
+
+import dayjs from 'dayjs';
+import { useDispatch, useSelector } from '../../Context';
+import { SHOW_COMPONENT } from '../../Context/actionTypes';
+import DatePicker from './DatePicker/DatePicker';
+import PickUpLocation from './PickUpLocation/PickUpLocation';
+import DropOffLocation from './DropOffLocation/DropOffLocation';
+import TimePicker from './TimePicker/TimePicker';
+
+import './SearchForm.scss';
 
 function SearchForm() {
-  const [clickedPickUpDate, setClickedPickUpDate] = useState(false);
-  const [pickUpDate, setPickUpDate] = useState("");
-  const [openPickUpLocation, setOpenPickUpLocation] = useState(false);
-  const [pickUpLocation, setPickUpLocation] = useState("");
+  const defaultTime = dayjs().set('hour', 0).set('minute', 0);
+
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [pickUpTime, setPickUpTime] = useState(defaultTime);
+
+  const dispatch = useDispatch();
+  const { searchForm } = useSelector();
 
   const navigate = useNavigate();
 
@@ -18,8 +29,7 @@ function SearchForm() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const scheduledData = Object.fromEntries(formData);
-    console.log(scheduledData);
-    navigate("/cab");
+    navigate('/cab');
   }
 
   return (
@@ -30,12 +40,15 @@ function SearchForm() {
             Pick Up Location
             <div className="searchForm__input">
               <input
-                onClick={() => setOpenPickUpLocation(true)}
+                onClick={() => dispatch({
+                  type: SHOW_COMPONENT,
+                  payload: { componentName: 'pickUpLocation', showing: true },
+                })}
                 type="text"
                 id="pickUpLocation"
                 placeholder="Pick Up"
                 name="pickUpLocation"
-                value={pickUpLocation}
+                value={searchForm.pickUpLocation}
                 readOnly
                 required
               />
@@ -48,10 +61,16 @@ function SearchForm() {
             Drop Off Location
             <div className="searchForm__input">
               <input
+                onClick={() => dispatch({
+                  type: SHOW_COMPONENT,
+                  payload: { componentName: 'dropOffLocation', showing: true },
+                })}
                 type="text"
                 id="dropOffLocation"
                 placeholder="Drop Off"
                 name="dropOffLocation"
+                value={searchForm.dropOffLocation}
+                readOnly
                 required
               />
               <div className="input-icon">
@@ -68,9 +87,15 @@ function SearchForm() {
                 type="text"
                 id="pickUpDate"
                 placeholder="Pick Up"
-                name="pickUpdate"
-                value={pickUpDate}
-                onClick={() => setClickedPickUpDate(true)}
+                name="pickUpDate"
+                value={searchForm.pickUpDate}
+                onClick={() => dispatch({
+                  type: SHOW_COMPONENT,
+                  payload: {
+                    componentName: 'pickUpDate',
+                    showing: true,
+                  },
+                })}
                 readOnly
                 required
               />
@@ -79,18 +104,25 @@ function SearchForm() {
               </div>
             </div>
           </label>
-          <label htmlFor="dropOffDate" className="searchForm__item">
-            Drop Off Date
+          <label htmlFor="pickUpTime" className="searchForm__item">
+            Pick Up Time
             <div className="searchForm__input">
               <input
                 type="text"
-                id="dropOffDate"
-                placeholder="Drop Off"
-                name="dropOffDate"
+                id="pickUpTime"
+                placeholder="Pick Up Time"
+                name="pickUpTime"
+                value={
+                  pickUpTime !== defaultTime
+                    ? (pickUpTime.format('hh:mm A'))
+                    : ('')
+                }
+                onClick={() => setShowTimePicker(true)}
+                readOnly
                 required
               />
               <div className="input-icon">
-                <FaRegCalendarAlt />
+                <FaClock />
               </div>
             </div>
           </label>
@@ -99,16 +131,16 @@ function SearchForm() {
           <button type="submit">SEARCH</button>
         </div>
       </form>
-      <DatePicker
-        state={clickedPickUpDate}
-        setClickedPickUp={setClickedPickUpDate}
-        setPickUpDate={setPickUpDate}
-      />
-      <LocationPicker
-        state={openPickUpLocation}
-        setOpenPickUpLocation={setOpenPickUpLocation}
-        setPickUpLocation={setPickUpLocation}
-      />
+      <DatePicker />
+      <PickUpLocation />
+      <DropOffLocation />
+      {showTimePicker && createPortal(
+        <TimePicker
+          onAccept={() => setShowTimePicker(false)}
+          onChange={setPickUpTime}
+        />,
+        document.body,
+      )}
     </>
   );
 }
