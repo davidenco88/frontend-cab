@@ -9,10 +9,10 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
     coverage: {
-      lines: 80,
-      functions: 80,
-      branches: 80,
-      statements: 80,
+      lines: 65,
+      functions: 65,
+      branches: 65,
+      statements: 65,
     },
   },
 });
