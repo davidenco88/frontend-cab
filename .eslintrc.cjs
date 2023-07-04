@@ -7,7 +7,6 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
   ],
-  extends: 'standard-with-typescript',
   overrides: [
   ],
   parserOptions: {
