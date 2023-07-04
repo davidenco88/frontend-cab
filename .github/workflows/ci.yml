@@ -1,4 +1,5 @@
 name: ci
+run-name: ${{ github.actor }} is running a CI 🚀
 on:
   push:
     branches: ["main"]
@@ -7,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  Build_and_Coverage:
     runs-on: ubuntu-latest
     steps:
       - name: Download-dependencies
