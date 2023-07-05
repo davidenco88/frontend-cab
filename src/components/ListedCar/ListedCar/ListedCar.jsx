@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { fetchCars } from '../../../services/cars';
+import { fetchAvailableCars } from '../../../services/cars';
 import ImageAndType from '../ImageAndType/ImageAndType';
 import InfoIcons from '../InfoIcons/InfoIcons';
 import ListPrice from '../ListPrice/ListPrice';
@@ -11,7 +11,7 @@ function ListedCar() {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetchCars()
+    fetchAvailableCars()
       .then((vehicles) => {
         setCars(vehicles);
       });
