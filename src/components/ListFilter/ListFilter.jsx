@@ -8,11 +8,9 @@ import './ListFilter.scss';
 
 const carTypes = {
   title: 'Car Types',
-  checks: ['Mini',
-    'Medium',
-    'Standard',
-    'Van',
-    'Luxury'],
+  checks: ['Spacious',
+    'Luxury',
+    'Economic'],
 };
 const carCapacity = {
   title: 'Capacity',
@@ -49,8 +47,8 @@ function ListFilter({ testFilterOptions, testBarIcon, testCloseIcon }) {
           : 'listFilter__options'}
       >
         <CheckFilter data={carTypes} />
-        <CheckFilter data={carCapacity} />
-        <CheckFilter data={carOptions} />
+        {/* <CheckFilter data={carCapacity} />
+        <CheckFilter data={carOptions} /> */}
       </div>
     </section>
   );

@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import {
-  FaBars,
-  FaWindowClose,
-} from 'react-icons/fa';
 import { BsPlusSquareFill, BsFillDashSquareFill } from 'react-icons/bs';
 import './CheckFilter.scss';
 
@@ -12,6 +8,12 @@ function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
 
   const handleClikMenu = () => setMenuHide(!menuHide);
 
+  function handleFilter(type, event) {
+    if (event.target.checked) {
+      console.log(type);
+    }
+  }
+
   return (
     <>
       <hr />
@@ -20,8 +22,8 @@ function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
           <h4>{title}</h4>
           <div>
             {menuHide
-              ? <div onClick={handleClikMenu}><BsPlusSquareFill className="checkFilter__icon" data-testid={testPlusIcon} /></div>
-              : <div onClick={handleClikMenu}><BsFillDashSquareFill className="checkFilter__icon" data-testid={testMinusIcon} /></div>}
+              ? <button className="checkFilter__title__button" type="button" aria-label="plus" onClick={handleClikMenu}><BsPlusSquareFill className="checkFilter__icon" data-testid={testPlusIcon} /></button>
+              : <button className="checkFilter__title__button" type="button" aria-label="less" onClick={handleClikMenu}><BsFillDashSquareFill className="checkFilter__icon" data-testid={testMinusIcon} /></button>}
           </div>
         </div>
         <ul className={menuHide
@@ -31,7 +33,7 @@ function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
           {checks.map((type) => (
             <li className="checkFilter__list__item" key={type}>
               <label className="checkFilter__list__item__label" htmlFor={type}>
-                <input className="checkFilter__list__item__input" type="checkbox" id={type} />
+                <input className="checkFilter__list__item__input" type="checkbox" id={type} onChange={(event) => handleFilter(type, event)} />
                 <span className="checkFilter__list__item__checkmark" />
                 {type}
               </label>

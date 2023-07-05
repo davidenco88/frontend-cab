@@ -3,6 +3,10 @@
   &__title {
     display: flex;
     justify-content: space-between;
+
+    &__button {
+      border: none;
+    }
   }
   &__icon {
     background-color: #525252;
