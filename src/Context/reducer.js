@@ -1,4 +1,6 @@
-import { SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP } from './actionTypes';
+import {
+  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_VEHICLES,
+} from './actionTypes';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -27,6 +29,15 @@ function reducer(state, action) {
           ...state.trip,
           ...action.payload,
         },
+      };
+    }
+    case SET_VEHICLES: {
+      return {
+        ...state,
+        vehicles: [
+          ...state.vehicles,
+          ...action.payload,
+        ],
       };
     }
     default: {

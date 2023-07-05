@@ -24,6 +24,7 @@ export function ContextProvider({ children }) {
       dropOffLongitude: '',
       pickUpDate: '',
     },
+    vehicles: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
