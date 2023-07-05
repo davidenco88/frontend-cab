@@ -23,8 +23,7 @@ function DateTimePicker() {
     dispatch({
       type: SET_TRIP,
       payload: {
-        fieldName: 'pickUpDate',
-        newField: dayjs(dateTime),
+        pickUpDate: dayjs(dateTime),
       },
     });
   }

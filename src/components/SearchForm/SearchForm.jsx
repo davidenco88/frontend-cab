@@ -73,14 +73,14 @@ function SearchForm() {
           </label>
         </div>
         <div className="c-items">
-          <label htmlFor="pickUpTime" className="searchForm__item">
-            Pick Up Time
+          <label htmlFor="pickUpDateTime" className="searchForm__item">
+            Pick Up Date-Time
             <div className="searchForm__input">
               <input
                 type="text"
-                id="pickUpTime"
-                placeholder="Pick Up Time"
-                name="pickUpTime"
+                id="pickUpDateTime"
+                placeholder="Pick Up Date-Time"
+                name="pickUpDateTime"
                 value={
                   searchForm.pickUpDate !== ''
                     ? (searchForm.pickUpDate.format('DD / MM / YYYY - hh:mm A'))
