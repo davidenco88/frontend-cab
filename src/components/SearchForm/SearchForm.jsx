@@ -1,27 +1,20 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { FaCrosshairs, FaRegCalendarAlt, FaClock } from 'react-icons/fa';
+import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
 import { createPortal } from 'react-dom';
 
-import dayjs from 'dayjs';
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
 import DatePicker from './DatePicker/DatePicker';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
 import DropOffLocation from './DropOffLocation/DropOffLocation';
-import TimePicker from './TimePicker/TimePicker';
+import DateTimePicker from './DateTimePicker/DateTimePicker';
 
 import './SearchForm.scss';
 
 function SearchForm() {
-  const defaultTime = dayjs().set('hour', 0).set('minute', 0);
-
-  const [showTimePicker, setShowTimePicker] = useState(false);
-  const [pickUpTime, setPickUpTime] = useState(defaultTime);
-
   const dispatch = useDispatch();
-  const { searchForm } = useSelector();
+  const { searchForm, showComponentHandler } = useSelector();
 
   const navigate = useNavigate();
 
@@ -80,30 +73,6 @@ function SearchForm() {
           </label>
         </div>
         <div className="c-items">
-          <label htmlFor="pickUpDate" className="searchForm__item">
-            Pick Up Date
-            <div className="searchForm__input">
-              <input
-                type="text"
-                id="pickUpDate"
-                placeholder="Pick Up"
-                name="pickUpDate"
-                value={searchForm.pickUpDate}
-                onClick={() => dispatch({
-                  type: SHOW_COMPONENT,
-                  payload: {
-                    componentName: 'pickUpDate',
-                    showing: true,
-                  },
-                })}
-                readOnly
-                required
-              />
-              <div className="input-icon">
-                <FaRegCalendarAlt />
-              </div>
-            </div>
-          </label>
           <label htmlFor="pickUpTime" className="searchForm__item">
             Pick Up Time
             <div className="searchForm__input">
@@ -113,16 +82,19 @@ function SearchForm() {
                 placeholder="Pick Up Time"
                 name="pickUpTime"
                 value={
-                  pickUpTime !== defaultTime
-                    ? (pickUpTime.format('hh:mm A'))
-                    : ('')
+                  searchForm.pickUpDate !== ''
+                    ? (searchForm.pickUpDate.format('DD / MM / YYYY - hh:mm A'))
+                    : (searchForm.pickUpDate)
                 }
-                onClick={() => setShowTimePicker(true)}
+                onClick={() => dispatch({
+                  type: SHOW_COMPONENT,
+                  payload: { componentName: 'pickUpDate', showing: true },
+                })}
                 readOnly
                 required
               />
               <div className="input-icon">
-                <FaClock />
+                <FaRegCalendarAlt />
               </div>
             </div>
           </label>
@@ -131,14 +103,10 @@ function SearchForm() {
           <button type="submit">SEARCH</button>
         </div>
       </form>
-      <DatePicker />
       <PickUpLocation />
       <DropOffLocation />
-      {showTimePicker && createPortal(
-        <TimePicker
-          onAccept={() => setShowTimePicker(false)}
-          onChange={setPickUpTime}
-        />,
+      {showComponentHandler.pickUpDate && createPortal(
+        <DateTimePicker />,
         document.body,
       )}
     </>
