@@ -20,3 +20,8 @@
 .orangeButton:active {
   background-color: #b15805;
 }
+
+.orangeButton:disabled {
+  background-color: #a1a1a1;
+}
+
