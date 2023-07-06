@@ -5,7 +5,7 @@ import { SET_VEHICLES } from '../../../Context/actionTypes';
 import './CheckFilter.scss';
 
 function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
-  const { title, checks } = data;
+  const { title, checks, filterBy } = data;
   const [menuHide, setMenuHide] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const { originalVehicles } = useSelector();
@@ -29,8 +29,12 @@ function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
 
   useEffect(() => {
     if (selectedFilters.length > 0) {
-      const newVehicles = originalVehicles.filter((vehicle) => selectedFilters
-        .includes(vehicle.VehicleTypes.type));
+      const newVehicles = originalVehicles.filter((vehicle) => {
+        const path = filterBy.split('.');
+        const value = path.reduce((obj, key) => obj[key], vehicle);
+        const result = selectedFilters.includes(value);
+        return result;
+      });
       dispatch({ type: SET_VEHICLES, payload: { renderVehicles: newVehicles } });
     } else {
       dispatch({ type: SET_VEHICLES, payload: { renderVehicles: originalVehicles } });

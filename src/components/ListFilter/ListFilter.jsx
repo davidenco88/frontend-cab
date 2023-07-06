@@ -11,14 +11,16 @@ const carTypes = {
   checks: ['Spacious',
     'Luxury',
     'Economic'],
+  filterBy: 'VehicleTypes.type',
 };
 const carCapacity = {
   title: 'Capacity',
   checks: [
-    '1 - 5',
-    '6 - 10',
-    '10 or More',
+    3,
+    4,
+    5,
   ],
+  filterBy: 'VehicleTypes.seats',
 };
 const carOptions = {
   title: 'Car Option',
@@ -47,8 +49,7 @@ function ListFilter({ testFilterOptions, testBarIcon, testCloseIcon }) {
           : 'listFilter__options'}
       >
         <CheckFilter data={carTypes} />
-        {/* <CheckFilter data={carCapacity} />
-        <CheckFilter data={carOptions} /> */}
+        <CheckFilter data={carCapacity} />
       </div>
     </section>
   );
