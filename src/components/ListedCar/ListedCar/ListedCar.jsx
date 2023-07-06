@@ -24,12 +24,10 @@ function ListedCar() {
       });
     });
   }, []);
-  // const handleClick = (item) => {
-  //   dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } });
-  // };
-  const isSearchFormEmpty = (searchForm.pickUpDate === ''
-          || searchForm.pickUpLocation === ''
-          || searchForm.dropOffLocation === '');
+
+  const isSearchFormEmpty = searchForm.pickUpDate === ''
+    || searchForm.pickUpLocation === ''
+    || searchForm.dropOffLocation === '';
 
   return (
     <main className="list">
@@ -39,7 +37,11 @@ function ListedCar() {
           <InfoIcons item={item} />
           <ListPrice item={item} />
           <NavLink className="list__listedCar__button" to="/booking">
-            <OrangeButton isDisabled={isSearchFormEmpty} text="Book now" />
+            <OrangeButton
+              isDisabled={isSearchFormEmpty}
+              text="Book now"
+              onClick={() => dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } })}
+            />
           </NavLink>
         </div>
       ))}
