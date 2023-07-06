@@ -1,0 +1,45 @@
+.HowToGetCard {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.HowToGetCard__Downloads{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.HowToGetCard__Downloads-icon{
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color:#eab30f;
+  background-color: white;
+  border-radius: 8px;
+  margin: 6px 0 0 0;
+ width: fit-content;
+}
+.HowToGetCard>h3{
+  text-align: center;
+  color:white;
+}
+.HowToGetCard>h1{
+  text-align: center;
+  color:white;
+}
+.HowToGetCard>p{
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .HowToGetCard {
+      width: 270px;
+  }
+  .HowToGetCard__Downloads{
+    display: flex;
+    flex-direction: row;
+  }
+}

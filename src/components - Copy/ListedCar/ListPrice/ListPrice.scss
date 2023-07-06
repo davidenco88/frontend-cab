@@ -1,0 +1,19 @@
+.listPrice {
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  text-align: center;
+
+  &__base {
+    font-weight: 800;
+  }
+
+  &__fare {
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    &__text {
+      color: gray;
+    }
+  }
+}

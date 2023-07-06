@@ -1,0 +1,28 @@
+.HowToGetCardPhone {
+  color: white;
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.HowToGetCardPhone--Map-photo{
+  display: flex;
+  align-items: center;
+  width: 120px;
+}
+.HowToGetCardPhone--Data-photo{
+  display: flex;
+  align-items: center;
+  width: 120px;
+}
+
+
+
+
+@media (min-width: 500px) {
+  .HowToGetCardPhone {
+      flex-direction:row;
+
+  }
+}
