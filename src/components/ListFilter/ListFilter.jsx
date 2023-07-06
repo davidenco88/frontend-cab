@@ -7,7 +7,7 @@ import CheckFilter from './CheckFilter/CheckFilter';
 import './ListFilter.scss';
 
 const carTypes = {
-  title: 'Car Types',
+  title: 'Car Type',
   checks: ['Spacious',
     'Luxury',
     'Economic'],

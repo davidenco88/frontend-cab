@@ -34,10 +34,7 @@ function reducer(state, action) {
     case SET_VEHICLES: {
       return {
         ...state,
-        vehicles: [
-          ...state.vehicles,
-          ...action.payload,
-        ],
+        ...action.payload,
       };
     }
     default: {

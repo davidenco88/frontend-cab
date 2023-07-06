@@ -1,18 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsPlusSquareFill, BsFillDashSquareFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from '../../../Context';
+import { SET_VEHICLES } from '../../../Context/actionTypes';
 import './CheckFilter.scss';
 
 function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
   const { title, checks } = data;
   const [menuHide, setMenuHide] = useState(true);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const { originalVehicles } = useSelector();
+  const dispatch = useDispatch();
 
   const handleClikMenu = () => setMenuHide(!menuHide);
 
   function handleFilter(type, event) {
     if (event.target.checked) {
-      console.log(type);
+      setSelectedFilters((prevFilters) => {
+        const result = [...prevFilters, type];
+        return result;
+      });
+    } else {
+      setSelectedFilters((prevFilters) => {
+        const result = prevFilters.filter((filter) => filter !== type);
+        return result;
+      });
     }
   }
+
+  useEffect(() => {
+    if (selectedFilters.length > 0) {
+      const newVehicles = originalVehicles.filter((vehicle) => selectedFilters
+        .includes(vehicle.VehicleTypes.type));
+      dispatch({ type: SET_VEHICLES, payload: { renderVehicles: newVehicles } });
+    } else {
+      dispatch({ type: SET_VEHICLES, payload: { renderVehicles: originalVehicles } });
+    }
+  }, [selectedFilters]);
 
   return (
     <>
