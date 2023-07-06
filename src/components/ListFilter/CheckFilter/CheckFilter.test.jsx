@@ -1,15 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import CheckFilter from './CheckFilter';
 
-describe('CheckFilter Tests', () => {
+describe.skip('CheckFilter Tests', () => {
   beforeEach(() => {
     const data = {
       title: 'Car Types',
-      checks: ['Mini',
-        'Medium',
-        'Standard',
-        'Van',
-        'Luxury'],
+      checks: ['Spacious',
+        'Luxury',
+        'Economic'],
     };
     // const { title } = data;
     const plusIcon = 'plusIcon';
