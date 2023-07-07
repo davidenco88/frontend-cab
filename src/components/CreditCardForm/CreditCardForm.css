@@ -1,63 +1,27 @@
 .creditCardOption {
-    padding: 0px 0px;
-    width: 100%;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px;
+  width: 400px;
+  font-weight: bold;
+  overflow: hidden;
 }
 
 .creditCardOptions__header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    background-color: #F9F9F9;
-    border: solid 1px #E5E5E5;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #F9F9F9;
+  border: solid 1px #E5E5E5;
 }
 
 .formCreditCard {
-    padding: 15px;
-    border: solid 1px #E5E5E5;
-}
-
-.formCreditCard>label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  padding: 15px;
+  border: solid 1px #E5E5E5;
 }
 
 .formCreditCard__input {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: solid 1px #E5E5E5;
-    border-radius: 5px;
-    background-color: white;
-    padding: 10px;
-    margin: 5px 0px;
-}
-
-.formCreditCard__input>input {
-    flex-grow: 1;
-    border: none;
-    width: 50px;
-}
-
-.formCreditCard__input>img {
-    height: 12px;
-}
-
-@media screen and (min-width: 900px) {
-
-    .formCreditCard {
-        display: grid;
-        grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-        column-gap: 20px;
-    }
-
-    .formCreditCard__item-name {
-        grid-area: 1 / 1 / span 1 / span 3;
-    }
-
-    .formCreditCard__item-number {
-        grid-area: 2 / 1 / span 1 / span 3;
-    }
+  padding: 10px;
+  margin: 20px 0px;
 }
