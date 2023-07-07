@@ -9,6 +9,7 @@ import DefaultLayout from './Layout/DefaultLayout';
 import LoginLayout from './Layout/LoginLayout';
 import Profile from './pages/Profile';
 import ActivateAccount from './pages/ActivateAccount';
+import Trips from './pages/TripsPage.jsx';
 
 function App() {
   // Aca podriamos comenzar a implementar el useReducer con la
@@ -27,6 +28,7 @@ function App() {
         <Route path="/failed" element={<FailedPayment />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/driver-travels/" element={<Trips />} />
       </Route>
       <Route path="/" element={<LoginLayout />}>
         <Route path="/login" element={<Login />} />
