@@ -14,6 +14,8 @@ function PickUpLocation() {
 
     const formData = new FormData(e.target);
     const addressData = Object.fromEntries(formData);
+    const pickUpAddress = `${addressData.road}-${addressData.houseNumber}, Barrio ${addressData.neighbourhood}, ${addressData.city}`;
+
     const address = Object.keys(addressData)
       .map((key) => {
         if (addressData[key].includes(' ')) {
@@ -48,6 +50,7 @@ function PickUpLocation() {
         payload: {
           pickUpLatitude: data[0].lat,
           pickUpLongitude: data[0].lon,
+          pickUpAddress,
         },
       });
     } catch (error) {
