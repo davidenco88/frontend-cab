@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { fetchAvailableCars } from "../../../services/cars";
-import { useDispatch, useSelector } from "../../../Context";
-import { SET_VEHICLES } from "../../../Context/actionTypes";
-import ImageAndType from "../ImageAndType/ImageAndType";
-import InfoIcons from "../InfoIcons/InfoIcons";
-import ListPrice from "../ListPrice/ListPrice";
-import OrangeButton from "../../OrangeButton/OrangeButton";
-import "./ListedCar.scss";
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { fetchAvailableCars } from '../../../services/cars';
+import { useDispatch, useSelector } from '../../../Context';
+import { SET_VEHICLES, SET_TRIP } from '../../../Context/actionTypes';
+import ImageAndType from '../ImageAndType/ImageAndType';
+import InfoIcons from '../InfoIcons/InfoIcons';
+import ListPrice from '../ListPrice/ListPrice';
+import OrangeButton from '../../OrangeButton/OrangeButton';
+import './ListedCar.scss';
 
 function ListedCar() {
   const dispatch = useDispatch();
-  const { renderVehicles } = useSelector();
+  const { renderVehicles, searchForm } = useSelector();
 
   useEffect(() => {
     fetchAvailableCars().then((fetchVehicles) => {
@@ -25,6 +25,10 @@ function ListedCar() {
     });
   }, []);
 
+  const isSearchFormEmpty = searchForm.pickUpDate === ''
+    || searchForm.pickUpLocation === ''
+    || searchForm.dropOffLocation === '';
+
   return (
     <main className="list">
       {renderVehicles.map((item) => (
@@ -33,7 +37,11 @@ function ListedCar() {
           <InfoIcons item={item} />
           <ListPrice item={item} />
           <NavLink className="list__listedCar__button" to="/booking">
-            <OrangeButton text="Book now" />
+            <OrangeButton
+              isDisabled={isSearchFormEmpty}
+              text="Book now"
+              onClick={() => dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } })}
+            />
           </NavLink>
         </div>
       ))}
