@@ -6,17 +6,24 @@
   box-shadow: 0px 0px 30px -10px rgb(193, 193, 193);
 }
 
+.verification {
+  text-align: center;
+  background-color: orange;
+  box-sizing: content-box;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
 @media screen and  (min-width:768px) {
   .cabMain {
   display: grid;
   grid-template-columns: 300px 1fr;
-
-  &__filter {
-
-  }
-
-  &__list {
-  }
   }
 }
 @media screen and (min-width: 700px) {
