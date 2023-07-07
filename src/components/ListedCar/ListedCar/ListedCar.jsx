@@ -25,9 +25,11 @@ function ListedCar() {
     });
   }, []);
 
-  const isSearchFormEmpty = searchForm.pickUpDate === ''
+  const isLoggedIn = !!localStorage.getItem('authToken');
+  const isMissingSomething = searchForm.pickUpDate === ''
     || searchForm.pickUpLocation === ''
-    || searchForm.dropOffLocation === '';
+    || searchForm.dropOffLocation === ''
+    || !isLoggedIn;
 
   return (
     <main className="list">
@@ -38,7 +40,7 @@ function ListedCar() {
           <ListPrice item={item} />
           <NavLink className="list__listedCar__button" to="/booking">
             <OrangeButton
-              isDisabled={isSearchFormEmpty}
+              isDisabled={isMissingSomething}
               text="Book now"
               onClick={() => dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } })}
             />
