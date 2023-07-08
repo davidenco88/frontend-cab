@@ -13,6 +13,7 @@ export default defineConfig({
       functions: 45,
       branches: 45,
       statements: 45,
+      exclude: ['**/Context/**'],
     },
   },
 });

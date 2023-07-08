@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BsPlusSquareFill, BsFillDashSquareFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from '../../../Context';
-import { SET_VEHICLES } from '../../../Context/actionTypes';
+import { SET_CONTEXT_OBJECT } from '../../../Context/actionTypes';
 import './CheckFilter.scss';
 
 function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
@@ -35,9 +35,9 @@ function CheckFilter({ data, testPlusIcon, testMinusIcon }) {
         const result = selectedFilters.includes(value);
         return result;
       });
-      dispatch({ type: SET_VEHICLES, payload: { renderVehicles: newVehicles } });
+      dispatch({ type: SET_CONTEXT_OBJECT, payload: { renderVehicles: newVehicles } });
     } else {
-      dispatch({ type: SET_VEHICLES, payload: { renderVehicles: originalVehicles } });
+      dispatch({ type: SET_CONTEXT_OBJECT, payload: { renderVehicles: originalVehicles } });
     }
   }, [selectedFilters]);
 

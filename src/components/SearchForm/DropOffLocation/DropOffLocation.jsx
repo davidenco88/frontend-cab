@@ -14,6 +14,7 @@ function DropOffLocation() {
 
     const formData = new FormData(e.target);
     const addressData = Object.fromEntries(formData);
+    const dropOffAddress = `${addressData.road}-${addressData.houseNumber}, Barrio ${addressData.neighbourhood}, ${addressData.city}`;
     const address = Object.keys(addressData)
       .map((key) => {
         if (addressData[key].includes(' ')) {
@@ -48,6 +49,7 @@ function DropOffLocation() {
         payload: {
           dropOffLatitude: data[0].lat,
           dropOffLongitude: data[0].lon,
+          dropOffAddress,
         },
       });
     } catch (error) {

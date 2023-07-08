@@ -1,18 +1,60 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from '../../Context';
+import { createTrip } from '../../services/trip';
+import { SET_CONTEXT_OBJECT } from '../../Context/actionTypes';
 import './BookingSummery.css';
 
 function BookingSummery() {
+  const { searchForm, trip, createdTrip } = useSelector();
+  const dispatch = useDispatch();
+  const { totalPrice } = createdTrip;
+
+  useEffect(() => {
+    async function postTrip() {
+      const newTrip = await createTrip(trip);
+
+      if (newTrip.status === 201) {
+        return dispatch({ type: SET_CONTEXT_OBJECT, payload: { createdTrip: newTrip.data } });
+      }
+      return console.log('Algo salio mal en la funcion postTrip');
+    }
+
+    postTrip();
+  }, []);
+
+  const pickUpArray = searchForm.pickUpLocation.split(',');
+  const pickUp = `${pickUpArray[0]} ${pickUpArray[1]}`;
+  const dropOffArray = searchForm.dropOffLocation.split(',');
+  const dropOff = `${dropOffArray[0]} ${dropOffArray[1]}`;
+
   return (
     <div className="bookingSummery">
       <h3 className="bookingSummery__header">Booking Summery</h3>
       <div className="bookingSummery__content">
         <ul>
-          <li><span>Itinerary:</span><span>Paris--Toules</span></li>
-          <li><span>Pickup Date:</span><span>04/06/2023, 11:35pm</span></li>
-          <li><span>Return Date:</span><span>14/06/2023, 13:00pm</span></li>
-          <li><span>Car Type:</span><span>Fiat Chrysler</span></li>
+          <li>
+            <h4>Pick Up:</h4>
+            <span>{pickUp}</span>
+          </li>
+          <li>
+            <h4>Drop Off:</h4>
+            <span> {dropOff}</span>
+          </li>
+          <li>
+            <h4>Pickup Date:</h4>
+            <span>{searchForm.pickUpDate.format('DD / MM / YYYY - hh:mm A')}</span>
+          </li>
+          <li>
+            <h4>Vehicle Type:</h4>
+            <span>{trip.selectedVehicle.VehicleTypes.type}</span>
+          </li>
+          <li>
+            <h4>Vehicle:</h4>
+            <span>{trip.selectedVehicle.brand} {trip.selectedVehicle.model}</span>
+          </li>
         </ul>
         <h3 className="bookingSummery__total">
-          <span>Total Fare:</span><span>$1250</span>
+          <span>Total Fare:</span><span>{totalPrice}</span>
         </h3>
       </div>
     </div>

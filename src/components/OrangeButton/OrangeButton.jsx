@@ -1,8 +1,13 @@
 import './OrangeButton.scss';
 
-function OrangeButton({ text }) {
+function OrangeButton({ text, isDisabled = false, onClick }) {
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
   return (
-    <button className="orangeButton" type="button">{text}</button>
+    <button className="orangeButton" type="button" disabled={isDisabled} onClick={handleClick}>{text}</button>
   );
 }
 
