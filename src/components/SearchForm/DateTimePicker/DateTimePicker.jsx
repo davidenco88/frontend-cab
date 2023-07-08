@@ -23,7 +23,7 @@ function DateTimePicker() {
     dispatch({
       type: SET_TRIP,
       payload: {
-        pickUpDate: dateTime.format('DD / MM / YYYY - hh:mm A'),
+        pickUpDate: dateTime.format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
       },
     });
   }
