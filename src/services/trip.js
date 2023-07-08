@@ -7,15 +7,13 @@ export async function createTrip(data) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
+  try {
+    const res = await fetch(`${BASE_URL}/api/trips`, options);
 
-  const res = await fetch(`${BASE_URL}/api/trips`, options);
-
-  if (res.ok) {
-    return res.json();
+    if (res.ok) {
+      return { status: res.status, data: await res.json() };
+    }
+  } catch (error) {
+    throw new Error('Failed to create trip', error.message);
   }
-  const errorData = await res.json();
-  return {
-    status: res.status,
-    message: errorData.message,
-  };
 }

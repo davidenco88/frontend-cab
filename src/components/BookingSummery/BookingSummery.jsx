@@ -11,13 +11,12 @@ function BookingSummery() {
 
   useEffect(() => {
     async function postTrip() {
-      const createdTrip = await createTrip(trip);
+      const newTrip = await createTrip(trip);
 
-      if (createdTrip.status !== 200) {
-        return alert('Error: ' + `${createdTrip.status} ${createdTrip.message}`);
+      if (newTrip.status === 201) {
+        return dispatch({ type: SET_CONTEXT_OBJECT, payload: { createdTrip: newTrip.data } });
       }
-
-      return dispatch({ type: SET_CONTEXT_OBJECT, payload: { createdTrip } });
+      return console.log('Algo salio mal en la funcion postTrip');
     }
 
     postTrip();
