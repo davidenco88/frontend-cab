@@ -1,12 +1,26 @@
 import { useEffect } from 'react';
-import { useSelector } from '../../Context';
+import { useSelector, useDispatch } from '../../Context';
+import { createTrip } from '../../services/trip';
+import { SET_CONTEXT_OBJECT } from '../../Context/actionTypes';
 import './BookingSummery.css';
 
 function BookingSummery() {
-  const { searchForm, trip } = useSelector();
+  const { searchForm, trip, createdTrip } = useSelector();
+  const dispatch = useDispatch();
+  const { totalPrice } = createdTrip;
 
   useEffect(() => {
-    // Aca el fetch enviando un post al back para calculo de fee con la info de trip?
+    async function postTrip() {
+      const createdTrip = await createTrip(trip);
+
+      if (createdTrip.status !== 200) {
+        return alert('Error: ' + `${createdTrip.status} ${createdTrip.message}`);
+      }
+
+      return dispatch({ type: SET_CONTEXT_OBJECT, payload: { createdTrip } });
+    }
+
+    postTrip();
   }, []);
 
   const pickUpArray = searchForm.pickUpLocation.split(',');
@@ -41,7 +55,7 @@ function BookingSummery() {
           </li>
         </ul>
         <h3 className="bookingSummery__total">
-          <span>Total Fare:</span><span>$1250</span>
+          <span>Total Fare:</span><span>{totalPrice}</span>
         </h3>
       </div>
     </div>

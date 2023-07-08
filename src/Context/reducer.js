@@ -1,5 +1,5 @@
 import {
-  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_VEHICLES,
+  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_CONTEXT_OBJECT,
 } from './actionTypes';
 
 function reducer(state, action) {
@@ -31,7 +31,7 @@ function reducer(state, action) {
         },
       };
     }
-    case SET_VEHICLES: {
+    case SET_CONTEXT_OBJECT: {
       return {
         ...state,
         ...action.payload,

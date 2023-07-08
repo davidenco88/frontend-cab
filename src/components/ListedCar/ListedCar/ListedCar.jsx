@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { fetchAvailableCars } from '../../../services/cars';
 import { useDispatch, useSelector } from '../../../Context';
-import { SET_VEHICLES, SET_TRIP } from '../../../Context/actionTypes';
+import { SET_CONTEXT_OBJECT, SET_TRIP } from '../../../Context/actionTypes';
 import ImageAndType from '../ImageAndType/ImageAndType';
 import InfoIcons from '../InfoIcons/InfoIcons';
 import ListPrice from '../ListPrice/ListPrice';
@@ -16,7 +16,7 @@ function ListedCar() {
   useEffect(() => {
     fetchAvailableCars().then((fetchVehicles) => {
       dispatch({
-        type: SET_VEHICLES,
+        type: SET_CONTEXT_OBJECT,
         payload: {
           originalVehicles: fetchVehicles,
           renderVehicles: fetchVehicles,
