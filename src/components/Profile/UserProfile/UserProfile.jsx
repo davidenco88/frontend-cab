@@ -34,8 +34,8 @@ function UserProfile() {
         alt="profile pic"
       />
       <div className="userProfile__text">
-        <form action="submit" onSubmit={handleSubmit}>
-          <input type="file" accept="image/*" name="avatar" onChange={handleUpload} />
+        <form className="userProfile__input" action="submit" onSubmit={handleSubmit}>
+          <input className="userProfile__input" type="file" accept="image/*" name="avatar" onChange={handleUpload} placeholder="Upload" />
           <button type="submit">Upload</button>
         </form>
         <h1 className="userProfile__text__name">{profile.fullName}</h1>

@@ -1,0 +1,11 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media screen and (min-width: 769px) {
+.profilePage {
+    flex-direction: row;
+}
+}

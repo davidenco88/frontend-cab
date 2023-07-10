@@ -1,10 +1,12 @@
-import UserProfile from "../components/Profile/UserProfile/UserProfile";
+import UserProfile from '../components/Profile/UserProfile/UserProfile';
+import RegularUserTrips from '../components/Profile/UserProfile/RegularUserTrips/RegularUserTrips';
+import './Profile.scss';
 
 function Profile() {
   return (
-    <div className="page">
-      <h1>USER PAGE UNDER CONSTRUCTION</h1>
+    <div className="profilePage">
       <UserProfile />
+      <RegularUserTrips />
     </div>
   );
 }
