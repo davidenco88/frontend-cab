@@ -7,7 +7,7 @@ export async function updateAvatar(profile, formData) {
     body: formData,
   };
   try {
-    const res = await fetch(`http://localhost:8080/api/users/avatar/${profile.id}`, options);
+    const res = await fetch(`${BASE_URL}/api/users/avatar/${profile.id}`, options);
 
     if (res.ok) {
       return { status: res.status, data: await res.json() };
