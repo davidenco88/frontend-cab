@@ -88,69 +88,84 @@ function RegularUserTrips() {
         fullName: 'Philipp Inform',
       },
     },
-    // {
-    //   id: 3,
-    //   pickUpAddress: 'cll 5 #5 Santa Teresita',
-    //   dropOffAddress: 'cll 6 #6 Santa Teresita',
-    //   totalPrice: 400,
-    //   pickUpDate: '07/07/2023, 5:49 PM',
-    //   vehicle: {
-    //     image:
-    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-    //     brand: 'Tesla',
-    //     model: 'Model 3',
-    //     plates: 'XYZ 789',
-    //   },
-    //   driver: {
-    //     avatar:
-    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-    //     fullName: 'Pedro Ramirez',
-    //   },
-    //   serviceType: 'Economic',
-    //   tripState: 'Finished',
-    // },
-    // {
-    //   id: 4,
-    //   pickUpAddress: 'cll 7 #7 Santa Teresita',
-    //   dropOffAddress: 'cll 8 #8 Santa Teresita',
-    //   totalPrice: 180,
-    //   pickUpDate: '07/07/2023, 5:49 PM',
-    //   vehicle: {
-    //     image:
-    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-    //     brand: 'Volkswagen',
-    //     model: 'Golf',
-    //     plates: 'DEF 456',
-    //   },
-    //   driver: {
-    //     avatar:
-    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-    //     fullName: 'María Lopez',
-    //   },
-    //   serviceType: 'Economic',
-    //   tripState: 'Finished',
-    // },
-    // {
-    //   id: 5,
-    //   pickUpAddress: 'cll 9 #9 Santa Teresita',
-    //   dropOffAddress: 'cll 10 #10 Santa Teresita',
-    //   totalPrice: 320,
-    //   pickUpDate: '07/07/2023, 5:49 PM',
-    //   vehicle: {
-    //     image:
-    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-    //     brand: 'BMW',
-    //     model: 'X5',
-    //     plates: 'JKL 321',
-    //   },
-    //   driver: {
-    //     avatar:
-    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-    //     fullName: 'Carlos Martinez',
-    //   },
-    //   serviceType: 'Economic',
-    //   tripState: 'Canceled',
-    // },
+    {
+      id: 3,
+      pickUpAddress: 'cll 5 #5 Santa Teresita',
+      dropOffAddress: 'cll 6 #6 Santa Teresita',
+      totalPrice: 400,
+      pickUpDate: '07/07/2023, 5:49 PM',
+      vehicle: {
+        image:
+          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+        brand: 'Tesla',
+        model: 'Model 3',
+        plates: 'XYZ 789',
+      },
+      driver: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Pedro Ramirez',
+      },
+      serviceType: 'Economic',
+      tripState: 'Finished',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
+    },
+    {
+      id: 4,
+      pickUpAddress: 'cll 7 #7 Santa Teresita',
+      dropOffAddress: 'cll 8 #8 Santa Teresita',
+      totalPrice: 180,
+      pickUpDate: '07/07/2023, 5:49 PM',
+      vehicle: {
+        image:
+          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+        brand: 'Volkswagen',
+        model: 'Golf',
+        plates: 'DEF 456',
+      },
+      driver: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'María Lopez',
+      },
+      serviceType: 'Economic',
+      tripState: 'Finished',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
+    },
+    {
+      id: 5,
+      pickUpAddress: 'cll 9 #9 Santa Teresita',
+      dropOffAddress: 'cll 10 #10 Santa Teresita',
+      totalPrice: 320,
+      pickUpDate: '07/07/2023, 5:49 PM',
+      vehicle: {
+        image:
+          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+        brand: 'BMW',
+        model: 'X5',
+        plates: 'JKL 321',
+      },
+      driver: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Carlos Martinez',
+      },
+      serviceType: 'Economic',
+      tripState: 'Canceled',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
+    },
   ];
 
   const [showDetails, setShowDetails] = useState(trips.map(() => false));
