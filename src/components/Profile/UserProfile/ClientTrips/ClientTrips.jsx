@@ -4,6 +4,7 @@ import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import TripDetails from './TripDetails/TripDetails';
+import { findHistorictrips } from '../../../../services/trip';
 import './ClientTrips.scss';
 
 function RegularUserTrips() {
@@ -14,7 +15,12 @@ function RegularUserTrips() {
   // Role identification
   const profile = JSON.parse(localStorage.getItem('profile'));
   const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
-
+  const dataFetcher = {
+    id: profile.id,
+    isDriver: hasDriverRole
+  }
+  const trips2 = findHistorictrips(dataFetcher);
+  console.log(Promise.all(trips2));
   useEffect(() => {
     // Logica para responsive
     const handleResize = () => {
