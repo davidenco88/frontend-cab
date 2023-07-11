@@ -3,7 +3,8 @@ import { HiClock } from 'react-icons/hi';
 import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
-import TripDetails from './TripDetails/TripDetails';
+import DriverDetails from './DriverDetails/DriverDetails';
+import ClientDetails from './ClientDetails/ClientDetails';
 import './ClientTrips.scss';
 
 function RegularUserTrips() {
@@ -14,6 +15,7 @@ function RegularUserTrips() {
   // Role identification
   const profile = JSON.parse(localStorage.getItem('profile'));
   const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+  const hasClientRole = profile.roles.some((role) => role.name === 'Client');
 
   useEffect(() => {
     // Logica para responsive
@@ -54,6 +56,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Scheduled',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
     },
     {
       id: 2,
@@ -75,70 +82,75 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Started',
-    },
-    {
-      id: 3,
-      pickUpAddress: 'cll 5 #5 Santa Teresita',
-      dropOffAddress: 'cll 6 #6 Santa Teresita',
-      totalPrice: 400,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Tesla',
-        model: 'Model 3',
-        plates: 'XYZ 789',
-      },
-      driver: {
+      client: {
         avatar:
           'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Pedro Ramirez',
+        fullName: 'Philipp Inform',
       },
-      serviceType: 'Economic',
-      tripState: 'Finished',
     },
-    {
-      id: 4,
-      pickUpAddress: 'cll 7 #7 Santa Teresita',
-      dropOffAddress: 'cll 8 #8 Santa Teresita',
-      totalPrice: 180,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Volkswagen',
-        model: 'Golf',
-        plates: 'DEF 456',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'María Lopez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Finished',
-    },
-    {
-      id: 5,
-      pickUpAddress: 'cll 9 #9 Santa Teresita',
-      dropOffAddress: 'cll 10 #10 Santa Teresita',
-      totalPrice: 320,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'BMW',
-        model: 'X5',
-        plates: 'JKL 321',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Carlos Martinez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Canceled',
-    },
+    // {
+    //   id: 3,
+    //   pickUpAddress: 'cll 5 #5 Santa Teresita',
+    //   dropOffAddress: 'cll 6 #6 Santa Teresita',
+    //   totalPrice: 400,
+    //   pickUpDate: '07/07/2023, 5:49 PM',
+    //   vehicle: {
+    //     image:
+    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+    //     brand: 'Tesla',
+    //     model: 'Model 3',
+    //     plates: 'XYZ 789',
+    //   },
+    //   driver: {
+    //     avatar:
+    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+    //     fullName: 'Pedro Ramirez',
+    //   },
+    //   serviceType: 'Economic',
+    //   tripState: 'Finished',
+    // },
+    // {
+    //   id: 4,
+    //   pickUpAddress: 'cll 7 #7 Santa Teresita',
+    //   dropOffAddress: 'cll 8 #8 Santa Teresita',
+    //   totalPrice: 180,
+    //   pickUpDate: '07/07/2023, 5:49 PM',
+    //   vehicle: {
+    //     image:
+    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+    //     brand: 'Volkswagen',
+    //     model: 'Golf',
+    //     plates: 'DEF 456',
+    //   },
+    //   driver: {
+    //     avatar:
+    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+    //     fullName: 'María Lopez',
+    //   },
+    //   serviceType: 'Economic',
+    //   tripState: 'Finished',
+    // },
+    // {
+    //   id: 5,
+    //   pickUpAddress: 'cll 9 #9 Santa Teresita',
+    //   dropOffAddress: 'cll 10 #10 Santa Teresita',
+    //   totalPrice: 320,
+    //   pickUpDate: '07/07/2023, 5:49 PM',
+    //   vehicle: {
+    //     image:
+    //       'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
+    //     brand: 'BMW',
+    //     model: 'X5',
+    //     plates: 'JKL 321',
+    //   },
+    //   driver: {
+    //     avatar:
+    //       'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+    //     fullName: 'Carlos Martinez',
+    //   },
+    //   serviceType: 'Economic',
+    //   tripState: 'Canceled',
+    // },
   ];
 
   const [showDetails, setShowDetails] = useState(trips.map(() => false));
@@ -211,9 +223,14 @@ function RegularUserTrips() {
               {trip.dropOffAddress}
             </h4>
           </section>
-          {showDetails[index] && !placementInfo ? (
-            <TripDetails trip={trip} />
+
+          {showDetails[index] && !placementInfo && hasClientRole && !hasDriverRole ? (
+            <DriverDetails trip={trip} />
           ) : null}
+          {showDetails[index] && !placementInfo && hasDriverRole && !hasClientRole ? (
+            <ClientDetails trip={trip} />
+          ) : null}
+
           <section className="tripsList__trip__right">
             <section>
               <h4 className="tripsList__trip__right__price">${trip.totalPrice}</h4>
@@ -249,8 +266,12 @@ function RegularUserTrips() {
               ) : null}
             </section>
           </section>
-          {showDetails[index] && placementInfo ? (
-            <TripDetails trip={trip} />
+
+          {showDetails[index] && placementInfo && hasClientRole && !hasDriverRole ? (
+            <DriverDetails trip={trip} />
+          ) : null}
+          {showDetails[index] && placementInfo && hasDriverRole && !hasClientRole ? (
+            <ClientDetails trip={trip} />
           ) : null}
         </div>
       ))}
