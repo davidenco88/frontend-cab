@@ -1,22 +1,23 @@
 .userProfile {
   display: grid;
   grid-template-columns: minmax(80px, 200px) 70%;
-  background-color: #1b1b1b;
   padding: 15px;
-  border-radius: 20px;
-  color: white;
-  // justify-items: start;
+  color: black;
   align-items: center;
   gap: 10px;
   justify-content: start;
   height: min-content;
 
+  &__input {
+    width: 50px;
+  }
+
   &__img {
     justify-self: center;
     width: 100%;
     border-radius: 50%;
-    border: 5px solid #1b1b1b;
-    outline: 1px solid#e9af0e8f;
+    border: 3px solid white;
+    outline: 2px solid#e9af0e8f;
     object-fit: cover;
   }
 
@@ -29,7 +30,7 @@
     }
 
     &__email {
-      font-weight: 100;
+      font-weight: 300;
       font-size: 20px;
     }
   }
