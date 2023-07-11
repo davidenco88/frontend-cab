@@ -1,13 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HiClock } from 'react-icons/hi';
 import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
+import TripDetails from './TripDetails/TripDetails';
 import './RegularUserTrips.scss';
 
 function RegularUserTrips() {
+  // Ref y State para responsive
+  const [placementInfo, setPlacementInfo] = useState(false);
+  const tripWidth = useRef(null);
+
+  // Role identification
   const profile = JSON.parse(localStorage.getItem('profile'));
   const hasDriverRole = profile.roles.some((role) => role.name === 'Client');
+
+  useEffect(() => {
+    // Logica para responsive
+    const handleResize = () => {
+      // Verifica el ancho del elemento
+      if (tripWidth.current.offsetWidth < 510) {
+        setPlacementInfo(true);
+      } else {
+        setPlacementInfo(false);
+      }
+    };
+
+    // Listener para responsive
+    window.addEventListener('resize', handleResize);
+
+    // Limpia el controlador de eventos al desmontar el componente
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const trips = [
     {
@@ -119,21 +143,8 @@ function RegularUserTrips() {
 
   const [showDetails, setShowDetails] = useState(trips.map(() => false));
 
-  function isScheduled(trip) {
-    if (trip.tripState === 'Scheduled') {
-      return true;
-    }
-    return false;
-  }
-  const handleCancel = () => {
-    // Aca va la lógica para actualizar el estado del viaje a cancelado
-  };
-
-  const handleStart = () => {
-    // Aca va la lógica para actualizar el estado del viaje a cancelado
-  };
   const handleShowDetails = (index) => {
-    // Algo se pone true y eso cambia la vizualizacion?
+    // cada item en la lista tiene su estado booleano que termina lo de expandir/ver mas
     setShowDetails((prevState) => {
       const newState = [...prevState];
       newState[index] = !newState[index];
@@ -141,10 +152,38 @@ function RegularUserTrips() {
     });
   };
 
+  // Comporbaciones del estado para visualizacion
+  function isScheduled(trip) {
+    if (trip.tripState === 'Scheduled') {
+      return true;
+    }
+    return false;
+  }
+
+  function isStarted(trip) {
+    if (trip.tripState === 'Started') {
+      return true;
+    }
+    return false;
+  }
+
+  // Handlers donde irian los llamados?
+  const handleCancel = () => {
+    // Aca va la lógica para actualizar el estado del viaje a cancelado
+  };
+
+  const handleStart = () => {
+    // Aca va la lógica para actualizar el estado del viaje a Iniciado
+  };
+
+  const handleFinish = () => {
+    // Aca va la lógica para actualizar el estado del viaje a Finalizado
+  };
+
   return (
     <div className="tripsList">
       {trips.map((trip, index) => (
-        <div key={trip.id} className="tripsList__trip">
+        <div key={trip.id} className="tripsList__trip" ref={tripWidth}>
           <section className="tripsList__trip__left">
             <span className="tripsList__trip__left__span">
               <p className="tripsList__trip__type">{trip.serviceType}</p>
@@ -154,8 +193,9 @@ function RegularUserTrips() {
                 aria-label="expand"
                 onClick={() => handleShowDetails(index)}
               >
-                {showDetails[index] ? <LuShrink className="expandButton" /> : <IoExpand className="expandButton" />}
-
+                {showDetails[index]
+                  ? <LuShrink className="expandButton" />
+                  : <IoExpand className="expandButton" />}
               </button>
             </span>
             <h4 className="tripsList__trip__info">
@@ -171,9 +211,12 @@ function RegularUserTrips() {
               {trip.dropOffAddress}
             </h4>
           </section>
+          {showDetails[index] && !placementInfo ? (
+            <TripDetails trip={trip} />
+          ) : null}
           <section className="tripsList__trip__right">
             <section>
-              <p>${trip.totalPrice}</p>
+              <h4 className="tripsList__trip__right__price">${trip.totalPrice}</h4>
               <p>{trip.tripState}</p>
             </section>
             <section className="tripsList__trip__right__bottom">
@@ -184,6 +227,15 @@ function RegularUserTrips() {
                   onClick={handleStart}
                 >
                   Start
+                </button>
+              ) : null}
+              {isStarted(trip) ? (
+                <button
+                  type="button"
+                  className="finishButton"
+                  onClick={handleFinish}
+                >
+                  Finish
                 </button>
               ) : null}
               {isScheduled(trip) ? (
@@ -197,6 +249,9 @@ function RegularUserTrips() {
               ) : null}
             </section>
           </section>
+          {showDetails[index] && placementInfo ? (
+            <TripDetails trip={trip} />
+          ) : null}
         </div>
       ))}
     </div>

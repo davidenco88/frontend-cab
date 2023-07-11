@@ -2,10 +2,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
 import { createPortal } from 'react-dom';
-
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
-import DatePicker from './DatePicker/DatePicker';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
 import DropOffLocation from './DropOffLocation/DropOffLocation';
 import DateTimePicker from './DateTimePicker/DateTimePicker';

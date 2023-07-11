@@ -10,28 +10,40 @@
   &__trip {
     margin: 5px 0px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 205px 1fr 90px;
     box-shadow: 0px 0px 30px -10px rgb(193, 193, 193);
     width: 100%;
     align-items: center;
     padding: 10px;
+    padding-top: 5px;
     font-size: 20px;
 
     &__right {
+      grid-column: 3 / 4;
       justify-self: end;
       align-self: baseline;
       text-align: right;
-      color:black;
       font-size: 18px;
       display: grid;
       grid-template-rows: 1fr 1fr;
+
+      &__price {
+        margin-top: 6px;
+        color: rgba(24, 24, 24, 0.87);
+      }
+
+      &__status {
+        color: rgb(32, 32, 32)
+      }
 
       &__bottom {
         display: grid;
         grid-row: inherit;
         gap: 5px;
         align-self: end;
+        justify-self: end;
       }
+
     }
 
     &__left {
@@ -71,41 +83,59 @@
 
 .dropOffIcon {
   font-size: 12px;
-  color: rgba(255, 166, 0, 0.918);
+  color: rgba(255, 123, 0, 0.973);
 }
 
 .cancelButton {
-  background-color: rgb(255, 83, 83);
+  background-color: #E01A4F;
   border: none;
   border-radius: 3px;
   padding: 2px 4px;
   cursor: pointer;
+  font-family: inherit;
 }
 .cancelButton:hover {
-  background-color: rgb(201, 70, 70);
+  background-color: #d11749;
   transform: scale(1.1);
 }
 .cancelButton:active {
-  background-color: rgb(141, 50, 50);
-  color: rgb(221, 221, 221);
-  transform: scale(1.2);
+  background-color: #c20537;
+  font-weight: 600;
 }
 
 .startButton {
-  background-color: rgb(253, 146, 5);
+  background-color: #159bfa;
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
   cursor: pointer;
+  font-family: inherit;
 }
 .startButton:hover {
-  background-color: rgb(202, 124, 22);
+  background-color: #098eee;
   transform: scale(1.1);
 }
 .startButton:active {
-  background-color: rgb(153, 101, 32);
-  color: rgb(221, 221, 221);
-  transform: scale(1.2);
+  background-color: #0084E2;
+  // color: rgb(221, 221, 221);
+  font-weight: 600;
+}
+
+.finishButton {
+  background-color: #ff8f1e;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.finishButton:hover {
+  background-color: #e77c10;
+  transform: scale(1.1);
+}
+.finishButton:active {
+  background-color: #e47200;
+  font-weight: 600;
 }
 
 .expandButton {
