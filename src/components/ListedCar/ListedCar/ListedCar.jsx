@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchAvailableCars } from '../../../services/cars';
 import { useDispatch, useSelector } from '../../../Context';
 import { SET_CONTEXT_OBJECT, SET_TRIP } from '../../../Context/actionTypes';
+import { createTrip } from '../../../services/trip';
 import ImageAndType from '../ImageAndType/ImageAndType';
 import InfoIcons from '../InfoIcons/InfoIcons';
 import ListPrice from '../ListPrice/ListPrice';
@@ -11,7 +12,7 @@ import './ListedCar.scss';
 
 function ListedCar() {
   const dispatch = useDispatch();
-  const { renderVehicles, searchForm } = useSelector();
+  const { renderVehicles, searchForm, trip } = useSelector();
 
   useEffect(() => {
     fetchAvailableCars().then((fetchVehicles) => {
@@ -24,6 +25,21 @@ function ListedCar() {
       });
     });
   }, []);
+
+  const navigate = useNavigate();
+
+  async function onClickBookHandler(item) {
+    dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } });
+
+    const newTrip = await createTrip(trip);
+
+    if (newTrip.status === 201) {
+      dispatch({ type: SET_CONTEXT_OBJECT, payload: { createdTrip: newTrip.data } });
+      navigate('/booking');
+    } else {
+      console.log('Algo salio mal en la funcion postTrip');
+    }
+  }
 
   const isLoggedIn = !!localStorage.getItem('authToken');
   const isMissingSomething = searchForm.pickUpDate === ''
@@ -38,13 +54,13 @@ function ListedCar() {
           <ImageAndType item={item} />
           <InfoIcons item={item} />
           <ListPrice item={item} />
-          <NavLink className="list__listedCar__button" to="/booking">
-            <OrangeButton
-              isDisabled={isMissingSomething}
-              text="Book now"
-              onClick={() => dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } })}
-            />
-          </NavLink>
+          {/* <NavLink className="list__listedCar__button" to="/booking"> */}
+          <OrangeButton
+            isDisabled={isMissingSomething}
+            text="Book now"
+            onClick={() => onClickBookHandler(item)}
+          />
+          {/* </NavLink> */}
         </div>
       ))}
     </main>
