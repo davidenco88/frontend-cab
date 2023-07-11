@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { updateAvatar } from '../../../services/upload';
+import { updateAvatar } from '../../../../services/upload';
 import './UserProfile.scss';
 
 function UserProfile() {

@@ -4,7 +4,7 @@ import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import TripDetails from './TripDetails/TripDetails';
-import './RegularUserTrips.scss';
+import './ClientTrips.scss';
 
 function RegularUserTrips() {
   // Ref y State para responsive
@@ -229,7 +229,7 @@ function RegularUserTrips() {
                   Start
                 </button>
               ) : null}
-              {isStarted(trip) ? (
+              {isStarted(trip) && hasDriverRole ? (
                 <button
                   type="button"
                   className="finishButton"
