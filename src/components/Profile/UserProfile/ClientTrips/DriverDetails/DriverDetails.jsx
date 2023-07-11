@@ -1,6 +1,6 @@
 import './TripDetails.scss';
 
-function TripDetails(data, options) {
+function DriverDetails(data, options) {
   const { trip } = data;
   const { vehicle, driver } = trip;
 
@@ -16,4 +16,4 @@ function TripDetails(data, options) {
   );
 }
 
-export default TripDetails;
+export default DriverDetails;
