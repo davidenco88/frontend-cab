@@ -41,13 +41,15 @@
 .login-form .group .label,
 .login-form .group .button {
   text-transform: uppercase;
+  font-family: inherit;
+  font-size: 14px;
 }
 
 .login-form .group .button:hover {
   background-color: #eb6020;
 }
 .login-form .group .button:active {
-  background-color: #b15805;
+  background-color: #be5416;
 }
 
 .loginForm .tab {
@@ -113,7 +115,7 @@
 
 .login-form .group .button {
   font-weight: bold;
-  background: #f1c40f;
+  background: rgb(255, 136, 24);
 }
 
 .login-form .group .check:checked + label {
