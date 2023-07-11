@@ -1,9 +1,9 @@
 .tripDetails {
-  // height: 98px;
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: center;
+  padding: 6px 0px;
 
   &__avatar {
     max-width: 70px;
@@ -25,3 +25,8 @@
   }
 }
 
+@media screen and (min-width: 769px) {
+  .tripDetails {
+    justify-content: start;
+  }
+}

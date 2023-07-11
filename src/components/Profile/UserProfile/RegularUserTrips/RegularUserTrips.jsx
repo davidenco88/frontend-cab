@@ -13,7 +13,7 @@ function RegularUserTrips() {
 
   // Role identification
   const profile = JSON.parse(localStorage.getItem('profile'));
-  const hasDriverRole = profile.roles.some((role) => role.name === 'Client');
+  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
 
   useEffect(() => {
     // Logica para responsive
@@ -36,7 +36,7 @@ function RegularUserTrips() {
   const trips = [
     {
       id: 1,
-      pickUpAddress: 'cll 1 #1 Santa Teresita',
+      pickUpAddress: 'cll 1 #1 Santa Teresita barrio la esperanza occiedental',
       dropOffAddress: 'cll 2 # 2 Santa Teresita',
       totalPrice: 300,
       pickUpDate: '07/07/2023, 5:49 PM',
