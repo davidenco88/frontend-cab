@@ -1,15 +1,15 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Cab from "./pages/Cab";
-import Booking from "./pages/Booking";
-import FailedPayment from "./pages/FailedPayment";
-import Payment from "./pages/Payment";
-import Login from "./pages/Login";
-import DefaultLayout from "./Layout/DefaultLayout";
-import LoginLayout from "./Layout/LoginLayout";
-import Profile from "./pages/Profile";
-import ActivateAccount from "./pages/ActivateAccount";
-import Trips from "./pages/TripsPage.jsx";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Cab from './pages/Cab';
+import Booking from './pages/Booking';
+import FailedPayment from './pages/FailedPayment';
+import Payment from './pages/Payment';
+import Login from './pages/Login';
+import DefaultLayout from './Layout/DefaultLayout';
+import LoginLayout from './Layout/LoginLayout';
+import Profile from './pages/Profile';
+import ActivateAccount from './pages/ActivateAccount';
+import Trips from './pages/TripsPage.jsx';
 
 function App() {
   return (
