@@ -12,6 +12,28 @@
     width: 50px;
   }
 
+  &__edit {
+    position: relative;
+  }
+
+  &__button {
+    background-color: rgba(255, 231, 204, 0.959);
+    color: rgb(245, 168, 26);
+    border-radius: 50%;
+    width: fit-content;
+    padding: 5px 5px 0px 5px;
+    font-size: 20px;
+    border: solid 1px rgb(235, 170, 50);
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  &__button:hover {
+    background-color: rgba(68, 68, 68, 0.877);
+    transform: scale(1.1);
+  }
+
   &__img {
     justify-self: center;
     width: 100%;
@@ -41,9 +63,26 @@
     display: grid;
     grid-template-columns: minmax(250px, 300px);
     max-width: 300px;
+
+    &__button {
+      bottom: 20px;
+      right: 20px;
+      font-size: 25px;
+    }
     &__pic {
       max-width: 150px;
       max-height: 150px;
+    }
+
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .userProfile {
+    &__button {
+      font-size: 15px;
+      right: 5px;
+      bottom: 5px;
     }
 
   }
