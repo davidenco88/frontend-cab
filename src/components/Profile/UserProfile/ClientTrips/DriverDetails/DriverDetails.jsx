@@ -2,15 +2,15 @@ import './TripDetails.scss';
 
 function DriverDetails(data, options) {
   const { trip } = data;
-  const { vehicle, driver } = trip;
+  const { Vehicles } = trip;
 
   return (
     <div className="tripDetails">
-      <img className="tripDetails__avatar" src={driver.avatar} alt="driver-pic" />
+      <img className="tripDetails__avatar" src={Vehicles.Users.avatar} alt="driver-pic" />
       <section className="tripDetails__text">
-        <h4 className="tripDetails__name">{driver.fullName}</h4>
-        <h5 className="tripDetails__vehicle">{vehicle.brand} {vehicle.model} </h5>
-        <h5 className="tripDetails__vehicle">{vehicle.plates}</h5>
+        <h4 className="tripDetails__name">{`${Vehicles.Users.name}${" "}${Vehicles.Users.lastname}`}</h4>
+        <h5 className="tripDetails__vehicle">{Vehicles.brand} {Vehicles.model} </h5>
+        <h5 className="tripDetails__vehicle">{Vehicles.plates}</h5>
       </section>
     </div>
   );
