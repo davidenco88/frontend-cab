@@ -81,15 +81,15 @@ function RegularUserTrips() {
   }
 
   // Handlers donde irian los llamados?
-  const handleCancel = () => {
+  const handleCancel = (trip) => {
     // Aca va la lógica para actualizar el estado del viaje a cancelado
   };
 
-  const handleStart = () => {
+  const handleStart = (trip) => {
     // Aca va la lógica para actualizar el estado del viaje a Iniciado
   };
 
-  const handleFinish = () => {
+  const handleFinish = (trip) => {
     // Aca va la lógica para actualizar el estado del viaje a Finalizado
   };
 
@@ -142,7 +142,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="startButton"
-                  onClick={handleStart}
+                  onClick={() => { handleStart(trip) }}
                 >
                   Start
                 </button>
@@ -151,7 +151,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="finishButton"
-                  onClick={handleFinish}
+                  onClick={() => { handleFinish(trip) }}
                 >
                   Finish
                 </button>
@@ -160,7 +160,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="cancelButton"
-                  onClick={handleCancel}
+                  onClick={() => { handleCancel(trip) }}
                 >
                   Cancel
                 </button>

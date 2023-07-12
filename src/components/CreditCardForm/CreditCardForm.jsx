@@ -1,11 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { fetchPayment, fetchRegisterPayment } from '../../services/payments';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from '../../Context';
 import Swal from 'sweetalert2'
 import './CreditCardForm.css';
 
 function CreditCardForm() {
+  const navigate = useNavigate();
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -31,6 +34,7 @@ function CreditCardForm() {
         'Your trip has been successfully booked',
         'success'
       );
+      navigate('/profile');
     } else {
       Swal.fire(
         'Something went wrong',
