@@ -28,6 +28,7 @@ export function ContextProvider({ children }) {
     originalVehicles: [],
     renderVehicles: [],
     driverVehicles: [],
+    trips: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
