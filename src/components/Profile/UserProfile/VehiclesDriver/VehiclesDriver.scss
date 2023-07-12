@@ -1,6 +1,5 @@
 .vehicleDriver {
   margin: 15px 0px;
-  margin: 15px 0px;
   // display: flex;
   // flex-direction: column;
   box-shadow: 0px 0px 30px -10px rgb(193, 193, 193);
@@ -8,6 +7,8 @@
   align-items: center;
 
   &__image {
+    margin-bottom: -40px;
+
     &__pic {
       width: 100%;
     }
