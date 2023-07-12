@@ -1,30 +1,49 @@
-import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
-
-import { FaUserAlt, FaWindowClose, FaBars, FaTaxi } from "react-icons/fa";
-
-import { AiFillSetting } from "react-icons/ai";
-import { useState } from "react";
-
-import "./HeaderNavBarStyless.css";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import {
+  FaUserAlt, FaWindowClose, FaBars, FaTaxi,
+} from 'react-icons/fa';
+import { AiFillSetting } from 'react-icons/ai';
+import { GoSignOut } from 'react-icons/go';
+import './HeaderNavBarStyless.scss';
 
 function HeaderNavBar() {
   const [menuHide, setMenuHide] = useState(true);
   const [configHide, setConfigHide] = useState(true);
   const [profile, setProfile] = useState();
+  const [hideProfileOptions, setHideProfileOptions] = useState(true);
+  const loginRef = useRef();
+  const navigate = useNavigate();
 
   const handleClikMenu = () => setMenuHide(!menuHide);
   const handleClikConfig = () => setConfigHide(!configHide);
+  const handleClickProfile = () => setHideProfileOptions(!hideProfileOptions);
+  const handleSignOut = () => {
+    localStorage.clear();
+    navigate('/');
+    window.location.reload();
+  };
 
   useEffect(() => {
-    const auth = localStorage.getItem("authToken");
+    const auth = localStorage.getItem('authToken');
     if (!auth) {
       return undefined;
     }
-    const profile = JSON.parse(localStorage.getItem("profile"));
+    const profile = JSON.parse(localStorage.getItem('profile'));
     setProfile(profile);
-    console.log(profile);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (loginRef.current && !loginRef.current.contains(event.target)) {
+        setHideProfileOptions(true);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [loginRef]);
 
   return (
     <header className="headerNavBar">
@@ -34,7 +53,7 @@ function HeaderNavBar() {
         </div>
         <span className="headerNavBar__title">RICA</span>
       </div>
-      <nav className={menuHide ? "navBarMobile navHide" : "navBarMobile"}>
+      <nav className={menuHide ? 'navBarMobile navHide' : 'navBarMobile'}>
         <ul className="navBar">
           <li className="navBar__link">
             <NavLink className="links" to="/">
@@ -46,9 +65,6 @@ function HeaderNavBar() {
               Cab
             </NavLink>
           </li>
-          <li className="navBar__link">
-            <p>Pages</p>
-          </li>
         </ul>
       </nav>
       <nav className="configBar">
@@ -56,7 +72,7 @@ function HeaderNavBar() {
           name="currency"
           id="currency"
           className={
-            configHide ? "configNavBar__set navHide" : "configNavBar__set"
+            configHide ? 'configNavBar__set navHide' : 'configNavBar__set'
           }
         >
           <option value="USD">USD</option>
@@ -66,7 +82,7 @@ function HeaderNavBar() {
           name="language"
           id="language"
           className={
-            configHide ? "configNavBar__set navHide" : "configNavBar__set"
+            configHide ? 'configNavBar__set navHide' : 'configNavBar__set'
           }
         >
           <option value="ENG">ENG</option>
@@ -85,20 +101,40 @@ function HeaderNavBar() {
         </div>
         <div>
           {profile ? (
-            <>
-              <NavLink className="linksLogin" to="/profile">
-                <span className="linksLogin">
-                  <p className="linkLogin">{profile.fullName}</p>
-                  <FaUserAlt />
-                </span>
-              </NavLink>
-            </>
+            <div
+              className="linksLogin"
+              onClick={handleClickProfile}
+              aria-hidden="true"
+            >
+              <p className="linkLogin">{profile.fullName}</p>
+            </div>
           ) : (
             <NavLink className="linksLogin" to="/login">
               <p>Sign in / Sign up</p>
             </NavLink>
           )}
         </div>
+        <nav ref={loginRef} className={hideProfileOptions ? 'hide' : 'logOut'}>
+          <ul className="logOut__list">
+            <li className="logOut__list__item">
+              <NavLink className="logOut__list__item__links" to="/profile">
+                <FaUserAlt />
+                Your profile
+              </NavLink>
+            </li>
+            <li className="navBar__link">
+              <p
+                className="logOut__list__item__links"
+                to="/cab"
+                onClick={handleSignOut}
+                aria-hidden="true"
+              >
+                <GoSignOut />
+                Sign Out
+              </p>
+            </li>
+          </ul>
+        </nav>
         <div className="headerNavBar__menu">
           {menuHide ? (
             <div onClick={handleClikMenu}>
@@ -114,4 +150,5 @@ function HeaderNavBar() {
     </header>
   );
 }
+
 export default HeaderNavBar;
