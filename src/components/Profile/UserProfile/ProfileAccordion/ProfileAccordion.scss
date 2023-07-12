@@ -10,16 +10,21 @@
     background-color: #FF8F1E;
     // border-radius: 10px 10px 0px 0px;
     padding: 5px 10px;
-    border: 1px solid black;
+    // border: 1px solid black;
   }
 
   &__content {
-    border: #FF8F1E 1px solid;
+    // border: #FF8F1E 1px solid;
   }
 
   &__title:hover {
-    color: rgb(255, 255, 255) ;
+    color: rgba(255, 255, 255, 0.829) ;
   }
+}
+
+.one {
+  border-bottom: 1px solid black ;
+  border-radius: 5px 5px 0px 0px;
 }
 
 @media screen and (min-width: 769px) {

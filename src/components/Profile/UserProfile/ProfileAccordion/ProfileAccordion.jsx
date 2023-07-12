@@ -6,20 +6,19 @@ function ProfileAccordion() {
   const [tripsIsActive, setTripsIsActive] = useState(false);
   const [carsIsActive, setCarsIsActive] = useState(false);
   const accordionData = {
-    title: 'T R I P S',
     content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis sapiente
       laborum cupiditate possimus labore, hic temporibus velit dicta earum
       suscipit commodi eum enim atque at? Et perspiciatis dolore iure
       voluptatem.`,
   };
 
-  const { title, content } = accordionData;
+  const { content } = accordionData;
 
   return (
     <div className="profileAccordion">
       <div className="profileAccordion__item">
         <div
-          className="profileAccordion__title"
+          className="profileAccordion__title one"
           onClick={() => setTripsIsActive(!tripsIsActive)}
           aria-hidden="true"
         >
