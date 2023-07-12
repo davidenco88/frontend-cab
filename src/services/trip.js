@@ -37,3 +37,19 @@ export async function findHistorictrips(data) {
     throw new Error("Failed to geting the trip history ", error.message);
   }
 }
+
+export async function modifyTripState(tripId, state) {
+
+  const payload = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      tripId,
+      state,
+    }),
+  };
+
+  const response = await fetch(`${BASE_URL}/api/trips/state/modify`, payload);
+
+  return response;
+}
