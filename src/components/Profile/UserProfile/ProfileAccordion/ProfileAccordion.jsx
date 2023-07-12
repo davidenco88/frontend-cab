@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ClientTrips from '../ClientTrips/ClientTrips';
 import './ProfileAccordion.scss';
 
@@ -11,8 +11,20 @@ function ProfileAccordion() {
       suscipit commodi eum enim atque at? Et perspiciatis dolore iure
       voluptatem.`,
   };
-
   const { content } = accordionData;
+  const profile = JSON.parse(localStorage.getItem('profile'));
+  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+  const hasClientRole = profile.roles.some((role) => role.name === 'Client');
+
+  useEffect(() => {
+    if (hasClientRole) {
+      setTripsIsActive(true);
+    }
+
+    if (hasDriverRole) {
+      setCarsIsActive(true);
+    }
+  }, []);
 
   return (
     <div className="profileAccordion">
@@ -26,6 +38,7 @@ function ProfileAccordion() {
           <div>{tripsIsActive ? '-' : '+'}</div>
         </div>
         {tripsIsActive && <div className="profileAccordion__content"><ClientTrips /> </div>}
+        {hasDriverRole && (
         <div
           className="profileAccordion__title"
           onClick={() => setCarsIsActive(!carsIsActive)}
@@ -34,6 +47,7 @@ function ProfileAccordion() {
           <div>C A R S</div>
           <div>{carsIsActive ? '-' : '+'}</div>
         </div>
+        )}
         {carsIsActive && <div className="profileAccordion__content">{content}</div>}
       </div>
     </div>
