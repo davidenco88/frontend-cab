@@ -38,18 +38,18 @@ export async function findHistorictrips(data) {
   }
 }
 
-export async function modifyTripState(trip, state) {
+export async function modifyTripState(tripId, state) {
 
   const payload = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      tripId: trip.id,
+      tripId,
       state,
     }),
   };
 
-  const response = await fetch(`${BASE_URL}/api/trips/state`, payload);
+  const response = await fetch(`${BASE_URL}/api/trips/state/modify`, payload);
 
   return response;
 }
