@@ -5,31 +5,37 @@ import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import DriverDetails from './DriverDetails/DriverDetails';
 import ClientDetails from './ClientDetails/ClientDetails';
+import { findHistorictrips } from '../../../../services/trip';
 import './ClientTrips.scss';
+import { useSelector, useDispatch } from '../../../../Context';
+import { SET_CONTEXT_OBJECT } from '../../../../Context/actionTypes';
 
-// Role identification
-const profile = JSON.parse(localStorage.getItem('profile'));
-const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
-
-let res;
-const BASE_URL = import.meta.env.VITE_BASE_URL
-  if (hasDriverRole) {
-    res = await fetch(`${BASE_URL}/api/trips/TripsByDriver/${profile.id}`);
-  } else {
-    res = await fetch(`${BASE_URL}/api/trips/TripsByClient/${profile.id}`);
-  }
-const trips = await res.json();
-console.log(trips);
 function RegularUserTrips() {
+  const dispatch = useDispatch()
   // Ref y State para responsive
   const [placementInfo, setPlacementInfo] = useState(false);
   const tripWidth = useRef(null);
+   // Role identification
+   const profile = JSON.parse(localStorage.getItem('profile'));
 
-  // Role identification
-  const profile = JSON.parse(localStorage.getItem('profile'));
-  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
-  const hasClientRole = profile.roles.some((role) => role.name === 'Client');
+   const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+   const hasClientRole = profile.roles.some((role) => role.name === 'Client');
+   const dataService = {
+    id: profile.id,
+    isDriver:hasDriverRole
+   }
 
+   useEffect(() => {
+    findHistorictrips(dataService).then((historicTrips) => {
+      dispatch({
+        type: SET_CONTEXT_OBJECT,
+        payload: {
+          trips: historicTrips,
+        },
+      });
+    });
+  }, []);
+  const {trips}= useSelector()
   useEffect(() => {
     // Logica para responsive
     const handleResize = () => {
@@ -48,139 +54,6 @@ function RegularUserTrips() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const trips2 = [
-    {
-      id: 1,
-      pickUpAddress: 'cll 1 #1 Santa Teresita barrio la esperanza occiedental',
-      dropOffAddress: 'cll 2 # 2 Santa Teresita',
-      totalPrice: 300,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Cupra',
-        model: 'Formentor',
-        plates: 'HHH 666',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Pepito Perez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Scheduled',
-      client: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Sally Matrix',
-      },
-    },
-    {
-      id: 2,
-      pickUpAddress: 'cll 3 #3 Santa Teresita',
-      dropOffAddress: 'cll 4 #4 Santa Teresita',
-      totalPrice: 250,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Toyota',
-        model: 'Corolla',
-        plates: 'ABC 123',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Juanita Rodriguez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Started',
-      client: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Philipp Inform',
-      },
-    },
-    {
-      id: 3,
-      pickUpAddress: 'cll 5 #5 Santa Teresita',
-      dropOffAddress: 'cll 6 #6 Santa Teresita',
-      totalPrice: 400,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Tesla',
-        model: 'Model 3',
-        plates: 'XYZ 789',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Pedro Ramirez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Finished',
-      client: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Sally Matrix',
-      },
-    },
-    {
-      id: 4,
-      pickUpAddress: 'cll 7 #7 Santa Teresita',
-      dropOffAddress: 'cll 8 #8 Santa Teresita',
-      totalPrice: 180,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'Volkswagen',
-        model: 'Golf',
-        plates: 'DEF 456',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'María Lopez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Finished',
-      client: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Sally Matrix',
-      },
-    },
-    {
-      id: 5,
-      pickUpAddress: 'cll 9 #9 Santa Teresita',
-      dropOffAddress: 'cll 10 #10 Santa Teresita',
-      totalPrice: 320,
-      pickUpDate: '07/07/2023, 5:49 PM',
-      vehicle: {
-        image:
-          'https://cdn.imagin.studio/getImage?&customer=counivalle&make=cupra&modelFamily=formentor&modelRange=formentor&modelVariant=od&modelYear=2020',
-        brand: 'BMW',
-        model: 'X5',
-        plates: 'JKL 321',
-      },
-      driver: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Carlos Martinez',
-      },
-      serviceType: 'Economic',
-      tripState: 'Canceled',
-      client: {
-        avatar:
-          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
-        fullName: 'Sally Matrix',
-      },
-    },
-  ];
-
   const [showDetails, setShowDetails] = useState(trips.map(() => false));
 
   const handleShowDetails = (index) => {
@@ -194,14 +67,14 @@ function RegularUserTrips() {
 
   // Comporbaciones del estado para visualizacion
   function isScheduled(trip) {
-    if (trip.tripState === 'Scheduled') {
+    if (trip.tripStateId === 1) {
       return true;
     }
     return false;
   }
 
   function isStarted(trip) {
-    if (trip.tripState === 'Started') {
+    if (trip.tripStateId === 2) {
       return true;
     }
     return false;
@@ -226,7 +99,7 @@ function RegularUserTrips() {
         <div key={trip.id} className="tripsList__trip" ref={tripWidth}>
           <section className="tripsList__trip__left">
             <span className="tripsList__trip__left__span">
-              <p className="tripsList__trip__type">{trip.serviceType}</p>
+              <p className="tripsList__trip__type">{trip.Vehicles.VehicleTypes.type}</p>
               <button
                 className="expandButton"
                 type="button"
@@ -245,7 +118,7 @@ function RegularUserTrips() {
             <h4 className="tripsList__trip__info">
               <TbCircleDotFilled className="pickUpIcon" />
               {trip.pickUpAddress}
-            </h4>
+            </h4>``
             <h4 className="tripsList__trip__info">
               <TbCircleDotFilled className="dropOffIcon" />
               {trip.dropOffAddress}
@@ -262,7 +135,7 @@ function RegularUserTrips() {
           <section className="tripsList__trip__right">
             <section>
               <h4 className="tripsList__trip__right__price">${trip.totalPrice}</h4>
-              <p>{trip.tripState}</p>
+              <p>{trip.TripState.name}</p>
             </section>
             <section className="tripsList__trip__right__bottom">
               {isScheduled(trip) && hasDriverRole ? (
