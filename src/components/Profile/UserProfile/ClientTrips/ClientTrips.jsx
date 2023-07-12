@@ -118,7 +118,7 @@ function RegularUserTrips() {
             <h4 className="tripsList__trip__info">
               <TbCircleDotFilled className="pickUpIcon" />
               {trip.pickUpAddress}
-            </h4>``
+            </h4>
             <h4 className="tripsList__trip__info">
               <TbCircleDotFilled className="dropOffIcon" />
               {trip.dropOffAddress}
