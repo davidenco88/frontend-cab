@@ -4,23 +4,28 @@ import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import TripDetails from './TripDetails/TripDetails';
-import { findHistorictrips } from '../../../../services/trip';
 import './ClientTrips.scss';
 
+// Role identification
+const profile = JSON.parse(localStorage.getItem('profile'));
+const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+
+let res;
+const BASE_URL = import.meta.env.VITE_BASE_URL
+  if (hasDriverRole) {
+    res = await fetch(`${BASE_URL}/api/trips/TripsByDriver/${profile.id}`);
+  } else {
+    res = await fetch(`${BASE_URL}/api/trips/TripsByClient/${profile.id}`);
+  }
+const trips = await res.json();
+console.log(trips);
 function RegularUserTrips() {
   // Ref y State para responsive
   const [placementInfo, setPlacementInfo] = useState(false);
   const tripWidth = useRef(null);
 
-  // Role identification
-  const profile = JSON.parse(localStorage.getItem('profile'));
-  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
-  const dataFetcher = {
-    id: profile.id,
-    isDriver: hasDriverRole
-  }
-  const trips2 = findHistorictrips(dataFetcher);
-  console.log(Promise.all(trips2));
+
+
   useEffect(() => {
     // Logica para responsive
     const handleResize = () => {
@@ -39,7 +44,7 @@ function RegularUserTrips() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const trips = [
+  const trips2 = [
     {
       id: 1,
       pickUpAddress: 'cll 1 #1 Santa Teresita barrio la esperanza occiedental',
