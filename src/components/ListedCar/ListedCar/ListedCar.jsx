@@ -29,8 +29,11 @@ function ListedCar() {
   const navigate = useNavigate();
 
   async function onClickBookHandler(item) {
-    dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } });
-
+    // const newtrip = await dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } });
+    // dispatch({ type: SET_TRIP, payload: { selectedVehicle: item } });
+    // CUAL ES LA DIFERENCIA ENTRE USAR EL DISPATCH, ESTE
+    // NO ES INMEDIATO Y LO DE ABAJO SI?
+    trip.selectedVehicle = item;
     const newTrip = await createTrip(trip);
 
     if (newTrip.status === 201) {

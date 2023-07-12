@@ -3,7 +3,8 @@ import { HiClock } from 'react-icons/hi';
 import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
-import TripDetails from './TripDetails/TripDetails';
+import DriverDetails from './DriverDetails/DriverDetails';
+import ClientDetails from './ClientDetails/ClientDetails';
 import './ClientTrips.scss';
 
 // Role identification
@@ -24,7 +25,10 @@ function RegularUserTrips() {
   const [placementInfo, setPlacementInfo] = useState(false);
   const tripWidth = useRef(null);
 
-
+  // Role identification
+  const profile = JSON.parse(localStorage.getItem('profile'));
+  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+  const hasClientRole = profile.roles.some((role) => role.name === 'Client');
 
   useEffect(() => {
     // Logica para responsive
@@ -65,6 +69,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Scheduled',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
     },
     {
       id: 2,
@@ -86,6 +95,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Started',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Philipp Inform',
+      },
     },
     {
       id: 3,
@@ -107,6 +121,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Finished',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
     },
     {
       id: 4,
@@ -128,6 +147,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Finished',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
     },
     {
       id: 5,
@@ -149,6 +173,11 @@ function RegularUserTrips() {
       },
       serviceType: 'Economic',
       tripState: 'Canceled',
+      client: {
+        avatar:
+          'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
+        fullName: 'Sally Matrix',
+      },
     },
   ];
 
@@ -222,9 +251,14 @@ function RegularUserTrips() {
               {trip.dropOffAddress}
             </h4>
           </section>
-          {showDetails[index] && !placementInfo ? (
-            <TripDetails trip={trip} />
+
+          {showDetails[index] && !placementInfo && hasClientRole && !hasDriverRole ? (
+            <DriverDetails trip={trip} />
           ) : null}
+          {showDetails[index] && !placementInfo && hasDriverRole && !hasClientRole ? (
+            <ClientDetails trip={trip} />
+          ) : null}
+
           <section className="tripsList__trip__right">
             <section>
               <h4 className="tripsList__trip__right__price">${trip.totalPrice}</h4>
@@ -260,8 +294,12 @@ function RegularUserTrips() {
               ) : null}
             </section>
           </section>
-          {showDetails[index] && placementInfo ? (
-            <TripDetails trip={trip} />
+
+          {showDetails[index] && placementInfo && hasClientRole && !hasDriverRole ? (
+            <DriverDetails trip={trip} />
+          ) : null}
+          {showDetails[index] && placementInfo && hasDriverRole && !hasClientRole ? (
+            <ClientDetails trip={trip} />
           ) : null}
         </div>
       ))}

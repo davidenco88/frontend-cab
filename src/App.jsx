@@ -12,13 +12,6 @@ import ActivateAccount from './pages/ActivateAccount';
 import Trips from './pages/TripsPage.jsx';
 
 function App() {
-  // Aca podriamos comenzar a implementar el useReducer con la
-  // opcion de que si el usuario no quiere dejar sesion iniciada
-  // entonces sí se sejecuta el beforeunload que borra su token
-  // No ponemos .clear() para no borrar preferencias futuras
-  addEventListener('beforeunload', (event) => {
-    localStorage.removeItem('authToken');
-  });
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>

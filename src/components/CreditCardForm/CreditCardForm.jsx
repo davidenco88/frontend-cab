@@ -10,7 +10,6 @@ function CreditCardForm() {
   const elements = useElements();
 
   const { createdTrip } = useSelector();
-  console.log(createdTrip);
 
   const onSubmithandle = async (event) => {
     event.preventDefault();
@@ -21,7 +20,9 @@ function CreditCardForm() {
       card: cardDetails,
     });
 
-    const response = await fetchPayment(paymentMethod);
+    const amount = Math.round(createdTrip.totalPrice * 100);
+
+    const response = await fetchPayment(paymentMethod, amount);
 
     if (response.status === 200) {
       const response = fetchRegisterPayment(createdTrip);
