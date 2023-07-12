@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
 import { HiClock } from 'react-icons/hi';
 import { TbCircleDotFilled } from 'react-icons/tb';
 import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import DriverDetails from './DriverDetails/DriverDetails';
 import ClientDetails from './ClientDetails/ClientDetails';
-import { findHistorictrips } from '../../../../services/trip';
+import { findHistorictrips, modifyTripState } from '../../../../services/trip';
 import './ClientTrips.scss';
 import { useSelector, useDispatch } from '../../../../Context';
 import { SET_CONTEXT_OBJECT } from '../../../../Context/actionTypes';
@@ -15,17 +16,17 @@ function RegularUserTrips() {
   // Ref y State para responsive
   const [placementInfo, setPlacementInfo] = useState(false);
   const tripWidth = useRef(null);
-   // Role identification
-   const profile = JSON.parse(localStorage.getItem('profile'));
+  // Role identification
+  const profile = JSON.parse(localStorage.getItem('profile'));
 
-   const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
-   const hasClientRole = profile.roles.some((role) => role.name === 'Client');
-   const dataService = {
+  const hasDriverRole = profile.roles.some((role) => role.name === 'Driver');
+  const hasClientRole = profile.roles.some((role) => role.name === 'Client');
+  const dataService = {
     id: profile.id,
-    isDriver:hasDriverRole
-   }
+    isDriver: hasDriverRole
+  }
 
-   useEffect(() => {
+  useEffect(() => {
     findHistorictrips(dataService).then((historicTrips) => {
       dispatch({
         type: SET_CONTEXT_OBJECT,
@@ -35,7 +36,9 @@ function RegularUserTrips() {
       });
     });
   }, []);
-  const {trips}= useSelector()
+
+  const { trips } = useSelector()
+
   useEffect(() => {
     // Logica para responsive
     const handleResize = () => {
@@ -81,16 +84,89 @@ function RegularUserTrips() {
   }
 
   // Handlers donde irian los llamados?
-  const handleCancel = () => {
-    // Aca va la lógica para actualizar el estado del viaje a cancelado
+  const handleCancel = async (tripId) => {
+    const state = 4; // 4 Corresponde al ID de Cancelado
+    const response = await modifyTripState(tripId, state);
+
+    if (response.status === 200) {
+
+      Swal.fire(
+        'Success Canceletion',
+        'Your trip has been successfully canceled',
+        'success'
+      );
+    } else {
+      Swal.fire(
+        'Something went wrong',
+        'Plese try again later',
+        'error'
+      );
+    }
+
+    findHistorictrips(dataService).then((historicTrips) => {
+      dispatch({
+        type: SET_CONTEXT_OBJECT,
+        payload: {
+          trips: historicTrips,
+        },
+      });
+    });
   };
 
-  const handleStart = () => {
-    // Aca va la lógica para actualizar el estado del viaje a Iniciado
+  const handleStart = async (tripId) => {
+    const state = 2; // 4 Corresponde al ID de Cancelado
+    const response = await modifyTripState(tripId, state);
+
+    if (response.status === 200) {
+      Swal.fire(
+        'Success Confirmation',
+        'Your trip has been successfully stared',
+        'success'
+      );
+    } else {
+      Swal.fire(
+        'Something went wrong',
+        'Plese try again later',
+        'error'
+      );
+    }
+
+    findHistorictrips(dataService).then((historicTrips) => {
+      dispatch({
+        type: SET_CONTEXT_OBJECT,
+        payload: {
+          trips: historicTrips,
+        },
+      });
+    });
   };
 
-  const handleFinish = () => {
-    // Aca va la lógica para actualizar el estado del viaje a Finalizado
+  const handleFinish = async (tripId) => {
+    const state = 3; // 4 Corresponde al ID de Cancelado
+    const response = await modifyTripState(tripId, state);
+
+    if (response.status === 200) {
+      Swal.fire(
+        'Success Confirmation',
+        'Your trip has been successfully finished',
+        'success'
+      );
+    } else {
+      Swal.fire(
+        'Something went wrong',
+        'Plese try again later',
+        'error'
+      );
+    }
+
+    findHistorictrips(dataService).then((historicTrips) => {
+      dispatch({
+        type: SET_CONTEXT_OBJECT,
+        payload: {
+          trips: historicTrips,
+        },
+      });
+    });
   };
 
   return (
@@ -142,7 +218,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="startButton"
-                  onClick={handleStart}
+                  onClick={() => { handleStart(trip.id) }}
                 >
                   Start
                 </button>
@@ -151,7 +227,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="finishButton"
-                  onClick={handleFinish}
+                  onClick={() => { handleFinish(trip.id) }}
                 >
                   Finish
                 </button>
@@ -160,7 +236,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="cancelButton"
-                  onClick={handleCancel}
+                  onClick={() => { handleCancel(trip.id) }}
                 >
                   Cancel
                 </button>
