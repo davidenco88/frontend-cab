@@ -1,0 +1,34 @@
+.profileAccordion {
+  margin: 15px;
+
+  &__title {
+    cursor: pointer;
+    display: flex;
+    gap: 20px;
+    font-weight: 800;
+    font-size: 24px;
+    background-color: #FF8F1E;
+    // border-radius: 10px 10px 0px 0px;
+    padding: 5px 10px;
+    // border: 1px solid black;
+  }
+
+  &__content {
+    // border: #FF8F1E 1px solid;
+  }
+
+  &__title:hover {
+    color: rgba(255, 255, 255, 0.829) ;
+  }
+}
+
+.one {
+  border-bottom: 1px solid black ;
+  border-radius: 5px 5px 0px 0px;
+}
+
+@media screen and (min-width: 769px) {
+  .profileAccordion {
+      width: 100%;
+  }
+}
