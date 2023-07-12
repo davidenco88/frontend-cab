@@ -27,6 +27,7 @@ export function ContextProvider({ children }) {
     createdTrip: {},
     originalVehicles: [],
     renderVehicles: [],
+    driverVehicles: [],
     trips: [],
   };
 

@@ -6,7 +6,7 @@ export async function fetchAvailableCars() {
   return res.json();
 }
 
-export async function fetchCarsById(id) {
-  const res = await fetch(`${BASE_URL}/api/cars/${id}`);
+export async function fetchVehicleByDriverId(id) {
+  const res = await fetch(`${BASE_URL}/api/vehicles/driver/${id}`);
   return res.json();
 }
