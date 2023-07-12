@@ -134,7 +134,7 @@ function RegularUserTrips() {
 
           <section className="tripsList__trip__right">
             <section>
-              <h4 className="tripsList__trip__right__price">${trip.totalPrice}</h4>
+              <h4 className="tripsList__trip__right__price">${trip.totalPrice.toFixed(2)}</h4>
               <p>{trip.TripState.name}</p>
             </section>
             <section className="tripsList__trip__right__bottom">
