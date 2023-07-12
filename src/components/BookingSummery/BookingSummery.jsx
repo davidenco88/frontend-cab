@@ -37,7 +37,7 @@ function BookingSummery() {
           </li>
         </ul>
         <h3 className="bookingSummery__total">
-          <span>Total Fare:</span><span>{totalPrice}</span>
+          <span>Total Fare:</span><span>{`$ ${totalPrice.toFixed(2)}`}</span>
         </h3>
       </div>
     </div>

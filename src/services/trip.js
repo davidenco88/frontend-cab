@@ -1,10 +1,10 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080';
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
 
 // eslint-disable-next-line import/prefer-default-export
 export async function createTrip(data) {
   const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
   try {
@@ -14,6 +14,26 @@ export async function createTrip(data) {
       return { status: res.status, data: await res.json() };
     }
   } catch (error) {
-    throw new Error('Failed to create trip', error.message);
+    throw new Error("Failed to create trip", error.message);
+  }
+}
+
+export async function findHistorictrips(data) {
+  try {
+    let res;
+
+    if (data.isDriver) {
+      res = await fetch(`${BASE_URL}/api/trips/TripsByDriver/${data.id}`);
+    } else {
+      res = await fetch(`${BASE_URL}/api/trips/TripsByClient/${data.id}`);
+    }
+    if (res.ok) {
+      return await res.json();
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to geting the trip history ", error.message);
   }
 }

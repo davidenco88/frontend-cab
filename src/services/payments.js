@@ -1,11 +1,11 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080';
 
-export async function fetchPayment(paymentMethod) {
+export async function fetchPayment(paymentMethod, amount) {
   const payload = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      amount: 1000, // $10.00 this is in cents
+      amount: amount,
       paymentMethod,
     }),
   };
