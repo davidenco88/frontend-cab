@@ -9,12 +9,14 @@ import DefaultLayout from './Layout/DefaultLayout';
 import LoginLayout from './Layout/LoginLayout';
 import Profile from './pages/Profile';
 import ActivateAccount from './pages/ActivateAccount';
-import Trips from './pages/TripsPage.jsx';
+import Successful from './pages/Successful';
+import Trips from './pages/TripsPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
+        <Route path="/successful" element={<Successful />} />
         <Route index element={<Home />} />
         <Route path="/cab" element={<Cab />} />
         <Route path="/booking" element={<Booking />} />

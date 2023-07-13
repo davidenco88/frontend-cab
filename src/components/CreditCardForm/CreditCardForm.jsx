@@ -1,9 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom';
 import { fetchPayment, fetchRegisterPayment } from '../../services/payments';
-import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from '../../Context';
-import Swal from 'sweetalert2'
+import { useSelector } from '../../Context';
 import './CreditCardForm.css';
 
 function CreditCardForm() {
@@ -29,21 +28,10 @@ function CreditCardForm() {
 
     if (response.status === 200) {
       const response = fetchRegisterPayment(createdTrip);
-      Swal.fire(
-        'Success payment',
-        'Your trip has been successfully booked',
-        'success'
-      );
-      navigate('/profile');
+      navigate('/successful');
     } else {
-      Swal.fire(
-        'Something went wrong',
-        'Plese check your card details',
-        'error'
-      );
+      navigate('/failed');
     }
-
-    const data = await response.json();
   };
 
   return (

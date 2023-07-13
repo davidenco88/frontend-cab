@@ -8,12 +8,10 @@ export function ContextProvider({ children }) {
     searchForm: {
       pickUpLocation: '',
       pickUpDate: '',
-      pickUpHour: '',
       dropOffLocation: '',
     },
     showComponentHandler: {
       pickUpDate: false,
-      pickUpHour: false,
       pickUpLocation: false,
       dropOffLocation: false,
     },

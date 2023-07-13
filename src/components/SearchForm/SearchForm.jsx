@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
 import { createPortal } from 'react-dom';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
@@ -18,6 +19,16 @@ function SearchForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (searchForm.pickUpDate === ''
+    || searchForm.pickUpLocation === ''
+    || searchForm.dropOffLocation === '') {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Information missing',
+        text: 'Fill trip details to continue',
+      });
+    }
     const formData = new FormData(e.target);
     const scheduledData = Object.fromEntries(formData);
     navigate('/cab');
