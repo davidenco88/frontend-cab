@@ -8,8 +8,10 @@ import './VehiclesDriver.scss';
 function VehiclesDriver() {
   const dispatch = useDispatch();
   const { driverVehicles } = useSelector();
+  const profile = JSON.parse(localStorage.getItem('profile'));
+
   useEffect(() => {
-    fetchVehicleByDriverId(3).then((vehicles) => {
+    fetchVehicleByDriverId(profile.id).then((vehicles) => {
       dispatch({
         type: SET_CONTEXT_OBJECT,
         payload: {
