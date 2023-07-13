@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from '../../../../Context';
 import { fetchVehicleByDriverId } from '../../../../services/cars';
-import { SET_CONTEXT_OBJECT } from '../../../../Context/actionTypes';
+import NewCarForm from '../NewCarForm/NewCarForm';
+import { SET_CONTEXT_OBJECT, SHOW_COMPONENT } from '../../../../Context/actionTypes';
 
 import './VehiclesDriver.scss';
 
 function VehiclesDriver() {
   const dispatch = useDispatch();
-  const { driverVehicles } = useSelector();
+  const { driverVehicles, showComponentHandler } = useSelector();
+
   useEffect(() => {
     fetchVehicleByDriverId(3).then((vehicles) => {
       dispatch({
@@ -19,8 +22,19 @@ function VehiclesDriver() {
     });
   }, []);
 
+  function onClickAddCarhandler() {
+    dispatch({
+      type: SHOW_COMPONENT,
+      payload: { componentName: 'addVehicle', showing: true },
+    })
+  }
+
   return (
     <>
+      <div className='addVehicle'>
+        <button className='orangeButton' onClick={onClickAddCarhandler}>Add New Car</button>
+      </div>
+
       {driverVehicles.map((vehicle) => (
         <div key={vehicle.id} className="vehicleDriver">
           <div className="vehicleDriver__image">
@@ -50,6 +64,11 @@ function VehiclesDriver() {
           </div>
         </div>
       ))}
+
+      {showComponentHandler.addVehicle && createPortal(
+        <NewCarForm />,
+        document.body
+      )}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import {
-  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_CONTEXT_OBJECT,
+  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_CONTEXT_OBJECT, SET_LOADING
 } from './actionTypes';
 
 function reducer(state, action) {
@@ -35,6 +35,15 @@ function reducer(state, action) {
       return {
         ...state,
         ...action.payload,
+      };
+    }
+    case SET_LOADING: {
+      return {
+        ...state,
+        showComponentHandler: {
+          ...state.showComponentHandler,
+          ...action.payload,
+        }
       };
     }
     default: {
