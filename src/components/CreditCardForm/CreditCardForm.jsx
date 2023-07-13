@@ -2,6 +2,7 @@
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import { fetchPayment, fetchRegisterPayment } from '../../services/payments';
+import { modifyCarAvailability } from '../../services/trip';
 import { useSelector } from '../../Context';
 import './CreditCardForm.css';
 
@@ -11,7 +12,7 @@ function CreditCardForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { createdTrip } = useSelector();
+  const { createdTrip, trip } = useSelector();
 
   const onSubmithandle = async (event) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ function CreditCardForm() {
 
     if (response.status === 200) {
       const response = fetchRegisterPayment(createdTrip);
+      modifyCarAvailability(trip.selectedVehicle.id, false);
       navigate('/successful');
     } else {
       navigate('/failed');

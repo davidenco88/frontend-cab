@@ -6,13 +6,13 @@ import { IoExpand } from 'react-icons/io5';
 import { LuShrink } from 'react-icons/lu';
 import DriverDetails from './DriverDetails/DriverDetails';
 import ClientDetails from './ClientDetails/ClientDetails';
-import { findHistorictrips, modifyTripState } from '../../../../services/trip';
+import { findHistorictrips, modifyTripState, modifyCarAvailability } from '../../../../services/trip';
 import './ClientTrips.scss';
 import { useSelector, useDispatch } from '../../../../Context';
 import { SET_CONTEXT_OBJECT } from '../../../../Context/actionTypes';
 
 function RegularUserTrips() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // Ref y State para responsive
   const [placementInfo, setPlacementInfo] = useState(false);
   const tripWidth = useRef(null);
@@ -23,8 +23,8 @@ function RegularUserTrips() {
   const hasClientRole = profile.roles.some((role) => role.name === 'Client');
   const dataService = {
     id: profile.id,
-    isDriver: hasDriverRole
-  }
+    isDriver: hasDriverRole,
+  };
 
   useEffect(() => {
     findHistorictrips(dataService).then((historicTrips) => {
@@ -37,7 +37,7 @@ function RegularUserTrips() {
     });
   }, []);
 
-  const { trips } = useSelector()
+  const { trips } = useSelector();
 
   useEffect(() => {
     // Logica para responsive
@@ -84,22 +84,22 @@ function RegularUserTrips() {
   }
 
   // Handlers donde irian los llamados?
-  const handleCancel = async (tripId) => {
+  const handleCancel = async (tripId, vehicleID) => {
     const state = 4; // 4 Corresponde al ID de Cancelado
     const response = await modifyTripState(tripId, state);
+    const responseAvail = await modifyCarAvailability(vehicleID, true);
 
-    if (response.status === 200) {
-
+    if (response.status === 200 && responseAvail.status === 200) {
       Swal.fire(
         'Success Canceletion',
         'Your trip has been successfully canceled',
-        'success'
+        'success',
       );
     } else {
       Swal.fire(
         'Something went wrong',
         'Plese try again later',
-        'error'
+        'error',
       );
     }
 
@@ -113,21 +113,22 @@ function RegularUserTrips() {
     });
   };
 
-  const handleStart = async (tripId) => {
+  const handleStart = async (tripId, vehicleID) => {
     const state = 2; // 4 Corresponde al ID de Cancelado
     const response = await modifyTripState(tripId, state);
+    const responseAvail = await modifyCarAvailability(vehicleID, false);
 
-    if (response.status === 200) {
+    if (response.status === 200 && responseAvail.status === 200) {
       Swal.fire(
         'Success Confirmation',
         'Your trip has been successfully stared',
-        'success'
+        'success',
       );
     } else {
       Swal.fire(
         'Something went wrong',
         'Plese try again later',
-        'error'
+        'error',
       );
     }
 
@@ -141,21 +142,22 @@ function RegularUserTrips() {
     });
   };
 
-  const handleFinish = async (tripId) => {
+  const handleFinish = async (tripId, vehicleID) => {
     const state = 3; // 4 Corresponde al ID de Cancelado
     const response = await modifyTripState(tripId, state);
+    const responseAvail = await modifyCarAvailability(vehicleID, false);
 
-    if (response.status === 200) {
+    if (response.status === 200 && responseAvail.status === 200) {
       Swal.fire(
         'Success Confirmation',
         'Your trip has been successfully finished',
-        'success'
+        'success',
       );
     } else {
       Swal.fire(
         'Something went wrong',
         'Plese try again later',
-        'error'
+        'error',
       );
     }
 
@@ -218,7 +220,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="startButton"
-                  onClick={() => { handleStart(trip.id) }}
+                  onClick={() => { handleStart(trip.id, trip.vehicleID); }}
                 >
                   Start
                 </button>
@@ -227,7 +229,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="finishButton"
-                  onClick={() => { handleFinish(trip.id) }}
+                  onClick={() => { handleFinish(trip.id, trip.vehicleID); }}
                 >
                   Finish
                 </button>
@@ -236,7 +238,7 @@ function RegularUserTrips() {
                 <button
                   type="button"
                   className="cancelButton"
-                  onClick={() => { handleCancel(trip.id) }}
+                  onClick={() => { handleCancel(trip.id, trip.vehicleID); }}
                 >
                   Cancel
                 </button>

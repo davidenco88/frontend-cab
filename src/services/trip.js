@@ -1,10 +1,10 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080';
 
 // eslint-disable-next-line import/prefer-default-export
 export async function createTrip(data) {
   const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
   try {
@@ -14,7 +14,7 @@ export async function createTrip(data) {
       return { status: res.status, data: await res.json() };
     }
   } catch (error) {
-    throw new Error("Failed to create trip", error.message);
+    throw new Error('Failed to create trip', error.message);
   }
 }
 
@@ -29,17 +29,15 @@ export async function findHistorictrips(data) {
     }
     if (res.ok) {
       return await res.json();
-    } else {
-      return [];
     }
+    return [];
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to geting the trip history ", error.message);
+    throw new Error('Failed to geting the trip history ', error.message);
   }
 }
 
 export async function modifyTripState(tripId, state) {
-
   const payload = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -50,6 +48,20 @@ export async function modifyTripState(tripId, state) {
   };
 
   const response = await fetch(`${BASE_URL}/api/trips/state/modify`, payload);
+
+  return response;
+}
+
+export async function modifyCarAvailability(vehicleID, state) {
+  const payload = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      available: state,
+    }),
+  };
+
+  const response = await fetch(`${BASE_URL}/api/vehicles//updateAvailability/${vehicleID}`, payload);
 
   return response;
 }
