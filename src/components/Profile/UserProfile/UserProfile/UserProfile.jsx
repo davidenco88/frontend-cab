@@ -26,7 +26,7 @@ function UserProfile() {
           <h2 className="userProfile__text__email">{profile.roles[0].name}</h2>
         </div>
       </div>
-      {showChangeAvatar && <ChangeAvatar profile={profile} setProfile={setProfile} />}
+      {showChangeAvatar && <ChangeAvatar profile={profile} setProfile={setProfile} setShowChangeAvatar={setShowChangeAvatar} />}
     </>
   );
 }
