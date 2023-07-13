@@ -34,6 +34,7 @@ function ListedCar() {
     // CUAL ES LA DIFERENCIA ENTRE USAR EL DISPATCH, ESTE
     // NO ES INMEDIATO Y LO DE ABAJO SI?
     trip.selectedVehicle = item;
+    trip.clientID = JSON.parse(localStorage.getItem('profile')).id;
     const newTrip = await createTrip(trip);
 
     if (newTrip.status === 201) {
