@@ -59,7 +59,6 @@ function LoginForm() {
       name: signUpData.name,
       lastname: signUpData.lastname,
       email: signUpData.email,
-      avatar: ' ',
       password: signUpData.password,
       rol_id: [],
     };
