@@ -1,48 +1,33 @@
 import { useState } from 'react';
-import { updateAvatar } from '../../../../services/upload';
+import { BsPencilFill } from 'react-icons/bs';
+import ChangeAvatar from './ChangeAvatar/ChangeAvatar';
 import './UserProfile.scss';
 
 function UserProfile() {
-  const [avatar, setAvatar] = useState();
+  const [showChangeAvatar, setShowChangeAvatar] = useState(false);
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
 
-  const handleUpload = (e) => {
-    setAvatar(e.target.files[0]);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append('avatar', avatar);
-
-    try {
-      const updatedProfile = await updateAvatar(profile, formData);
-      localStorage.setItem('profile', JSON.stringify(updatedProfile.data));
-      setProfile(updatedProfile.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="userProfile">
-      <img
-        className="userProfile__img"
-        src={profile.avatar}
-        alt="profile pic"
-      />
-      <div className="userProfile__text">
-        <form className="userProfile__input" action="submit" onSubmit={handleSubmit}>
-          <input className="userProfile__input" type="file" accept="image/*" name="avatar" onChange={handleUpload} placeholder="Upload" />
-          <button type="submit">Upload</button>
-        </form>
-        <h1 className="userProfile__text__name">{profile.fullName}</h1>
-        <h2 className="userProfile__text__email">{profile.email}</h2>
-        <h2 className="userProfile__text__email">{profile.roles[0].name}</h2>
+    <>
+      <div className="userProfile">
+        <div className="userProfile__edit">
+          <img
+            className="userProfile__img"
+            src={profile.avatar}
+            alt="profile pic"
+          />
+          <button className="userProfile__button" type="button" onClick={() => setShowChangeAvatar(!showChangeAvatar)}>
+            <BsPencilFill />
+          </button>
+        </div>
+        <div className="userProfile__text">
+          <h1 className="userProfile__text__name">{profile.fullName}</h1>
+          <h2 className="userProfile__text__email">{profile.email}</h2>
+          <h2 className="userProfile__text__email">{profile.roles[0].name}</h2>
+        </div>
       </div>
-    </div>
+      {showChangeAvatar && <ChangeAvatar profile={profile} setProfile={setProfile} setShowChangeAvatar={setShowChangeAvatar} />}
+    </>
   );
 }
 
