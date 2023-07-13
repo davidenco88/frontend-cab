@@ -10,6 +10,7 @@ import { findHistorictrips, modifyTripState, modifyCarAvailability } from '../..
 import './ClientTrips.scss';
 import { useSelector, useDispatch } from '../../../../Context';
 import { SET_CONTEXT_OBJECT } from '../../../../Context/actionTypes';
+import dayjs from 'dayjs';
 
 function RegularUserTrips() {
   const dispatch = useDispatch();
@@ -177,7 +178,7 @@ function RegularUserTrips() {
         <div key={trip.id} className="tripsList__trip" ref={tripWidth}>
           <section className="tripsList__trip__left">
             <span className="tripsList__trip__left__span">
-              <p className="tripsList__trip__type">{trip.Vehicles.VehicleTypes.type}</p>
+              <p className="tripsList__trip__type"><strong>Vehicle Type:</strong>{` ${trip.Vehicles.VehicleTypes.type}`}</p>
               <button
                 className="expandButton"
                 type="button"
@@ -191,7 +192,7 @@ function RegularUserTrips() {
             </span>
             <h4 className="tripsList__trip__info">
               <HiClock className="clockIcon" />
-              {trip.pickUpDate}
+              {dayjs(trip.pickUpDate).format('DD / MM / YYYY - hh:mm A')}
             </h4>
             <h4 className="tripsList__trip__info">
               <TbCircleDotFilled className="pickUpIcon" />

@@ -14,6 +14,7 @@ export function ContextProvider({ children }) {
       pickUpDate: false,
       pickUpLocation: false,
       dropOffLocation: false,
+      addVehicle: false,
     },
     trip: {
       pickUpLatitude: '',

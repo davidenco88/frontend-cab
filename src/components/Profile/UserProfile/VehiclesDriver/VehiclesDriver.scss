@@ -1,3 +1,10 @@
+.addVehicle {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .vehicleDriver {
   margin: 15px 0px;
   // display: flex;
@@ -19,7 +26,7 @@
     &__row {
       display: grid;
       grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-      border-top: 1px solid rgba(255, 94, 0, 0.137) ;
+      border-top: 1px solid rgba(255, 94, 0, 0.137);
     }
 
     &__field {
@@ -42,7 +49,8 @@
   .vehicleDriver {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0px;;
+    padding: 0px;
+    ;
 
     &__image {
       margin: -10px -40px;

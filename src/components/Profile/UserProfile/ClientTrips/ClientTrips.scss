@@ -20,7 +20,7 @@
     &__right {
       grid-column: 3 / 4;
       justify-self: end;
-      align-self:stretch;
+      align-self: stretch;
       text-align: right;
       font-size: 18px;
       display: grid;
@@ -46,7 +46,7 @@
     }
 
     &__left {
-      color:black;
+      color: black;
       display: flex;
       flex-direction: column;
 
@@ -60,13 +60,14 @@
     &__type {
       font-weight: 400;
       text-align: left;
-      font-size: 16px;
+      font-size: 18px;
+      margin-bottom: 15px;
     }
 
     &__info {
       font-weight: 500;
       font-size: 17px;
-      color:rgb(99, 99, 99);
+      color: rgb(99, 99, 99);
       display: grid;
       grid-template-columns: 10px 1fr;
       align-items: center;
@@ -96,10 +97,12 @@
   cursor: pointer;
   font-family: inherit;
 }
+
 .cancelButton:hover {
   background-color: #d11749;
   transform: scale(1.1);
 }
+
 .cancelButton:active {
   background-color: #c20537;
   font-weight: 600;
@@ -113,10 +116,12 @@
   cursor: pointer;
   font-family: inherit;
 }
+
 .startButton:hover {
   background-color: #098eee;
   transform: scale(1.1);
 }
+
 .startButton:active {
   background-color: #0084E2;
   font-weight: 600;
@@ -130,10 +135,12 @@
   cursor: pointer;
   font-family: inherit;
 }
+
 .finishButton:hover {
   background-color: #e77c10;
   transform: scale(1.1);
 }
+
 .finishButton:active {
   background-color: #e47200;
   font-weight: 600;
@@ -149,9 +156,11 @@
   text-align: left;
   cursor: pointer;
 }
+
 .expandButton:hover {
   transform: scale(1.1);
 }
+
 .expandButton:active {
   transform: scale(1.2);
 }

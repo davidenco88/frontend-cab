@@ -7,7 +7,6 @@ function Profile() {
   return (
     <div className="profilePage">
       <UserProfile />
-      {/* <ClientTrips /> */}
       <ProfileAccordion />
     </div>
   );
