@@ -1,24 +1,23 @@
-import { useDispatch } from "../../../../Context";
-import { SHOW_COMPONENT } from "../../../../Context/actionTypes";
+import Swal from 'sweetalert2';
+import { useDispatch } from '../../../../Context';
+import { SHOW_COMPONENT } from '../../../../Context/actionTypes';
 
 import {
   postCreateVehicle,
-  fetchVehicleByDriverId
-} from "../../../../services/cars";
-
-import Swal from 'sweetalert2';
+  fetchVehicleByDriverId,
+} from '../../../../services/cars';
 
 import './NewCarForm.scss';
 
 export default function NewCarForm(props) {
-
   const dispatch = useDispatch();
+  const currentYear = new Date().getFullYear();
 
   function onCancelkHandler() {
     dispatch({
       type: SHOW_COMPONENT,
       payload: { componentName: 'addVehicle', showing: false },
-    })
+    });
   }
 
   async function onSubmithandler(event) {
@@ -34,20 +33,20 @@ export default function NewCarForm(props) {
         'Your car has been successfully created',
         'Your car is now available',
         'success',
-      )
+      );
+      window.location.reload();
     } else {
       Swal.fire(
         'Something is wrong',
         'Please try again',
         'success',
-      )
+      );
     }
 
     dispatch({
       type: SHOW_COMPONENT,
       payload: { componentName: 'addVehicle', showing: false },
     });
-
   }
 
   return (
@@ -91,6 +90,8 @@ export default function NewCarForm(props) {
                   name="year"
                   required
                   placeholder="2023"
+                  min="2000"
+                  max={currentYear}
                 />
               </div>
             </label>
@@ -113,8 +114,8 @@ export default function NewCarForm(props) {
             <label htmlFor="vehicleTypeID">
               Car Type
               <div className="c-CarDetailsForm__input">
-                <select name="vehicleTypeID" id="vehicleTypeID" required>
-                  <option defaultValue="" selected disabled >- Car Type -</option>
+                <select defaultValue="" name="vehicleTypeID" id="vehicleTypeID" required>
+                  <option value="" disabled>- Car Type -</option>
                   <option value="1">Spacious</option>
                   <option value="2">Luxury</option>
                   <option value="3">Economic</option>
@@ -124,6 +125,7 @@ export default function NewCarForm(props) {
           </div>
           <div className="CarDetailsForm__buttons">
             <button
+              type="button"
               className="CarDetailsForm__button CarDetailsForm__button--cancel"
               onClick={onCancelkHandler}
             >
