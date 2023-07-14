@@ -1,10 +1,13 @@
-import { login, register } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "./LoginForm.scss";
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { login, register } from '../../services/auth';
+import { useDispatch } from '../../Context';
+import { SET_TRIP } from '../../Context/actionTypes';
+import './LoginForm.scss';
 
 function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function handleSubmitSignIn(e) {
     e.preventDefault();
@@ -16,31 +19,34 @@ function LoginForm() {
 
     if (loginPayload.status === 404) {
       return Swal.fire({
-        icon: "error",
-        title: "Error",
+        icon: 'error',
+        title: 'Error',
         text: loginPayload.message,
       });
     }
 
     if (loginPayload.status === 401) {
       return Swal.fire({
-        icon: "error",
-        title: "Error",
+        icon: 'error',
+        title: 'Error',
         text: loginPayload.message,
       });
     }
 
     if (loginPayload.status === 400) {
       return Swal.fire({
-        icon: "error",
-        title: "Error",
+        icon: 'error',
+        title: 'Error',
         text: loginPayload.message,
       });
     }
-    localStorage.setItem("authToken", loginPayload.token);
-    localStorage.setItem("profile", JSON.stringify(loginPayload.profile));
+    localStorage.setItem('authToken', loginPayload.token);
+    localStorage.setItem('profile', JSON.stringify(loginPayload.profile));
+    const profile = JSON.parse(localStorage.getItem('profile'));
 
-    navigate("/");
+    dispatch({ type: SET_TRIP, payload: { clientID: profile.id } });
+
+    navigate('/');
   }
 
   async function handleSubmitSignUp(e) {
@@ -53,15 +59,14 @@ function LoginForm() {
       name: signUpData.name,
       lastname: signUpData.lastname,
       email: signUpData.email,
-      avatar: " ",
       password: signUpData.password,
       rol_id: [],
     };
 
-    if (signUpData.userRol === "Client") {
+    if (signUpData.userRol === 'Client') {
       createUserData.rol_id.push(2);
     }
-    if (signUpData.userRol === "Driver") {
+    if (signUpData.userRol === 'Driver') {
       createUserData.rol_id.push(3);
     }
 
@@ -69,17 +74,17 @@ function LoginForm() {
 
     if (response.status === 201) {
       Swal.fire({
-        icon: "success",
-        title: "Registration successful",
-        text: "We have sent you an email with a link to verify your account. Please check your inbox.",
+        icon: 'success',
+        title: 'Registration successful',
+        text: 'We have sent you an email with a link to verify your account. Please check your inbox.',
       });
 
-      navigate("/");
+      navigate('/');
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Registration failed",
-        text: "Something went wrong. Please try again.",
+        icon: 'error',
+        title: 'Registration failed',
+        text: 'Something went wrong. Please try again.',
       });
     }
   }
@@ -137,7 +142,7 @@ function LoginForm() {
                     type="radio"
                     name="singin-rol"
                     defaultChecked
-                  />{" "}
+                  />{' '}
                   CLIENT
                 </label>
                 <label htmlFor="check-driver-signIn">
@@ -145,7 +150,7 @@ function LoginForm() {
                     id="check-driver-signIn"
                     type="radio"
                     name="singin-rol"
-                  />{" "}
+                  />{' '}
                   DRIVER
                 </label>
               </div>
@@ -232,7 +237,7 @@ function LoginForm() {
                     name="userRol"
                     value="Client"
                     defaultChecked
-                  />{" "}
+                  />{' '}
                   CLIENT
                 </label>
                 <label htmlFor="check-driver">
@@ -241,7 +246,7 @@ function LoginForm() {
                     type="radio"
                     name="userRol"
                     value="Driver"
-                  />{" "}
+                  />{' '}
                   DRIVER
                 </label>
               </div>

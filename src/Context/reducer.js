@@ -1,4 +1,6 @@
-import { SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP } from './actionTypes';
+import {
+  SHOW_COMPONENT, SET_SEARCH_FORM, SET_TRIP, SET_CONTEXT_OBJECT, SET_LOADING,
+} from './actionTypes';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -25,6 +27,21 @@ function reducer(state, action) {
         ...state,
         trip: {
           ...state.trip,
+          ...action.payload,
+        },
+      };
+    }
+    case SET_CONTEXT_OBJECT: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+    case SET_LOADING: {
+      return {
+        ...state,
+        showComponentHandler: {
+          ...state.showComponentHandler,
           ...action.payload,
         },
       };

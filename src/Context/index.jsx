@@ -8,14 +8,13 @@ export function ContextProvider({ children }) {
     searchForm: {
       pickUpLocation: '',
       pickUpDate: '',
-      pickUpHour: '',
       dropOffLocation: '',
     },
     showComponentHandler: {
       pickUpDate: false,
-      pickUpHour: false,
       pickUpLocation: false,
       dropOffLocation: false,
+      addVehicle: false,
     },
     trip: {
       pickUpLatitude: '',
@@ -24,6 +23,11 @@ export function ContextProvider({ children }) {
       dropOffLongitude: '',
       pickUpDate: '',
     },
+    createdTrip: {},
+    originalVehicles: [],
+    renderVehicles: [],
+    driverVehicles: [],
+    trips: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);

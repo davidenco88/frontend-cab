@@ -1,10 +1,12 @@
-import UserProfile from "../components/Profile/UserProfile/UserProfile";
+import UserProfile from '../components/Profile/UserProfile/UserProfile/UserProfile';
+import ProfileAccordion from '../components/Profile/UserProfile/ProfileAccordion/ProfileAccordion';
+import './Profile.scss';
 
 function Profile() {
   return (
-    <div className="page">
-      <h1>USER PAGE UNDER CONSTRUCTION</h1>
+    <div className="profilePage">
       <UserProfile />
+      <ProfileAccordion />
     </div>
   );
 }

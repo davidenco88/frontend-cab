@@ -1,32 +1,34 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { FaCrosshairs, FaRegCalendarAlt, FaClock } from 'react-icons/fa';
+import { FaCrosshairs, FaRegCalendarAlt } from 'react-icons/fa';
 import { createPortal } from 'react-dom';
-
-import dayjs from 'dayjs';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { useDispatch, useSelector } from '../../Context';
 import { SHOW_COMPONENT } from '../../Context/actionTypes';
-import DatePicker from './DatePicker/DatePicker';
 import PickUpLocation from './PickUpLocation/PickUpLocation';
 import DropOffLocation from './DropOffLocation/DropOffLocation';
-import TimePicker from './TimePicker/TimePicker';
+import DateTimePicker from './DateTimePicker/DateTimePicker';
 
 import './SearchForm.scss';
 
 function SearchForm() {
-  const defaultTime = dayjs().set('hour', 0).set('minute', 0);
-
-  const [showTimePicker, setShowTimePicker] = useState(false);
-  const [pickUpTime, setPickUpTime] = useState(defaultTime);
-
   const dispatch = useDispatch();
-  const { searchForm } = useSelector();
+  const { searchForm, showComponentHandler } = useSelector();
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (searchForm.pickUpDate === ''
+    || searchForm.pickUpLocation === ''
+    || searchForm.dropOffLocation === '') {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Information missing',
+        text: 'Fill trip details to continue',
+      });
+    }
     const formData = new FormData(e.target);
     const scheduledData = Object.fromEntries(formData);
     navigate('/cab');
@@ -80,21 +82,22 @@ function SearchForm() {
           </label>
         </div>
         <div className="c-items">
-          <label htmlFor="pickUpDate" className="searchForm__item">
-            Pick Up Date
+          <label htmlFor="pickUpDateTime" className="searchForm__item">
+            Pick Up Date-Time
             <div className="searchForm__input">
               <input
                 type="text"
-                id="pickUpDate"
-                placeholder="Pick Up"
-                name="pickUpDate"
-                value={searchForm.pickUpDate}
+                id="pickUpDateTime"
+                placeholder="Pick Up Date-Time"
+                name="pickUpDateTime"
+                value={
+                  searchForm.pickUpDate !== ''
+                    ? (searchForm.pickUpDate.format('DD / MM / YYYY - hh:mm A'))
+                    : (searchForm.pickUpDate)
+                }
                 onClick={() => dispatch({
                   type: SHOW_COMPONENT,
-                  payload: {
-                    componentName: 'pickUpDate',
-                    showing: true,
-                  },
+                  payload: { componentName: 'pickUpDate', showing: true },
                 })}
                 readOnly
                 required
@@ -104,41 +107,15 @@ function SearchForm() {
               </div>
             </div>
           </label>
-          <label htmlFor="pickUpTime" className="searchForm__item">
-            Pick Up Time
-            <div className="searchForm__input">
-              <input
-                type="text"
-                id="pickUpTime"
-                placeholder="Pick Up Time"
-                name="pickUpTime"
-                value={
-                  pickUpTime !== defaultTime
-                    ? (pickUpTime.format('hh:mm A'))
-                    : ('')
-                }
-                onClick={() => setShowTimePicker(true)}
-                readOnly
-                required
-              />
-              <div className="input-icon">
-                <FaClock />
-              </div>
-            </div>
-          </label>
         </div>
         <div className="c-button">
           <button type="submit">SEARCH</button>
         </div>
       </form>
-      <DatePicker />
       <PickUpLocation />
       <DropOffLocation />
-      {showTimePicker && createPortal(
-        <TimePicker
-          onAccept={() => setShowTimePicker(false)}
-          onChange={setPickUpTime}
-        />,
+      {showComponentHandler.pickUpDate && createPortal(
+        <DateTimePicker />,
         document.body,
       )}
     </>

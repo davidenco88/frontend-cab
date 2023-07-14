@@ -1,0 +1,166 @@
+.tripsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: black;
+
+  &__trip {
+    margin: 5px 0px;
+    display: grid;
+    grid-template-columns: minmax(230px, 1fr) 1fr 90px;
+    box-shadow: 0px 0px 30px -10px rgb(193, 193, 193);
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+    padding-top: 5px;
+    font-size: 20px;
+    align-self: stretch;
+
+    &__right {
+      grid-column: 3 / 4;
+      justify-self: end;
+      align-self: stretch;
+      text-align: right;
+      font-size: 18px;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+
+      &__price {
+        margin-top: 6px;
+        color: rgba(24, 24, 24, 0.87);
+      }
+
+      &__status {
+        color: rgb(32, 32, 32)
+      }
+
+      &__bottom {
+        display: grid;
+        grid-row: inherit;
+        gap: 5px;
+        align-self: end;
+        justify-self: end;
+      }
+
+    }
+
+    &__left {
+      color: black;
+      display: flex;
+      flex-direction: column;
+
+      &__span {
+        display: flex;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    &__type {
+      font-weight: 400;
+      text-align: left;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    &__info {
+      font-weight: 500;
+      font-size: 17px;
+      color: rgb(99, 99, 99);
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      align-items: center;
+      gap: 3px;
+    }
+  }
+}
+
+.clockIcon {
+  font-size: 13px;
+}
+
+.pickUpIcon {
+  font-size: 12px;
+}
+
+.dropOffIcon {
+  font-size: 12px;
+  color: rgba(255, 123, 0, 0.973);
+}
+
+.cancelButton {
+  background-color: #E01A4F;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cancelButton:hover {
+  background-color: #d11749;
+  transform: scale(1.1);
+}
+
+.cancelButton:active {
+  background-color: #c20537;
+  font-weight: 600;
+}
+
+.startButton {
+  background-color: #159bfa;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.startButton:hover {
+  background-color: #098eee;
+  transform: scale(1.1);
+}
+
+.startButton:active {
+  background-color: #0084E2;
+  font-weight: 600;
+}
+
+.finishButton {
+  background-color: #ff8f1e;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.finishButton:hover {
+  background-color: #e77c10;
+  transform: scale(1.1);
+}
+
+.finishButton:active {
+  background-color: #e47200;
+  font-weight: 600;
+}
+
+.expandButton {
+  width: fit-content;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 3px;
+  font-size: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.expandButton:hover {
+  transform: scale(1.1);
+}
+
+.expandButton:active {
+  transform: scale(1.2);
+}

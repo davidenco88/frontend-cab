@@ -7,20 +7,20 @@ import CheckFilter from './CheckFilter/CheckFilter';
 import './ListFilter.scss';
 
 const carTypes = {
-  title: 'Car Types',
-  checks: ['Mini',
-    'Medium',
-    'Standard',
-    'Van',
-    'Luxury'],
+  title: 'Car Type',
+  checks: ['Spacious',
+    'Luxury',
+    'Economic'],
+  filterBy: 'VehicleTypes.type',
 };
 const carCapacity = {
   title: 'Capacity',
   checks: [
-    '1 - 5',
-    '6 - 10',
-    '10 or More',
+    3,
+    4,
+    5,
   ],
+  filterBy: 'VehicleTypes.seats',
 };
 const carOptions = {
   title: 'Car Option',
@@ -50,7 +50,6 @@ function ListFilter({ testFilterOptions, testBarIcon, testCloseIcon }) {
       >
         <CheckFilter data={carTypes} />
         <CheckFilter data={carCapacity} />
-        <CheckFilter data={carOptions} />
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+[![ci](https://github.com/mercuryeater/frontend-cab-fork/actions/workflows/ci-test.yml/badge.svg)](https://github.com/mercuryeater/frontend-cab-fork/actions/workflows/ci-test.yml)
 # frontend-cab
 
 example
