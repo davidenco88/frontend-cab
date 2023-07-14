@@ -4,11 +4,9 @@
   align-items: center;
 
   &__img {
-    max-width: 200px;
-    margin: 0px 0px;
-    margin-right: -15px;
-    margin-bottom: -25px;
+    width: 50%;
     align-self: center;
+    margin: 5px;
   }
 
   &__type {

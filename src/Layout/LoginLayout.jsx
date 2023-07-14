@@ -1,16 +1,15 @@
 import { Outlet } from 'react-router-dom';
-import HeaderNavBar from "../components/HeaderNavBar/HeaderNavBar";
-import SingleFooter from "../components/SingleFooter/SingleFooter";
+import HeaderNavBar from '../components/HeaderNavBar/HeaderNavBar';
+// import SingleFooter from '../components/SingleFooter/SingleFooter';
 
-
-const LoginLayout = () => {
+function LoginLayout() {
   return (
     <>
-    <HeaderNavBar />
-      <Outlet/>
-    <SingleFooter />
+      <HeaderNavBar />
+      <Outlet />
+      {/* <SingleFooter /> */}
     </>
-  )
+  );
 }
 
 export default LoginLayout;
