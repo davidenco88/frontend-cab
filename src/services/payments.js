@@ -1,9 +1,9 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export async function fetchPayment(paymentMethod, amount) {
   const payload = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       amount: amount,
       paymentMethod,
@@ -18,8 +18,8 @@ export async function fetchPayment(paymentMethod, amount) {
 export async function fetchRegisterPayment(trip) {
   console.log(trip);
   const payload = {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(trip),
   };
 
