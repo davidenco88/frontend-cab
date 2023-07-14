@@ -55,16 +55,6 @@ function HeaderNavBar() {
     console.log(profile);
   }, []);
 
-  useEffect(() => {
-    const auth = localStorage.getItem('authToken');
-    if (!auth) {
-      return undefined;
-    }
-    const profile = JSON.parse(localStorage.getItem('profile'));
-    setProfile(profile);
-    console.log(profile);
-  }, []);
-
   return (
     <header className="headerNavBar">
       <div className="c-logo">
