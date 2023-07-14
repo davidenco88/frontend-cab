@@ -134,28 +134,6 @@ function LoginForm() {
               />
             </div>
             <div className="group">
-              <h4 className="rol-header">Would you like to sign in as?</h4>
-              <div className="user-rol">
-                <label htmlFor="check-client-signIn">
-                  <input
-                    id="check-client-signIn"
-                    type="radio"
-                    name="singin-rol"
-                    defaultChecked
-                  />{' '}
-                  CLIENT
-                </label>
-                <label htmlFor="check-driver-signIn">
-                  <input
-                    id="check-driver-signIn"
-                    type="radio"
-                    name="singin-rol"
-                  />{' '}
-                  DRIVER
-                </label>
-              </div>
-            </div>
-            <div className="group">
               <input type="submit" className="button" value="Sign In" />
             </div>
             <div className="hr" />
