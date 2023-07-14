@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 // const carsUrl = 'http://localhost:3000/cars';
 
 export async function fetchAvailableCars() {
@@ -13,7 +13,7 @@ export async function fetchVehicleByDriverId(id) {
 
 export async function postCreateVehicle(vehicleData) {
   const urlApiCar = `https://cdn.imagin.studio/getImage?&customer=counivalle&make=${vehicleData.brand}&modelFamily=${vehicleData.model}`;
-  const profile = JSON.parse(localStorage.getItem('profile'));
+  const profile = JSON.parse(localStorage.getItem("profile"));
   const vehicle = {
     ...vehicleData,
     year: Number(vehicleData.year),
@@ -23,11 +23,11 @@ export async function postCreateVehicle(vehicleData) {
     isAvailable: true,
     isActive: true,
   };
-  console.log('🚀 ~ file: cars.js:41 ~ testCreateVehicle ~ vehicle:', vehicle);
+  console.log("🚀 ~ file: cars.js:41 ~ testCreateVehicle ~ vehicle:", vehicle);
 
   const payload = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(vehicle),
   };
 
@@ -38,11 +38,14 @@ export async function postCreateVehicle(vehicleData) {
 
 export async function testCreateVehicle(vehicleData) {
   const payload = {
-    method: 'POST',
+    method: "POST",
     body: vehicleData,
   };
 
-  const response = await fetch(`${BASE_URL}/api/vehicles/testCreateVehicle`, payload);
+  const response = await fetch(
+    `${BASE_URL}/api/vehicles/testCreateVehicle`,
+    payload
+  );
 
   return response;
 }
