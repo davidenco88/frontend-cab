@@ -1,4 +1,4 @@
-.StepsToUse{
+.StepsToUse {
   color: white;
   display: flex;
   text-align: center;
@@ -7,12 +7,13 @@
   justify-content: center;
   padding: 40px 20px;
   gap: 15px;
-  background-image: url('test2.png') !important;
+  background-image: url('/test2.png') !important;
   background-repeat: no-repeat;
   background-size: cover;
 
 }
-.StepsToUse__Cards{
+
+.StepsToUse__Cards {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -21,8 +22,8 @@
 
 @media (min-width: 500px) {
   .StepsToUse__Cards {
-     flex-direction:row ;
-     justify-content: space-around;
-     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
 }
