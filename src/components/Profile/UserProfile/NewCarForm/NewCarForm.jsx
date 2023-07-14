@@ -43,7 +43,7 @@ export default function NewCarForm(props) {
       Swal.fire(
         'Something is wrong',
         'Please try again',
-        'success',
+        'error',
       );
     }
 
