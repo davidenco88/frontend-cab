@@ -10,7 +10,7 @@ import './VehiclesDriver.scss';
 function VehiclesDriver() {
   const dispatch = useDispatch();
   const { driverVehicles, showComponentHandler } = useSelector();
-  
+
   const profile = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
@@ -28,13 +28,13 @@ function VehiclesDriver() {
     dispatch({
       type: SHOW_COMPONENT,
       payload: { componentName: 'addVehicle', showing: true },
-    })
+    });
   }
 
   return (
     <>
-      <div className='addVehicle'>
-        <button className='orangeButton' onClick={onClickAddCarhandler}>Add New Car</button>
+      <div className="addVehicle">
+        <button className="orangeButton" onClick={onClickAddCarhandler}>Add New Car</button>
       </div>
 
       {driverVehicles.map((vehicle) => (
@@ -69,7 +69,7 @@ function VehiclesDriver() {
 
       {showComponentHandler.addVehicle && createPortal(
         <NewCarForm />,
-        document.body
+        document.body,
       )}
     </>
   );

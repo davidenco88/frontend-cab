@@ -12,7 +12,6 @@ export async function fetchVehicleByDriverId(id) {
 }
 
 export async function postCreateVehicle(vehicleData) {
-
   const urlApiCar = `https://cdn.imagin.studio/getImage?&customer=counivalle&make=${vehicleData.brand}&modelFamily=${vehicleData.model}`;
   const profile = JSON.parse(localStorage.getItem('profile'));
   const vehicle = {
@@ -23,7 +22,8 @@ export async function postCreateVehicle(vehicleData) {
     vehicleTypeID: Number(vehicleData.vehicleTypeID),
     isAvailable: true,
     isActive: true,
-  }
+  };
+  console.log('🚀 ~ file: cars.js:41 ~ testCreateVehicle ~ vehicle:', vehicle);
 
   const payload = {
     method: 'POST',
@@ -32,6 +32,17 @@ export async function postCreateVehicle(vehicleData) {
   };
 
   const response = await fetch(`${BASE_URL}/api/vehicles`, payload);
+
+  return response;
+}
+
+export async function testCreateVehicle(vehicleData) {
+  const payload = {
+    method: 'POST',
+    body: vehicleData,
+  };
+
+  const response = await fetch(`${BASE_URL}/api/vehicles/testCreateVehicle`, payload);
 
   return response;
 }

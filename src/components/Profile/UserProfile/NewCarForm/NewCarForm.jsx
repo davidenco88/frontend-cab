@@ -4,7 +4,7 @@ import { SHOW_COMPONENT } from '../../../../Context/actionTypes';
 
 import {
   postCreateVehicle,
-  fetchVehicleByDriverId,
+  testCreateVehicle,
 } from '../../../../services/cars';
 
 import './NewCarForm.scss';
@@ -12,6 +12,7 @@ import './NewCarForm.scss';
 export default function NewCarForm(props) {
   const dispatch = useDispatch();
   const currentYear = new Date().getFullYear();
+  const profile = JSON.parse(localStorage.getItem('profile'));
 
   function onCancelkHandler() {
     dispatch({
@@ -24,9 +25,12 @@ export default function NewCarForm(props) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const vehicleData = Object.fromEntries(formData);
+    formData.append('driverID', profile.id);
 
-    const response = await postCreateVehicle(vehicleData);
+    // const vehicleData = Object.fromEntries(formData);
+    // const response = await postCreateVehicle(vehicleData);
+
+    const response = await testCreateVehicle(formData);
 
     if (response.status === 200) {
       Swal.fire(
@@ -34,7 +38,7 @@ export default function NewCarForm(props) {
         'Your car is now available',
         'success',
       );
-      window.location.reload();
+      // window.location.reload();
     } else {
       Swal.fire(
         'Something is wrong',
@@ -53,7 +57,7 @@ export default function NewCarForm(props) {
     <div className="modal-wrap">
       <div className="CarDetailsForm">
         <h3 className="CarDetailsForm__header">CAR DETAILS</h3>
-        <form className="CarDetailsForm__content" onSubmit={(event) => onSubmithandler(event)}>
+        <form className="CarDetailsForm__content" onSubmit={(event) => onSubmithandler(event)} encType="multipart/form-data">
           <div className="CarDetailsForm__item CarDetailsForm__item--flex">
             <label htmlFor="CarDetailsForm__brand">
               Brand
@@ -123,6 +127,18 @@ export default function NewCarForm(props) {
               </div>
             </label>
           </div>
+
+          <label className="changeAvatar__label" htmlFor="image">
+            <input
+              className="changeAvatar__input"
+              type="file"
+              accept="image/*"
+              name="image"
+              id="image"
+              // onChange={handleUpload}
+            />
+          </label>
+          {/* <button className="changeAvatar__button" type="submit">Upload</button> */}
           <div className="CarDetailsForm__buttons">
             <button
               type="button"
