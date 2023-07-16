@@ -14,14 +14,16 @@
   align-items: center;
 
   &__image {
+    padding: 15px;
     display: flex;
     justify-content: center;
+    max-height: 250px;
+
     &__pic {
       margin: 5px 20px;
       max-width: 330px;
       width: 100%;
-      display: flex;
-
+      object-fit: contain;
     }
   }
 
@@ -54,7 +56,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0px;
-    ;
 
     &__image {
     }
