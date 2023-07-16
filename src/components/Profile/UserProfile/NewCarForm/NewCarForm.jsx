@@ -38,7 +38,7 @@ export default function NewCarForm(props) {
         'Your car is now available',
         'success',
       );
-      window.location.reload();
+      // window.location.reload();
     } else {
       Swal.fire(
         'Something is wrong',
